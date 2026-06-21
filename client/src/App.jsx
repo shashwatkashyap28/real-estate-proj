@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, BrowserRouter } from 'react-router-dom';
+import Header from './components/header';
 import Home from './pages/home';
 import Signin from './pages/signin';
 import Signup from './pages/signup';
@@ -7,8 +8,9 @@ import About from './pages/about';
 
 
 export default function App() { 
-  return (<BrowserRouter>
-
+  return (
+  <BrowserRouter>
+    <Header/>
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/profile" element={<Profile />} />
@@ -18,5 +20,6 @@ export default function App() {
     </Routes>  
 
 
-  </BrowserRouter>)
-}
+  </BrowserRouter>
+  )
+  }
