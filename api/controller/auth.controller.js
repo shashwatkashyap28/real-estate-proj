@@ -21,6 +21,6 @@ export const signup = async (req, res, next) => {
         });
 
     } catch (err) {
-        next(error);
+        next(errorHandler(500, "Error creating user"));
     }
 };

@@ -1,35 +1,54 @@
-import {FaSearch} from 'react-icons/fa'
-import { Link } from 'react-router-dom'
+import { FaSearch } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 export default function Header() {
   return (
-    <header className='bg-slate-900 shadow-md '> 
-      <div className='flex justify-between items-center max-w-6xl mx-auto p-3'>
-        <Link to='/'>
-          <h1 className='font-bold text-sm sm:text-xl flex flex-wrap'>
-            <span className='text-slate-100'>GO</span>
-            <span className='text-green-500'>REALTOR</span>
+    <header className="bg-black shadow-md">
+      <div className="flex justify-between items-center max-w-7xl mx-auto px-6 py-4">
+
+        {/* Logo */}
+        <Link
+          to="/"
+          className="transition-transform duration-300 hover:scale-105"
+        >
+          <h1 className="flex items-center text-3xl sm:text-3xl font-black tracking-wider uppercase">
+            <span className="text-white">GO</span>
+            <span className="text-green-500 ml-2">REALTOR</span>
           </h1>
         </Link>
-        <form className='bg-slate-100 p-3 rounded-lg flex'>
-          <input 
-          type="text" 
-          placeholder='Search...'
-          className='bg-transparent focus:outline-none w-24 sm:w-64'/>
-          <FaSearch className='text-slate-500'/>
+
+        {/* Search Bar */}
+        <form className="bg-white px-4 py-3 rounded-full flex items-center shadow-md">
+          <input
+            type="text"
+            placeholder="Search..."
+            className="bg-transparent focus:outline-none w-28 sm:w-72 text-black placeholder-gray-500"
+          />
+          <FaSearch className="text-gray-600 text-lg cursor-pointer hover:text-green-500 transition-colors" />
         </form>
-        <ul className='flex gap-4'>
-          <Link to='/'>
-          <li className='hidden sm:inline text-slate-100 hover:underline'>HOME</li>
+
+        {/* Navigation */}
+        <ul className="flex items-center gap-6 font-medium">
+          <Link to="/">
+            <li className="hidden sm:inline text-white hover:text-green-500 transition-colors duration-300">
+              HOME
+            </li>
           </Link>
-          <Link to='/about'>
-          <li className='hidden sm:inline text-slate-100 hover:underline'>ABOUT</li>
+
+          <Link to="/about">
+            <li className="hidden sm:inline text-white hover:text-green-500 transition-colors duration-300">
+              ABOUT
+            </li>
           </Link>
-          <Link to='/signin'>
-          <li className='text-slate-100 hover:underline'>SIGN IN</li>
+
+          <Link to="/signin">
+            <li className="text-white hover:text-green-500 transition-colors duration-300">
+              SIGN IN
+            </li>
           </Link>
         </ul>
-      </div>  
+
+      </div>
     </header>
-  )
+  );
 }
