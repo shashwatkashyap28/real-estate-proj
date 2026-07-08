@@ -3,72 +3,76 @@ import {
   FaUsers,
   FaAward,
   FaHandshake,
-  FaCheckCircle,
 } from "react-icons/fa";
 
 export default function About() {
   return (
-    <main className="bg-green-50 text-black overflow-hidden">
+    <main className="min-h-screen overflow-hidden bg-black text-white">
 
       {/* ================= HERO ================= */}
 
-      <section className="relative bg-gradient-to-r bg-green-50">
+      <section className="relative">
 
-        <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_top_right,#16a34a_0%,transparent_60%)]"></div>
+        {/* Background Image */}
 
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-12 py-24">
+        <img
+          src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1800&q=80"
+          alt="Luxury Home"
+          className="absolute inset-0 h-full w-full object-cover opacity-20"
+        />
 
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+        {/* Overlay */}
+
+        <div className="absolute inset-0 bg-black/80"></div>
+
+        {/* Green Glow */}
+
+        <div className="absolute -left-32 top-10 h-72 w-72 rounded-full bg-green-500/20 blur-3xl"></div>
+
+        <div className="absolute right-0 bottom-0 h-80 w-80 rounded-full bg-green-600/10 blur-3xl"></div>
+
+        <div className="relative mx-auto max-w-7xl px-6 py-32">
+
+          <div className="grid items-center gap-20 lg:grid-cols-2">
 
             {/* Left */}
 
             <div>
 
-              <span className="inline-block rounded-full bg-green-100 text-green-700 px-5 py-2 font-semibold tracking-wide">
-                ABOUT GO REALTORS
+              <span className="rounded-full border border-green-500/30 bg-green-500/10 px-5 py-2 text-green-400 font-semibold">
+
+                About GO REALTORS
+
               </span>
 
-              <h1 className="mt-8 text-5xl lg:text-7xl font-extrabold leading-tight">
+              <h1 className="mt-8 text-5xl font-extrabold leading-tight md:text-7xl">
 
-                Building Trust.
+                Building
                 <br />
 
-                Finding
-                <span className="text-green-600">
-                  {" "}Dream Homes.
+                <span className="text-green-500">
+
+                  Trust Through
+                  <br />
+                  Real Estate
+
                 </span>
 
               </h1>
 
-              <p className="mt-8 text-lg leading-8 text-gray-600">
+              <p className="mt-8 max-w-xl text-lg leading-9 text-gray-400">
 
-                Go Realtors is a premium real estate consultancy dedicated to
-                helping families, investors and first-time buyers discover
-                exceptional residential and commercial properties across India.
+                GO REALTORS is a premium real estate platform helping
+                buyers, sellers and investors discover verified
+                residential and commercial properties across India.
 
                 <br />
                 <br />
 
-                We believe every property purchase should be transparent,
-                stress-free and rewarding.
+                We believe every property transaction should be simple,
+                transparent and secure.
 
               </p>
-
-              <div className="mt-10 flex flex-wrap gap-5">
-
-                <button className="rounded-xl bg-green-600 px-8 py-4 font-semibold text-white transition hover:bg-green-700">
-
-                  Explore Properties
-
-                </button>
-
-                <button className="rounded-xl border border-green-600 px-8 py-4 font-semibold text-green-600 transition hover:bg-green-50">
-
-                  Contact Us
-
-                </button>
-
-              </div>
 
             </div>
 
@@ -77,10 +81,9 @@ export default function About() {
             <div>
 
               <img
-                loading="lazy"
-                src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80"
-                alt="Luxury Home"
-                className="rounded-3xl shadow-2xl object-cover w-full h-600px"
+                src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=900&q=80"
+                alt="Luxury Villa"
+                className="rounded-3xl border border-white/10 shadow-2xl"
               />
 
             </div>
@@ -91,98 +94,91 @@ export default function About() {
 
       </section>
 
-      {/* ================= WHO WE ARE ================= */}
+      {/* ================= STATS ================= */}
 
-      <section className="py-24">
+      <section className="bg-slate-950 py-24">
 
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        <div className="mx-auto max-w-7xl px-6">
 
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
 
-            {/* Image */}
+            {/* Card */}
 
-            <div>
+            <div className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl transition hover:border-green-500">
 
-              <img
-                loading="lazy"
-                src="https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&w=1200&q=80"
-                alt="Office"
-                className="rounded-3xl shadow-xl"
-              />
+              <FaHome className="mb-5 text-5xl text-green-500" />
 
-            </div>
+              <h2 className="text-5xl font-bold">
 
-            {/* Content */}
-
-            <div>
-
-              <p className="uppercase tracking-[4px] text-green-600 font-semibold">
-                Who We Are
-              </p>
-
-              <h2 className="mt-4 text-5xl font-bold leading-tight">
-
-                More Than Real Estate.
-                <br />
-
-                We Build Relationships.
+                15K+
 
               </h2>
 
-              <p className="mt-8 text-lg text-gray-600 leading-8">
+              <p className="mt-3 text-gray-400">
 
-                At Go Realtors, we understand that buying a property is one of
-                life's biggest decisions.
-
-                That's why our experienced consultants focus on understanding
-                your goals before recommending any property.
+                Verified Properties
 
               </p>
 
-              <p className="mt-6 text-lg text-gray-600 leading-8">
+            </div>
 
-                Whether you're purchasing your first home, investing in premium
-                real estate or expanding your commercial portfolio, we provide
-                personalized guidance from property discovery to final
-                registration.
+            {/* Card */}
+
+            <div className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl transition hover:border-green-500">
+
+              <FaUsers className="mb-5 text-5xl text-green-500" />
+
+              <h2 className="text-5xl font-bold">
+
+                8K+
+
+              </h2>
+
+              <p className="mt-3 text-gray-400">
+
+                Happy Clients
 
               </p>
 
-              <div className="mt-10 space-y-5">
+            </div>
 
-                <div className="flex items-center gap-4">
+            {/* Card */}
 
-                  <FaCheckCircle className="text-green-600 text-xl" />
+            <div className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl transition hover:border-green-500">
 
-                  <span>Verified Property Listings</span>
+              <FaAward className="mb-5 text-5xl text-green-500" />
 
-                </div>
+              <h2 className="text-5xl font-bold">
 
-                <div className="flex items-center gap-4">
+                120+
 
-                  <FaCheckCircle className="text-green-600 text-xl" />
+              </h2>
 
-                  <span>Experienced Real Estate Consultants</span>
+              <p className="mt-3 text-gray-400">
 
-                </div>
+                Cities Covered
 
-                <div className="flex items-center gap-4">
+              </p>
 
-                  <FaCheckCircle className="text-green-600 text-xl" />
+            </div>
 
-                  <span>Transparent Buying Process</span>
+            {/* Card */}
 
-                </div>
+            <div className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl transition hover:border-green-500">
 
-                <div className="flex items-center gap-4">
+              <FaHandshake className="mb-5 text-5xl text-green-500" />
 
-                  <FaCheckCircle className="text-green-600 text-xl" />
+              <h2 className="text-5xl font-bold">
 
-                  <span>Complete Legal & Documentation Support</span>
+                99%
 
-                </div>
+              </h2>
 
-              </div>
+              <p className="mt-3 text-gray-400">
+
+                Client Satisfaction
+
+              </p>
 
             </div>
 
@@ -191,95 +187,69 @@ export default function About() {
         </div>
 
       </section>
-            {/* ================= TIMELINE ================= */}
+            {/* ================= OUR STORY ================= */}
 
-            <section className="bg-green-50 py-24">
+            <section className="bg-black py-28">
 
-<div className="max-w-7xl mx-auto px-6 lg:px-12">
+<div className="mx-auto max-w-7xl px-6">
 
-  <div className="text-center">
+  <div className="grid items-center gap-20 lg:grid-cols-2">
 
-    <p className="uppercase tracking-[4px] text-green-600 font-semibold">
-      Our Journey
-    </p>
+    {/* Left */}
 
-    <h2 className="mt-4 text-5xl font-bold">
-      Growing With Trust
-    </h2>
+    <div>
 
-    <p className="mt-6 text-lg text-gray-600 max-w-3xl mx-auto">
-      Every milestone reflects our commitment to helping families,
-      investors, and businesses make confident real estate decisions.
-    </p>
-
-  </div>
-
-  <div className="mt-20 grid gap-10 md:grid-cols-2 lg:grid-cols-4">
-
-    <div className="relative rounded-3xl bg-white p-8 shadow-lg border border-gray-200 hover:shadow-2xl transition">
-
-      <span className="text-5xl font-extrabold text-green-600">
-        2020
-      </span>
-
-      <h3 className="mt-5 text-2xl font-semibold">
-        Company Founded
-      </h3>
-
-      <p className="mt-4 text-gray-600 leading-7">
-        Go Realtors was established with a vision to simplify the real
-        estate experience through honesty and transparency.
-      </p>
+      <img
+        src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=80"
+        alt="Office"
+        className="rounded-3xl border border-white/10 shadow-2xl"
+      />
 
     </div>
 
-    <div className="rounded-3xl bg-white p-8 shadow-lg border border-gray-200 hover:shadow-2xl transition">
+    {/* Right */}
 
-      <span className="text-5xl font-extrabold text-green-600">
-        2022
+    <div>
+
+      <span className="rounded-full border border-green-500/30 bg-green-500/10 px-5 py-2 font-semibold text-green-400">
+
+        Our Story
+
       </span>
 
-      <h3 className="mt-5 text-2xl font-semibold">
-        Delhi NCR Expansion
-      </h3>
+      <h2 className="mt-8 text-5xl font-bold">
 
-      <p className="mt-4 text-gray-600 leading-7">
-        Expanded operations across Delhi NCR, partnering with leading
-        developers and residential communities.
+        More Than Just
+        <span className="text-green-500">
+
+          {" "}Real Estate
+
+        </span>
+
+      </h2>
+
+      <p className="mt-8 text-lg leading-9 text-gray-400">
+
+        GO REALTORS was founded with one simple vision—
+        making property buying and selling transparent,
+        reliable and stress-free.
+
       </p>
 
-    </div>
+      <p className="mt-6 text-lg leading-9 text-gray-400">
 
-    <div className="rounded-3xl bg-white p-8 shadow-lg border border-gray-200 hover:shadow-2xl transition">
+        Whether you're purchasing your first home,
+        investing in commercial real estate or searching
+        for a luxury villa, we provide verified listings,
+        experienced advisors and end-to-end assistance.
 
-      <span className="text-5xl font-extrabold text-green-600">
-        2024
-      </span>
-
-      <h3 className="mt-5 text-2xl font-semibold">
-        500+ Deals Closed
-      </h3>
-
-      <p className="mt-4 text-gray-600 leading-7">
-        Successfully assisted hundreds of buyers and investors in
-        finding premium homes and commercial spaces.
       </p>
 
-    </div>
+      <p className="mt-6 text-lg leading-9 text-gray-400">
 
-    <div className="rounded-3xl bg-white p-8 shadow-lg border border-gray-200 hover:shadow-2xl transition">
+        Our goal is not just to sell homes—
+        it's to build lifelong relationships with every client.
 
-      <span className="text-5xl font-extrabold text-green-600">
-        Today
-      </span>
-
-      <h3 className="mt-5 text-2xl font-semibold">
-        Trusted Across India
-      </h3>
-
-      <p className="mt-4 text-gray-600 leading-7">
-        Continuing to grow with a customer-first approach, innovative
-        technology, and unmatched service quality.
       </p>
 
     </div>
@@ -290,187 +260,281 @@ export default function About() {
 
 </section>
 
-{/* ================= STATS ================= */}
+{/* ================= COMPANY JOURNEY ================= */}
 
-<section className="py-24">
+<section className="bg-slate-950 py-28">
 
-<div className="max-w-7xl mx-auto px-6 lg:px-12">
+<div className="mx-auto max-w-6xl px-6">
 
   <div className="text-center">
 
-    <p className="uppercase tracking-[4px] text-green-600 font-semibold">
-      Our Achievements
-    </p>
+    <span className="rounded-full border border-green-500/30 bg-green-500/10 px-5 py-2 font-semibold text-green-400">
 
-    <h2 className="mt-4 text-5xl font-bold">
-      Numbers That Speak
+      Company Journey
+
+    </span>
+
+    <h2 className="mt-8 text-5xl font-bold">
+
+      Our Growth Story
+
     </h2>
 
-  </div>
+    <p className="mt-6 text-lg text-gray-400">
 
-  <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      Every milestone reflects our commitment to
+      excellence and customer satisfaction.
 
-    <div className="rounded-3xl bg-white border border-gray-200 p-10 text-center shadow-lg hover:-translate-y-2 hover:shadow-2xl transition">
-
-      <h3 className="text-5xl font-extrabold text-green-600">
-        500+
-      </h3>
-
-      <p className="mt-4 text-gray-600 text-lg">
-        Premium Properties
-      </p>
-
-    </div>
-
-    <div className="rounded-3xl bg-white border border-gray-200 p-10 text-center shadow-lg hover:-translate-y-2 hover:shadow-2xl transition">
-
-      <h3 className="text-5xl font-extrabold text-green-600">
-        20+
-      </h3>
-
-      <p className="mt-4 text-gray-600 text-lg">
-        Cities Served
-      </p>
-
-    </div>
-
-    <div className="rounded-3xl bg-white border border-gray-200 p-10 text-center shadow-lg hover:-translate-y-2 hover:shadow-2xl transition">
-
-      <h3 className="text-5xl font-extrabold text-green-600">
-        250+
-      </h3>
-
-      <p className="mt-4 text-gray-600 text-lg">
-        Happy Families
-      </p>
-
-    </div>
-
-    <div className="rounded-3xl bg-white border border-gray-200 p-10 text-center shadow-lg hover:-translate-y-2 hover:shadow-2xl transition">
-
-      <h3 className="text-5xl font-extrabold text-green-600">
-        8+
-      </h3>
-
-      <p className="mt-4 text-gray-600 text-lg">
-        Years of Experience
-      </p>
-
-    </div>
+    </p>
 
   </div>
 
-</div>
+  <div className="relative mt-20">
 
-</section>
+    {/* Timeline Line */}
 
-{/* ================= MISSION ================= */}
+    <div className="absolute left-5 top-0 h-full w-1 rounded-full bg-green-500"></div>
 
-<section className="bg-green-50 py-24">
+    {/* Item 1 */}
 
-<div className="max-w-5xl mx-auto px-6 text-center">
+    <div className="relative mb-16 pl-20">
 
-  <p className="uppercase tracking-[4px] text-green-600 font-semibold">
-    Our Mission
-  </p>
+      <div className="absolute left-0 flex h-10 w-10 items-center justify-center rounded-full bg-green-500 font-bold text-black">
 
-  <h2 className="mt-4 text-5xl font-bold text-black">
-    Real Estate Made Simple.
-  </h2>
+        1
 
-  <p className="mt-8 text-xl leading-9 text-grey-100">
+      </div>
 
-    Our mission is to make buying, selling and investing in real estate
-    transparent, secure and stress-free. We strive to build lasting
-    relationships by providing trusted advice, verified properties and
-    exceptional customer service at every step of the journey.
+      <div className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl">
 
-  </p>
+        <h3 className="text-2xl font-bold">
+
+          2023 • Company Founded
+
+        </h3>
+
+        <p className="mt-4 leading-8 text-gray-400">
+
+          GO REALTORS started with a mission to
+          simplify property buying and selling
+          through transparency and technology.
+
+        </p>
+
+      </div>
+
+    </div>
+
+    {/* Item 2 */}
+
+    <div className="relative mb-16 pl-20">
+
+      <div className="absolute left-0 flex h-10 w-10 items-center justify-center rounded-full bg-green-500 font-bold text-black">
+
+        2
+
+      </div>
+
+      <div className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl">
+
+        <h3 className="text-2xl font-bold">
+
+          2024 • Expanded Across Cities
+
+        </h3>
+
+        <p className="mt-4 leading-8 text-gray-400">
+
+          Successfully partnered with hundreds
+          of property owners and expanded our
+          listings across major Indian cities.
+
+        </p>
+
+      </div>
+
+    </div>
+
+    {/* Item 3 */}
+
+    <div className="relative mb-16 pl-20">
+
+      <div className="absolute left-0 flex h-10 w-10 items-center justify-center rounded-full bg-green-500 font-bold text-black">
+
+        3
+
+      </div>
+
+      <div className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl">
+
+        <h3 className="text-2xl font-bold">
+
+          2025 • Premium Services
+
+        </h3>
+
+        <p className="mt-4 leading-8 text-gray-400">
+
+          Introduced luxury properties,
+          investment consultancy,
+          and dedicated NRI services.
+
+        </p>
+
+      </div>
+
+    </div>
+
+    {/* Item 4 */}
+
+    <div className="relative pl-20">
+
+      <div className="absolute left-0 flex h-10 w-10 items-center justify-center rounded-full bg-green-500 font-bold text-black">
+
+        4
+
+      </div>
+
+      <div className="rounded-3xl border border-green-500/40 bg-green-500/10 p-8 backdrop-blur-xl">
+
+        <h3 className="text-2xl font-bold text-green-400">
+
+          Today
+
+        </h3>
+
+        <p className="mt-4 leading-8 text-gray-300">
+
+          GO REALTORS continues to connect
+          thousands of buyers, sellers and
+          investors through a trusted,
+          technology-driven platform.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
 
 </div>
 
 </section>
       {/* ================= WHY CHOOSE US ================= */}
 
-      <section className="py-24 bg-green-50">
+      <section className="bg-black py-28">
 
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        <div className="mx-auto max-w-7xl px-6">
 
           <div className="text-center">
 
-            <p className="uppercase tracking-[4px] text-green-600 font-semibold">
-              Why Choose Us
-            </p>
+            <span className="rounded-full border border-green-500/30 bg-green-500/10 px-5 py-2 font-semibold text-green-400">
 
-            <h2 className="mt-4 text-5xl font-bold">
-              The Go Realtors Difference
+              Why Choose Us
+
+            </span>
+
+            <h2 className="mt-8 text-5xl font-bold">
+
+              The GO REALTORS Difference
+
             </h2>
 
-            <p className="mt-6 max-w-3xl mx-auto text-lg text-gray-600">
-              We combine local market expertise with modern technology to deliver
-              a seamless property buying and selling experience.
+            <p className="mt-6 text-lg text-gray-400">
+
+              Everything you need to make your property journey
+              simple, secure and successful.
+
             </p>
 
           </div>
 
-          <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-20 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
 
-            <div className="rounded-3xl border border-gray-200 bg-white p-8 shadow-md hover:-translate-y-2 hover:shadow-2xl hover:border-green-600 transition duration-300">
+            {/* Card */}
 
-              <FaHome className="text-5xl text-green-600 mb-6" />
+            <div className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl transition duration-300 hover:-translate-y-2 hover:border-green-500">
 
-              <h3 className="text-2xl font-semibold">
+              <FaHome className="mb-6 text-5xl text-green-500" />
+
+              <h3 className="text-2xl font-bold">
+
                 Verified Listings
+
               </h3>
 
-              <p className="mt-4 text-gray-600 leading-7">
-                Every property undergoes verification to ensure complete
-                transparency and peace of mind.
+              <p className="mt-4 leading-8 text-gray-400">
+
+                Every property is carefully verified to
+                ensure accurate details and trustworthy
+                information.
+
               </p>
 
             </div>
 
-            <div className="rounded-3xl border border-gray-200 bg-white p-8 shadow-md hover:-translate-y-2 hover:shadow-2xl hover:border-green-600 transition duration-300">
+            {/* Card */}
 
-              <FaUsers className="text-5xl text-green-600 mb-6" />
+            <div className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl transition duration-300 hover:-translate-y-2 hover:border-green-500">
 
-              <h3 className="text-2xl font-semibold">
+              <FaUsers className="mb-6 text-5xl text-green-500" />
+
+              <h3 className="text-2xl font-bold">
+
                 Expert Advisors
+
               </h3>
 
-              <p className="mt-4 text-gray-600 leading-7">
-                Our experienced consultants help you choose the right property
-                based on your goals and budget.
+              <p className="mt-4 leading-8 text-gray-400">
+
+                Our experienced consultants help you
+                throughout every stage of buying,
+                selling and investing.
+
               </p>
 
             </div>
 
-            <div className="rounded-3xl border border-gray-200 bg-white p-8 shadow-md hover:-translate-y-2 hover:shadow-2xl hover:border-green-600 transition duration-300">
+            {/* Card */}
 
-              <FaAward className="text-5xl text-green-600 mb-6" />
+            <div className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl transition duration-300 hover:-translate-y-2 hover:border-green-500">
 
-              <h3 className="text-2xl font-semibold">
+              <FaAward className="mb-6 text-5xl text-green-500" />
+
+              <h3 className="text-2xl font-bold">
+
                 Trusted Brand
+
               </h3>
 
-              <p className="mt-4 text-gray-600 leading-7">
-                Hundreds of successful transactions and satisfied clients make
-                us a trusted name in Indian real estate.
+              <p className="mt-4 leading-8 text-gray-400">
+
+                Thousands of satisfied clients trust
+                GO REALTORS for honest and transparent
+                real estate services.
+
               </p>
 
             </div>
 
-            <div className="rounded-3xl border border-gray-200 bg-white p-8 shadow-md hover:-translate-y-2 hover:shadow-2xl hover:border-green-600 transition duration-300">
+            {/* Card */}
 
-              <FaHandshake className="text-5xl text-green-600 mb-6" />
+            <div className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl transition duration-300 hover:-translate-y-2 hover:border-green-500">
 
-              <h3 className="text-2xl font-semibold">
-                End-to-End Support
+              <FaHandshake className="mb-6 text-5xl text-green-500" />
+
+              <h3 className="text-2xl font-bold">
+
+                Secure Deals
+
               </h3>
 
-              <p className="mt-4 text-gray-600 leading-7">
-                From your first property visit to final registration, we stay
-                with you at every stage.
+              <p className="mt-4 leading-8 text-gray-400">
+
+                We ensure safe transactions with complete
+                transparency from start to finish.
+
               </p>
 
             </div>
@@ -483,72 +547,77 @@ export default function About() {
 
       {/* ================= CORE VALUES ================= */}
 
-      <section className="bg-green-50 py-24">
+      <section className="bg-slate-950 py-28">
 
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        <div className="mx-auto max-w-7xl px-6">
 
           <div className="text-center">
 
-            <p className="uppercase tracking-[4px] text-green-600 font-semibold">
-              Our Values
-            </p>
+            <span className="rounded-full border border-green-500/30 bg-green-500/10 px-5 py-2 font-semibold text-green-400">
 
-            <h2 className="mt-4 text-5xl font-bold">
-              Principles That Guide Us
+              Core Values
+
+            </span>
+
+            <h2 className="mt-8 text-5xl font-bold">
+
+              What Drives Us
+
             </h2>
 
           </div>
 
-          <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-20 grid gap-8 lg:grid-cols-3">
 
-            <div className="rounded-3xl bg-white p-8 shadow-lg">
+            <div className="rounded-3xl border border-white/10 bg-white/5 p-10 backdrop-blur-xl transition hover:border-green-500">
 
-              <h3 className="text-2xl font-bold text-green-600">
+              <h3 className="text-3xl font-bold text-green-500">
+
                 Transparency
+
               </h3>
 
-              <p className="mt-4 text-gray-600 leading-7">
-                Honest communication and complete clarity throughout every
-                transaction.
+              <p className="mt-6 leading-8 text-gray-400">
+
+                We believe every property transaction
+                should be open, honest and completely
+                transparent.
+
               </p>
 
             </div>
 
-            <div className="rounded-3xl bg-white p-8 shadow-lg">
+            <div className="rounded-3xl border border-white/10 bg-white/5 p-10 backdrop-blur-xl transition hover:border-green-500">
 
-              <h3 className="text-2xl font-bold text-green-600">
-                Integrity
-              </h3>
+              <h3 className="text-3xl font-bold text-green-500">
 
-              <p className="mt-4 text-gray-600 leading-7">
-                Every recommendation is made with our clients' best interests
-                in mind.
-              </p>
-
-            </div>
-
-            <div className="rounded-3xl bg-white p-8 shadow-lg">
-
-              <h3 className="text-2xl font-bold text-green-600">
                 Innovation
+
               </h3>
 
-              <p className="mt-4 text-gray-600 leading-7">
-                Leveraging technology to make real estate faster, easier and
-                smarter.
+              <p className="mt-6 leading-8 text-gray-400">
+
+                We use modern technology to simplify
+                property discovery and deliver the
+                best customer experience.
+
               </p>
 
             </div>
 
-            <div className="rounded-3xl bg-white p-8 shadow-lg">
+            <div className="rounded-3xl border border-white/10 bg-white/5 p-10 backdrop-blur-xl transition hover:border-green-500">
 
-              <h3 className="text-2xl font-bold text-green-600">
+              <h3 className="text-3xl font-bold text-green-500">
+
                 Commitment
+
               </h3>
 
-              <p className="mt-4 text-gray-600 leading-7">
-                Building lifelong relationships through exceptional service and
-                trust.
+              <p className="mt-6 leading-8 text-gray-400">
+
+                Every customer is treated like family.
+                Your success is our biggest achievement.
+
               </p>
 
             </div>
@@ -559,40 +628,145 @@ export default function About() {
 
       </section>
 
-      {/* ================= CTA ================= */}
+      {/* ================= OUR MISSION ================= */}
 
-      <section className="py-24 bg-gradient-to-r from-green-700 via-green-800 to-black">
+      <section className="bg-black py-28">
 
-        <div className="max-w-5xl mx-auto px-6 text-center">
+        <div className="mx-auto max-w-5xl rounded-3xl border border-white/10 bg-white/5 p-12 text-center backdrop-blur-xl">
 
-          <h2 className="text-5xl md:text-6xl font-bold text-white">
-            Ready to Find Your
-            <br />
-            Dream Property?
+          <span className="rounded-full border border-green-500/30 bg-green-500/10 px-5 py-2 font-semibold text-green-400">
+
+            Our Mission
+
+          </span>
+
+          <h2 className="mt-8 text-5xl font-bold">
+
+            Making Real Estate
+            <span className="text-green-500">
+
+              {" "}Simple & Trustworthy
+
+            </span>
+
           </h2>
 
-          <p className="mt-8 text-xl text-green-100 leading-8 max-w-3xl mx-auto">
-            Whether you're buying your first home, upgrading to luxury living,
-            or investing in premium real estate, Go Realtors is here to guide
-            you every step of the way.
+          <p className="mt-8 text-lg leading-9 text-gray-400">
+
+            Our mission is to redefine the real estate
+            experience by combining technology, trust
+            and expert guidance.
+
+            We strive to help every buyer, seller and
+            investor make confident decisions through
+            verified listings, transparent pricing and
+            personalized assistance.
+
           </p>
-
-          <div className="mt-12 flex flex-wrap justify-center gap-6">
-
-            <button className="rounded-xl bg-white px-8 py-4 text-lg font-semibold text-green-700 hover:scale-105 transition">
-              Explore Properties
-            </button>
-
-            <button className="rounded-xl border-2 border-white px-8 py-4 text-lg font-semibold text-white hover:bg-white hover:text-green-700 transition">
-              Contact Us
-            </button>
-
-          </div>
 
         </div>
 
       </section>
+            {/* ================= CALL TO ACTION ================= */}
 
-    </main>
-  );
+            <section className="relative overflow-hidden bg-slate-950 py-28">
+
+{/* Green Glow */}
+
+<div className="absolute -top-32 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-green-500/10 blur-3xl"></div>
+
+<div className="relative mx-auto max-w-6xl px-6">
+
+  <div className="rounded-[40px] border border-white/10 bg-white/5 p-12 backdrop-blur-xl text-center">
+
+    <span className="rounded-full border border-green-500/30 bg-green-500/10 px-5 py-2 font-semibold text-green-400">
+
+      Start Your Journey
+
+    </span>
+
+    <h2 className="mt-8 text-5xl font-bold md:text-6xl">
+
+      Find Your
+      <span className="text-green-500">
+
+        {" "}Dream Property
+
+      </span>
+
+    </h2>
+
+    <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-gray-400">
+
+      Whether you're buying your first home,
+      investing in commercial property or
+      searching for luxury living,
+      GO REALTORS is here to guide you
+      every step of the way.
+
+    </p>
+
+    <div className="mt-12 flex flex-col items-center justify-center gap-6 sm:flex-row">
+
+      <button className="rounded-xl bg-green-500 px-10 py-4 text-lg font-semibold text-black transition duration-300 hover:scale-105 hover:bg-green-400 hover:shadow-xl hover:shadow-green-500/30">
+
+        Explore Properties
+
+      </button>
+
+      <button className="rounded-xl border border-green-500 px-10 py-4 text-lg font-semibold text-green-500 transition duration-300 hover:bg-green-500 hover:text-black">
+
+        Contact Us
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+</section>
+
+{/* ================= FOOTER STRIP ================= */}
+
+<section className="border-t border-white/10 bg-black py-8">
+
+<div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 text-center text-gray-500 md:flex-row">
+
+  <p>
+
+    © {new Date().getFullYear()} GO REALTORS.
+    All Rights Reserved.
+
+  </p>
+
+  <div className="flex gap-8">
+
+    <span className="transition hover:text-green-500 cursor-pointer">
+
+      Privacy Policy
+
+    </span>
+
+    <span className="transition hover:text-green-500 cursor-pointer">
+
+      Terms & Conditions
+
+    </span>
+
+    <span className="transition hover:text-green-500 cursor-pointer">
+
+      Support
+
+    </span>
+
+  </div>
+
+</div>
+
+</section>
+
+</main>
+);
 }

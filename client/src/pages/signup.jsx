@@ -1,51 +1,92 @@
-import { FaUser, FaEnvelope, FaLock } from "react-icons/fa";
+import {
+  FaUser,
+  FaEnvelope,
+  FaLock,
+  FaEye,
+  FaEyeSlash,
+} from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
 export default function Signup() {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   return (
-    <div className="min-h-screen bg-slate-950">
+    <main className="min-h-screen bg-black text-white">
+
       <div className="grid min-h-screen lg:grid-cols-2">
 
         {/* LEFT SIDE */}
-        <div className="relative hidden lg:block">
+
+        <div className="relative hidden overflow-hidden lg:block">
 
           <img
-            src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"
+            src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80"
             alt="Luxury Home"
             className="h-full w-full object-cover"
           />
 
-          <div className="absolute inset-0 bg-black/55" />
+          <div className="absolute inset-0 bg-black/70"></div>
 
-          <div className="absolute bottom-16 left-16 text-white max-w-md">
-            <h1 className="text-5xl font-bold leading-tight">
-              Find Your
+          {/* Green Glow */}
+
+          <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-green-500/20 blur-3xl"></div>
+
+          <div className="absolute bottom-16 left-16 max-w-md">
+
+            <span className="rounded-full bg-green-500/20 px-4 py-2 text-green-400 border border-green-500/30">
+              Join Go Realtors
+            </span>
+
+            <h1 className="mt-6 text-5xl font-bold leading-tight">
+
+              Find Your 
               <br />
-              Dream Home.
+
+              <span className="text-green-500">
+                Dream Home
+              </span>
+
             </h1>
 
-            <p className="mt-6 text-lg text-gray-200">
-              Join thousands of buyers and sellers discovering premium
-              properties around the world.
+            <p className="mt-6 text-lg leading-8 text-gray-300">
+
+              Create your account to discover premium
+              properties, save favourites,
+              connect with trusted agents
+              and begin your real estate journey.
+
             </p>
+
           </div>
+
         </div>
 
         {/* RIGHT SIDE */}
 
-        <div className="flex items-center justify-center bg-gradient-to-brown from-slate-950 via-slate-900 to-slate-800 p-6">
+        <div className="flex items-center justify-center bg-gradient-to-blue from-black via-slate-900 to-black px-6 py-12">
 
-          <div className="w-full max-w-md rounded-3xl border border-white/10 bg-white/10 backdrop-blur-xl p-8 shadow-2xl">
+          <div className="w-full max-w-md rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl shadow-2xl">
 
-            <h2 className="text-center text-4xl font-bold text-white">
-              Create Account
-            </h2>
+            <div className="text-center">
 
-            <p className="mt-2 text-center text-gray-400">
-              Welcome to GOREALTORS
-            </p>
+              <h2 className="text-4xl font-bold">
 
-            <form className="mt-8 space-y-5">
+                Create Account
+
+              </h2>
+
+              <p className="mt-3 text-gray-400">
+
+                Welcome to <span className="text-green-500 font-semibold">GO REALTORS</span>
+
+              </p>
+
+            </div>
+
+            <form className="mt-10 space-y-5">
 
               {/* Username */}
 
@@ -55,8 +96,8 @@ export default function Signup() {
 
                 <input
                   type="text"
-                  placeholder="Username"
-                  className="w-full rounded-xl border border-slate-600 bg-slate-800/60 py-3 pl-12 pr-4 text-white outline-none transition focus:border-blue-500"
+                  placeholder="Full Name"
+                  className="w-full rounded-xl border border-slate-700 bg-slate-900/70 py-3 pl-12 pr-4 outline-none transition focus:border-green-500"
                 />
 
               </div>
@@ -69,8 +110,8 @@ export default function Signup() {
 
                 <input
                   type="email"
-                  placeholder="Email"
-                  className="w-full rounded-xl border border-slate-600 bg-slate-800/60 py-3 pl-12 pr-4 text-white outline-none transition focus:border-blue-500"
+                  placeholder="Email Address"
+                  className="w-full rounded-xl border border-slate-700 bg-slate-900/70 py-3 pl-12 pr-4 outline-none transition focus:border-green-500"
                 />
 
               </div>
@@ -82,10 +123,18 @@ export default function Signup() {
                 <FaLock className="absolute left-4 top-4 text-gray-400" />
 
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   placeholder="Password"
-                  className="w-full rounded-xl border border-slate-600 bg-slate-800/60 py-3 pl-12 pr-4 text-white outline-none transition focus:border-blue-500"
+                  className="w-full rounded-xl border border-slate-700 bg-slate-900/70 py-3 pl-12 pr-12 outline-none transition focus:border-green-500"
                 />
+
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-4 top-4 text-gray-400 hover:text-white"
+                >
+                  {showPassword ? <FaEyeSlash /> : <FaEye />}
+                </button>
 
               </div>
 
@@ -96,58 +145,106 @@ export default function Signup() {
                 <FaLock className="absolute left-4 top-4 text-gray-400" />
 
                 <input
-                  type="password"
+                  type={showConfirmPassword ? "text" : "password"}
                   placeholder="Confirm Password"
-                  className="w-full rounded-xl border border-slate-600 bg-slate-800/60 py-3 pl-12 pr-4 text-white outline-none transition focus:border-blue-500"
+                  className="w-full rounded-xl border border-slate-700 bg-slate-900/70 py-3 pl-12 pr-12 outline-none transition focus:border-green-500"
                 />
 
+                <button
+                  type="button"
+                  onClick={() =>
+                    setShowConfirmPassword(!showConfirmPassword)
+                  }
+                  className="absolute right-4 top-4 text-gray-400 hover:text-white"
+                >
+                  {showConfirmPassword ? (
+                    <FaEyeSlash />
+                  ) : (
+                    <FaEye />
+                  )}
+                </button>
+
               </div>
+                            {/* Terms & Conditions */}
 
-              {/* Button */}
+                            <label className="flex items-start gap-3 text-sm text-gray-400">
 
-              <button
-                className="w-full rounded-xl bg-blue-600 py-3 text-lg font-semibold text-white transition duration-300 hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-600/40"
-              >
-                Create Account
-              </button>
+<input
+  type="checkbox"
+  className="mt-1 accent-green-500"
+/>
 
-            </form>
+<span>
+  I agree to the{" "}
+  <span className="cursor-pointer text-green-500 hover:text-green-400">
+    Terms & Conditions
+  </span>{" "}
+  and{" "}
+  <span className="cursor-pointer text-green-500 hover:text-green-400">
+    Privacy Policy
+  </span>
+</span>
 
-            {/* Divider */}
+</label>
 
-            <div className="my-7 flex items-center">
+{/* Create Account Button */}
 
-              <div className="h-px flex-1 bg-gray-600"></div>
+<button
+type="submit"
+className="w-full rounded-xl bg-green-500 py-3 text-lg font-semibold text-black transition duration-300 hover:scale-[1.02] hover:bg-green-400 hover:shadow-lg hover:shadow-green-500/30"
+>
+Create Account
+</button>
 
-              <span className="mx-4 text-gray-400">OR</span>
+</form>
 
-              <div className="h-px flex-1 bg-gray-600"></div>
+{/* Divider */}
 
-            </div>
+<div className="my-8 flex items-center">
 
-            {/* Google */}
+<div className="h-px flex-1 bg-slate-700"></div>
 
-            <button
-              className="flex w-full items-center justify-center gap-3 rounded-xl border border-slate-600 bg-white py-3 font-semibold text-black transition hover:bg-gray-100"
-            >
-              <FcGoogle size={24} />
-              Continue with Google
-            </button>
+<span className="mx-4 text-gray-400">
+OR
+</span>
 
-            {/* Footer */}
+<div className="h-px flex-1 bg-slate-700"></div>
 
-            <p className="mt-8 text-center text-gray-400">
-              Already have an account?{" "}
-              <span className="cursor-pointer font-semibold text-blue-400 hover:text-blue-300">
-                Sign In
-              </span>
-            </p>
+</div>
 
-          </div>
+{/* Google */}
 
-        </div>
+<button
+className="flex w-full items-center justify-center gap-3 rounded-xl border border-slate-700 bg-white py-3 font-semibold text-black transition hover:bg-gray-100"
+>
 
-      </div>
-    </div>
-  );
+<FcGoogle size={24} />
+
+Continue with Google
+
+</button>
+
+{/* Footer */}
+
+<p className="mt-8 text-center text-gray-400">
+
+Already have an account?{" "}
+
+<Link
+to="/signin"
+className="font-semibold text-green-500 hover:text-green-400 transition"
+>
+Sign In
+</Link>
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</main>
+);
 }

@@ -30,7 +30,7 @@ export default function Signin() {
 
           <div className="absolute inset-0 bg-black/70"></div>
 
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-green-900/20"></div>
+          <div className="absolute inset-0 bg-gradient-to-teal from-black via-black/40 to-green-900/20"></div>
 
           <div className="absolute bottom-16 left-16 max-w-lg">
 
