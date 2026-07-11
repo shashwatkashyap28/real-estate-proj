@@ -6,10 +6,50 @@ import {
   FaEyeSlash,
 } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link , useNavigate} from "react-router-dom";
 import { useState } from "react";
 
 export default function Signup() {
+  const [formData, setFormData] = useState({});
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try{
+    setLoading(true);
+  
+    console.log("Submitting:", formData);
+  
+    const res = await fetch("/api/auth/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+  
+    const data = await res.json();
+    if(data.success === false) {
+      setLoading(false);
+      setError(data.message);
+      
+      return;
+    }
+    setLoading(false);
+    setError(null);
+    navigate("/signin");
+    console.log(data);}
+    catch (err) {
+      setLoading(false);
+      setError(error.message);
+      
+    }
+  };
+  
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -74,7 +114,7 @@ export default function Signup() {
 
               <h2 className="text-4xl font-bold">
 
-                Create Account
+                Enquiry
 
               </h2>
 
@@ -86,7 +126,7 @@ export default function Signup() {
 
             </div>
 
-            <form className="mt-10 space-y-5">
+            <form onSubmit={handleSubmit} className="mt-10 space-y-5">
 
               {/* Username */}
 
@@ -96,8 +136,10 @@ export default function Signup() {
 
                 <input
                   type="text"
-                  placeholder="Full Name"
+                  placeholder="Username"
                   className="w-full rounded-xl border border-slate-700 bg-slate-900/70 py-3 pl-12 pr-4 outline-none transition focus:border-green-500"
+                  id ="username"
+                  onChange={handleChange}
                 />
 
               </div>
@@ -110,9 +152,12 @@ export default function Signup() {
 
                 <input
                   type="email"
-                  placeholder="Email Address"
+                  placeholder="Email"
                   className="w-full rounded-xl border border-slate-700 bg-slate-900/70 py-3 pl-12 pr-4 outline-none transition focus:border-green-500"
+                  id ="email"
+                  onChange={handleChange}
                 />
+
 
               </div>
 
@@ -126,7 +171,10 @@ export default function Signup() {
                   type={showPassword ? "text" : "password"}
                   placeholder="Password"
                   className="w-full rounded-xl border border-slate-700 bg-slate-900/70 py-3 pl-12 pr-12 outline-none transition focus:border-green-500"
-                />
+                  id ="password"  
+                  onChange={handleChange}                 
+               />
+
 
                 <button
                   type="button"
@@ -138,33 +186,7 @@ export default function Signup() {
 
               </div>
 
-              {/* Confirm Password */}
-
-              <div className="relative">
-
-                <FaLock className="absolute left-4 top-4 text-gray-400" />
-
-                <input
-                  type={showConfirmPassword ? "text" : "password"}
-                  placeholder="Confirm Password"
-                  className="w-full rounded-xl border border-slate-700 bg-slate-900/70 py-3 pl-12 pr-12 outline-none transition focus:border-green-500"
-                />
-
-                <button
-                  type="button"
-                  onClick={() =>
-                    setShowConfirmPassword(!showConfirmPassword)
-                  }
-                  className="absolute right-4 top-4 text-gray-400 hover:text-white"
-                >
-                  {showConfirmPassword ? (
-                    <FaEyeSlash />
-                  ) : (
-                    <FaEye />
-                  )}
-                </button>
-
-              </div>
+              
                             {/* Terms & Conditions */}
 
                             <label className="flex items-start gap-3 text-sm text-gray-400">
@@ -191,9 +213,10 @@ export default function Signup() {
 
 <button
 type="submit"
+disabled={loading}
 className="w-full rounded-xl bg-green-500 py-3 text-lg font-semibold text-black transition duration-300 hover:scale-[1.02] hover:bg-green-400 hover:shadow-lg hover:shadow-green-500/30"
 >
-Create Account
+{loading ? "Creating Account..." : "Create Account"}
 </button>
 
 </form>
@@ -212,17 +235,6 @@ OR
 
 </div>
 
-{/* Google */}
-
-<button
-className="flex w-full items-center justify-center gap-3 rounded-xl border border-slate-700 bg-white py-3 font-semibold text-black transition hover:bg-gray-100"
->
-
-<FcGoogle size={24} />
-
-Continue with Google
-
-</button>
 
 {/* Footer */}
 
@@ -242,6 +254,12 @@ Sign In
 </div>
 
 </div>
+{error && (
+<div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-4 py-2 rounded shadow-lg">
+{error}
+</div>
+)}
+
 
 </div>
 

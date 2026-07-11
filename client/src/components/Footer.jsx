@@ -87,7 +87,7 @@ export default function Footer() {
                 to="/signup"
                 className="hover:text-green-500 transition"
               >
-                Sign Up
+                Enquiry
               </Link>
 
             </div>
