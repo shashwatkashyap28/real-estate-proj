@@ -80,7 +80,7 @@ export default function Footer() {
                 to="/signin"
                 className="hover:text-green-500 transition"
               >
-                Sign In
+                Services
               </Link>
 
               <Link
@@ -98,9 +98,12 @@ export default function Footer() {
 
           <div>
 
-            <h3 className="text-2xl font-bold text-white mb-6">
-              Services
-            </h3>
+          <Link
+                to="/properties"
+                className="text-2xl font-bold mb-6 p-1 `  hover:text-green-500 transition"
+              >
+                Properties
+              </Link>
 
             <div className="flex flex-col gap-4 text-gray-400">
 

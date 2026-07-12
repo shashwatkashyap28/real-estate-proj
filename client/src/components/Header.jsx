@@ -43,7 +43,7 @@ export default function Header() {
 
           <Link to="/signin">
             <li className="text-white hover:text-green-500 transition-colors duration-300">
-              SIGN IN
+              SERVICES
             </li>
           </Link>
         </ul>
