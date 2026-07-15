@@ -11,14 +11,20 @@ import {
 } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useDispatch , useSelector } from "react-redux";
+import {
+  signInStart,
+  signInSuccess,
+  signInFailure,
+} from "../redux/user/userSlice";
 
 export default function Signin() {
   const [formData, setFormData] = useState({});
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const {loading, error} = useSelector((state) => state.user);
   const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setFormData({
@@ -31,8 +37,8 @@ export default function Signin() {
     e.preventDefault();
 
     try {
-      setLoading(true);
-      setError(null);
+      dispatch(signInStart());
+      
 
       const res = await fetch("/api/auth/signin", {
         method: "POST",
@@ -45,18 +51,16 @@ export default function Signin() {
       const data = await res.json();
 
       if (data.success === false) {
-        setLoading(false);
-        setError(data.message);
+        dispatch(signInFailure(data.message));
         return;
       }
 
-      setLoading(false);
+      dispatch(signInSuccess(data));
 
       navigate("/");
 
     } catch (err) {
-      setLoading(false);
-      setError(err.message);
+      dispatch(signInFailure(err.message));
     }
   };
 

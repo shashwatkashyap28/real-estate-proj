@@ -22,7 +22,7 @@ export default function FloatingEnquiry() {
       {/* Enquiry Button */}
       <Link
         to="/signup"
-        className="group flex items-center rounded-full bg-gradient-to-red from-black to-green-700 px-6 py-3 shadow-2xl transition-all duration-300 hover:scale-105"
+        className="group flex items-center rounded-full bg-gradient-to-red bg-green-600 px-6 py-3 shadow-2xl transition-all duration-300 hover:scale-105"
       >
         <div className="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-white/20">
           <FaEnvelope className="text-white text-lg" />

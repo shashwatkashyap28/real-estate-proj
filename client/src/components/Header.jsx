@@ -1,52 +1,89 @@
-import { FaSearch } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { FaSearch, FaUserCircle } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   return (
-    <header className="bg-black shadow-md">
-      <div className="flex justify-between items-center max-w-7xl mx-auto px-6 py-4">
+    <header className="sticky top-0 z-50 bg-black/95 backdrop-blur-md border-b border-white/10 shadow-xl">
+      <div className="max-w-7xl mx-auto px-1 h-20 flex items-center justify-between">
 
         {/* Logo */}
         <Link
           to="/"
-          className="transition-transform duration-300 hover:scale-105"
+          className="flex items-center gap-2 hover:scale-105 transition duration-300"
         >
-          <h1 className="flex items-center text-3xl sm:text-3xl font-black tracking-wider uppercase">
+          <h1 className="text-3xl font-black tracking-widest uppercase">
             <span className="text-white">GO</span>
-            <span className="text-green-500 ml-2">REALTOR</span>
+            <span className="text-emerald-400 ml-2">REALTORS</span>
           </h1>
         </Link>
 
-        {/* Search Bar */}
-        <form className="bg-white px-4 py-3 rounded-full flex items-center shadow-md">
-          <input
-            type="text"
-            placeholder="Search..."
-            className="bg-transparent focus:outline-none w-28 sm:w-72 text-black placeholder-gray-500"
-          />
-          <FaSearch className="text-gray-600 text-lg cursor-pointer hover:text-green-500 transition-colors" />
-        </form>
-
         {/* Navigation */}
-        <ul className="flex items-center gap-6 font-medium">
-          <Link to="/">
-            <li className="hidden sm:inline text-white hover:text-green-500 transition-colors duration-300">
-              HOME
-            </li>
+        <nav className="hidden lg:flex items-center gap-8">
+
+          <Link
+            to="/"
+            className="text-white hover:text-emerald-400 transition font-semibold tracking-wide"
+          >
+            Home
           </Link>
 
-          <Link to="/about">
-            <li className="hidden sm:inline text-white hover:text-green-500 transition-colors duration-300">
-              ABOUT
-            </li>
+          <Link
+            to="/about"
+            className="text-white hover:text-emerald-400 transition font-semibold tracking-wide"
+          >
+            About
           </Link>
 
-          <Link to="/signin">
-            <li className="text-white hover:text-green-500 transition-colors duration-300">
-              SERVICES
-            </li>
+          <Link
+            to="/properties"
+            className="text-white hover:text-emerald-400 transition font-semibold tracking-wide"
+          >
+            Properties
           </Link>
-        </ul>
+
+          <Link
+            to="/signin"
+            className="text-white hover:text-emerald-400 transition font-semibold tracking-wide"
+          >
+            Services
+          </Link>
+
+          <Link
+            to="/signup"
+            className="text-white hover:text-emerald-400 transition font-semibold tracking-wide"
+          >
+            Contact
+          </Link>
+
+        </nav>
+
+        {/* Right Side */}
+        <div className="flex items-center gap-6">
+
+          {/* Search */}
+          <div className="hidden md:flex items-center bg-white rounded-full px-4 py-2 shadow-lg">
+
+            <input
+              type="text"
+              placeholder="Search properties..."
+              className="bg-transparent outline-none text-sm w-56 placeholder-gray-500"
+            />
+
+            <FaSearch className="text-gray-600 cursor-pointer hover:text-emerald-500 transition" />
+
+          </div>
+
+          
+
+          {/* CTA */}
+          <Link
+            to="/properties"
+            className="bg-emerald-500 text-black font-semibold px-6 py-3 rounded-full hover:bg-emerald-400 transition duration-300 shadow-lg"
+          >
+            Explore
+          </Link>
+
+        </div>
 
       </div>
     </header>
