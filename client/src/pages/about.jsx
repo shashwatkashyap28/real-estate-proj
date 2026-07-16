@@ -7,7 +7,7 @@ import {
 
 export default function About() {
   return (
-    <main className="min-h-screen overflow-hidden bg-black text-white">
+    <main className="min-h-screen overflow-hidden bg-cream text-charcoal">
 
       {/* ================= HERO ================= */}
 
@@ -31,7 +31,7 @@ export default function About() {
 
         <div className="absolute right-0 bottom-0 h-80 w-80 rounded-full bg-green-600/10 blur-3xl"></div>
 
-        <div className="relative mx-auto max-w-7xl px-6 py-32">
+        <div className="relative mx-auto max-w-7xl px-6 py-32 text-white">
 
           <div className="grid items-center gap-20 lg:grid-cols-2">
 
@@ -60,7 +60,7 @@ export default function About() {
 
               </h1>
 
-              <p className="mt-8 max-w-xl text-lg leading-9 text-gray-400">
+              <p className="mt-8 max-w-xl text-lg leading-9 text-gray-200">
 
                 GO REALTORS is a premium real estate platform helping
                 buyers, sellers and investors discover verified
@@ -83,7 +83,7 @@ export default function About() {
               <img
                 src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=900&q=80"
                 alt="Luxury Villa"
-                className="rounded-3xl border border-white/10 shadow-2xl"
+                className="rounded-3xl border border-gold-200 shadow-2xl"
               />
 
             </div>
@@ -96,7 +96,7 @@ export default function About() {
 
       {/* ================= STATS ================= */}
 
-      <section className="bg-slate-950 py-24">
+      <section className="bg-ivory py-24">
 
         <div className="mx-auto max-w-7xl px-6">
 
@@ -104,7 +104,7 @@ export default function About() {
 
             {/* Card */}
 
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl transition hover:border-green-500">
+            <div className="rounded-3xl border border-gold-200 bg-white p-8 backdrop-blur-xl transition hover:border-green-500">
 
               <FaHome className="mb-5 text-5xl text-green-500" />
 
@@ -114,7 +114,7 @@ export default function About() {
 
               </h2>
 
-              <p className="mt-3 text-gray-400">
+              <p className="mt-3 text-gray-600">
 
                 Verified Properties
 
@@ -124,7 +124,7 @@ export default function About() {
 
             {/* Card */}
 
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl transition hover:border-green-500">
+            <div className="rounded-3xl border border-gold-200 bg-white p-8 backdrop-blur-xl transition hover:border-green-500">
 
               <FaUsers className="mb-5 text-5xl text-green-500" />
 
@@ -134,7 +134,7 @@ export default function About() {
 
               </h2>
 
-              <p className="mt-3 text-gray-400">
+              <p className="mt-3 text-gray-600">
 
                 Happy Clients
 
@@ -144,7 +144,7 @@ export default function About() {
 
             {/* Card */}
 
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl transition hover:border-green-500">
+            <div className="rounded-3xl border border-gold-200 bg-white p-8 backdrop-blur-xl transition hover:border-green-500">
 
               <FaAward className="mb-5 text-5xl text-green-500" />
 
@@ -154,7 +154,7 @@ export default function About() {
 
               </h2>
 
-              <p className="mt-3 text-gray-400">
+              <p className="mt-3 text-gray-600">
 
                 Cities Covered
 
@@ -164,7 +164,7 @@ export default function About() {
 
             {/* Card */}
 
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl transition hover:border-green-500">
+            <div className="rounded-3xl border border-gold-200 bg-white p-8 backdrop-blur-xl transition hover:border-green-500">
 
               <FaHandshake className="mb-5 text-5xl text-green-500" />
 
@@ -174,7 +174,7 @@ export default function About() {
 
               </h2>
 
-              <p className="mt-3 text-gray-400">
+              <p className="mt-3 text-gray-600">
 
                 Client Satisfaction
 
@@ -189,7 +189,7 @@ export default function About() {
       </section>
             {/* ================= OUR STORY ================= */}
 
-            <section className="bg-black py-28">
+            <section className="bg-cream py-28">
 
 <div className="mx-auto max-w-7xl px-6">
 
@@ -202,7 +202,7 @@ export default function About() {
       <img
         src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=80"
         alt="Office"
-        className="rounded-3xl border border-white/10 shadow-2xl"
+        className="rounded-3xl border border-gold-200 shadow-2xl"
       />
 
     </div>
@@ -228,7 +228,7 @@ export default function About() {
 
       </h2>
 
-      <p className="mt-8 text-lg leading-9 text-gray-400">
+      <p className="mt-8 text-lg leading-9 text-gray-600">
 
         GO REALTORS was founded with one simple vision—
         making property buying and selling transparent,
@@ -236,7 +236,7 @@ export default function About() {
 
       </p>
 
-      <p className="mt-6 text-lg leading-9 text-gray-400">
+      <p className="mt-6 text-lg leading-9 text-gray-600">
 
         Whether you're purchasing your first home,
         investing in commercial real estate or searching
@@ -245,7 +245,7 @@ export default function About() {
 
       </p>
 
-      <p className="mt-6 text-lg leading-9 text-gray-400">
+      <p className="mt-6 text-lg leading-9 text-gray-600">
 
         Our goal is not just to sell homes—
         it's to build lifelong relationships with every client.
@@ -262,7 +262,7 @@ export default function About() {
 
 {/* ================= COMPANY JOURNEY ================= */}
 
-<section className="bg-slate-950 py-28">
+<section className="bg-ivory py-28">
 
 <div className="mx-auto max-w-6xl px-6">
 
@@ -280,7 +280,7 @@ export default function About() {
 
     </h2>
 
-    <p className="mt-6 text-lg text-gray-400">
+    <p className="mt-6 text-lg text-gray-600">
 
       Every milestone reflects our commitment to
       excellence and customer satisfaction.
@@ -305,7 +305,7 @@ export default function About() {
 
       </div>
 
-      <div className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl">
+      <div className="rounded-3xl border border-gold-200 bg-white p-8 backdrop-blur-xl">
 
         <h3 className="text-2xl font-bold">
 
@@ -313,7 +313,7 @@ export default function About() {
 
         </h3>
 
-        <p className="mt-4 leading-8 text-gray-400">
+        <p className="mt-4 leading-8 text-gray-600">
 
           GO REALTORS started with a mission to
           simplify property buying and selling
@@ -335,7 +335,7 @@ export default function About() {
 
       </div>
 
-      <div className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl">
+      <div className="rounded-3xl border border-gold-200 bg-white p-8 backdrop-blur-xl">
 
         <h3 className="text-2xl font-bold">
 
@@ -343,7 +343,7 @@ export default function About() {
 
         </h3>
 
-        <p className="mt-4 leading-8 text-gray-400">
+        <p className="mt-4 leading-8 text-gray-600">
 
           Successfully partnered with hundreds
           of property owners and expanded our
@@ -365,7 +365,7 @@ export default function About() {
 
       </div>
 
-      <div className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl">
+      <div className="rounded-3xl border border-gold-200 bg-white p-8 backdrop-blur-xl">
 
         <h3 className="text-2xl font-bold">
 
@@ -373,7 +373,7 @@ export default function About() {
 
         </h3>
 
-        <p className="mt-4 leading-8 text-gray-400">
+        <p className="mt-4 leading-8 text-gray-600">
 
           Introduced luxury properties,
           investment consultancy,
@@ -403,7 +403,7 @@ export default function About() {
 
         </h3>
 
-        <p className="mt-4 leading-8 text-gray-300">
+        <p className="mt-4 leading-8 text-gray-700">
 
           GO REALTORS continues to connect
           thousands of buyers, sellers and
@@ -423,7 +423,7 @@ export default function About() {
 </section>
       {/* ================= WHY CHOOSE US ================= */}
 
-      <section className="bg-black py-28">
+      <section className="bg-cream py-28">
 
         <div className="mx-auto max-w-7xl px-6">
 
@@ -441,7 +441,7 @@ export default function About() {
 
             </h2>
 
-            <p className="mt-6 text-lg text-gray-400">
+            <p className="mt-6 text-lg text-gray-600">
 
               Everything you need to make your property journey
               simple, secure and successful.
@@ -454,7 +454,7 @@ export default function About() {
 
             {/* Card */}
 
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl transition duration-300 hover:-translate-y-2 hover:border-green-500">
+            <div className="rounded-3xl border border-gold-200 bg-white p-8 backdrop-blur-xl transition duration-300 hover:-translate-y-2 hover:border-green-500">
 
               <FaHome className="mb-6 text-5xl text-green-500" />
 
@@ -464,7 +464,7 @@ export default function About() {
 
               </h3>
 
-              <p className="mt-4 leading-8 text-gray-400">
+              <p className="mt-4 leading-8 text-gray-600">
 
                 Every property is carefully verified to
                 ensure accurate details and trustworthy
@@ -476,7 +476,7 @@ export default function About() {
 
             {/* Card */}
 
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl transition duration-300 hover:-translate-y-2 hover:border-green-500">
+            <div className="rounded-3xl border border-gold-200 bg-white p-8 backdrop-blur-xl transition duration-300 hover:-translate-y-2 hover:border-green-500">
 
               <FaUsers className="mb-6 text-5xl text-green-500" />
 
@@ -486,7 +486,7 @@ export default function About() {
 
               </h3>
 
-              <p className="mt-4 leading-8 text-gray-400">
+              <p className="mt-4 leading-8 text-gray-600">
 
                 Our experienced consultants help you
                 throughout every stage of buying,
@@ -498,7 +498,7 @@ export default function About() {
 
             {/* Card */}
 
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl transition duration-300 hover:-translate-y-2 hover:border-green-500">
+            <div className="rounded-3xl border border-gold-200 bg-white p-8 backdrop-blur-xl transition duration-300 hover:-translate-y-2 hover:border-green-500">
 
               <FaAward className="mb-6 text-5xl text-green-500" />
 
@@ -508,7 +508,7 @@ export default function About() {
 
               </h3>
 
-              <p className="mt-4 leading-8 text-gray-400">
+              <p className="mt-4 leading-8 text-gray-600">
 
                 Thousands of satisfied clients trust
                 GO REALTORS for honest and transparent
@@ -520,7 +520,7 @@ export default function About() {
 
             {/* Card */}
 
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl transition duration-300 hover:-translate-y-2 hover:border-green-500">
+            <div className="rounded-3xl border border-gold-200 bg-white p-8 backdrop-blur-xl transition duration-300 hover:-translate-y-2 hover:border-green-500">
 
               <FaHandshake className="mb-6 text-5xl text-green-500" />
 
@@ -530,7 +530,7 @@ export default function About() {
 
               </h3>
 
-              <p className="mt-4 leading-8 text-gray-400">
+              <p className="mt-4 leading-8 text-gray-600">
 
                 We ensure safe transactions with complete
                 transparency from start to finish.
@@ -547,7 +547,7 @@ export default function About() {
 
       {/* ================= CORE VALUES ================= */}
 
-      <section className="bg-slate-950 py-28">
+      <section className="bg-ivory py-28">
 
         <div className="mx-auto max-w-7xl px-6">
 
@@ -569,7 +569,7 @@ export default function About() {
 
           <div className="mt-20 grid gap-8 lg:grid-cols-3">
 
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-10 backdrop-blur-xl transition hover:border-green-500">
+            <div className="rounded-3xl border border-gold-200 bg-white p-10 backdrop-blur-xl transition hover:border-green-500">
 
               <h3 className="text-3xl font-bold text-green-500">
 
@@ -577,7 +577,7 @@ export default function About() {
 
               </h3>
 
-              <p className="mt-6 leading-8 text-gray-400">
+              <p className="mt-6 leading-8 text-gray-600">
 
                 We believe every property transaction
                 should be open, honest and completely
@@ -587,7 +587,7 @@ export default function About() {
 
             </div>
 
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-10 backdrop-blur-xl transition hover:border-green-500">
+            <div className="rounded-3xl border border-gold-200 bg-white p-10 backdrop-blur-xl transition hover:border-green-500">
 
               <h3 className="text-3xl font-bold text-green-500">
 
@@ -595,7 +595,7 @@ export default function About() {
 
               </h3>
 
-              <p className="mt-6 leading-8 text-gray-400">
+              <p className="mt-6 leading-8 text-gray-600">
 
                 We use modern technology to simplify
                 property discovery and deliver the
@@ -605,7 +605,7 @@ export default function About() {
 
             </div>
 
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-10 backdrop-blur-xl transition hover:border-green-500">
+            <div className="rounded-3xl border border-gold-200 bg-white p-10 backdrop-blur-xl transition hover:border-green-500">
 
               <h3 className="text-3xl font-bold text-green-500">
 
@@ -613,7 +613,7 @@ export default function About() {
 
               </h3>
 
-              <p className="mt-6 leading-8 text-gray-400">
+              <p className="mt-6 leading-8 text-gray-600">
 
                 Every customer is treated like family.
                 Your success is our biggest achievement.
@@ -630,9 +630,9 @@ export default function About() {
 
       {/* ================= OUR MISSION ================= */}
 
-      <section className="bg-black py-28">
+      <section className="bg-cream py-28">
 
-        <div className="mx-auto max-w-5xl rounded-3xl border border-white/10 bg-white/5 p-12 text-center backdrop-blur-xl">
+        <div className="mx-auto max-w-5xl rounded-3xl border border-gold-200 bg-white p-12 text-center backdrop-blur-xl">
 
           <span className="rounded-full border border-green-500/30 bg-green-500/10 px-5 py-2 font-semibold text-green-400">
 
@@ -651,7 +651,7 @@ export default function About() {
 
           </h2>
 
-          <p className="mt-8 text-lg leading-9 text-gray-400">
+          <p className="mt-8 text-lg leading-9 text-gray-600">
 
             Our mission is to redefine the real estate
             experience by combining technology, trust
@@ -669,7 +669,7 @@ export default function About() {
       </section>
             {/* ================= CALL TO ACTION ================= */}
 
-            <section className="relative overflow-hidden bg-slate-950 py-28">
+            <section className="relative overflow-hidden bg-ivory py-28">
 
 {/* Green Glow */}
 
@@ -677,7 +677,7 @@ export default function About() {
 
 <div className="relative mx-auto max-w-6xl px-6">
 
-  <div className="rounded-[40px] border border-white/10 bg-white/5 p-12 backdrop-blur-xl text-center">
+  <div className="rounded-[40px] border border-gold-200 bg-white p-12 backdrop-blur-xl text-center">
 
     <span className="rounded-full border border-green-500/30 bg-green-500/10 px-5 py-2 font-semibold text-green-400">
 
@@ -696,7 +696,7 @@ export default function About() {
 
     </h2>
 
-    <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-gray-400">
+    <p className="mx-auto mt-8 max-w-3xl text-lg leading-9 text-gray-600">
 
       Whether you're buying your first home,
       investing in commercial property or
@@ -730,7 +730,7 @@ export default function About() {
 
 {/* ================= FOOTER STRIP ================= */}
 
-<section className="border-t border-white/10 bg-black py-8">
+<section className="border-t border-gold-800/40 bg-charcoal py-8">
 
 <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 text-center text-gray-500 md:flex-row">
 

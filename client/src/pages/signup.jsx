@@ -172,7 +172,7 @@ export default function Signup() {
     
                 <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
     
-                  <h2 className="text-4xl font-bold text-black">
+                  <h2 className="text-4xl font-bold text-white">
                     5000+
                   </h2>
     
@@ -184,7 +184,7 @@ export default function Signup() {
     
                 <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
     
-                  <h2 className="text-4xl font-bold text-black">
+                  <h2 className="text-4xl font-bold text-white">
                     1200+
                   </h2>
     
@@ -196,7 +196,7 @@ export default function Signup() {
     
                 <div className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
     
-                  <h2 className="text-4xl font-bold text-black">
+                  <h2 className="text-4xl font-bold text-white">
                     4.9★
                   </h2>
     
@@ -215,9 +215,9 @@ export default function Signup() {
           {/* ================= RIGHT SIDE STARTS HERE ================= */}
           {/* ================= RIGHT SIDE ================= */}
 
-<div className="flex items-center justify-center bg-gradient-to-brown from-black via-slate-950 to-black px-6 py-12">
+<div className="flex items-center justify-center bg-cream text-charcoal px-6 py-12">
 
-<div className="w-full max-w-md rounded-3xl border border-white/10 bg-white/5 p-8 shadow-2xl backdrop-blur-xl">
+<div className="w-full max-w-md rounded-3xl border border-gold-200 bg-white border border-gold-100 p-8 shadow-2xl backdrop-blur-xl">
 
   {/* Heading */}
 
@@ -241,7 +241,7 @@ export default function Signup() {
 
     </h2>
 
-    <p className="mt-4 text-gray-400 leading-7">
+    <p className="mt-4 text-gray-600 leading-7">
 
       Fill in your details and one of our
       property experts will contact you
@@ -262,14 +262,14 @@ export default function Signup() {
 
     <div className="relative">
 
-      <FaUser className="absolute left-4 top-4 text-gray-400" />
+      <FaUser className="absolute left-4 top-4 text-gray-600" />
 
       <input
         type="text"
         id="username"
         placeholder="Your Full Name"
         onChange={handleChange}
-        className="w-full rounded-xl border border-slate-700 bg-slate-900/80 py-3 pl-12 pr-4 outline-none transition-all duration-300 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
+        className="w-full rounded-xl border border-gold-200 bg-cream py-3 pl-12 pr-4 outline-none transition-all duration-300 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
       />
 
     </div>
@@ -278,14 +278,14 @@ export default function Signup() {
 
     <div className="relative">
 
-      <FaEnvelope className="absolute left-4 top-4 text-gray-400" />
+      <FaEnvelope className="absolute left-4 top-4 text-gray-600" />
 
       <input
         type="email"
         id="email"
         placeholder="Email Address"
         onChange={handleChange}
-        className="w-full rounded-xl border border-slate-700 bg-slate-900/80 py-3 pl-12 pr-4 outline-none transition-all duration-300 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
+        className="w-full rounded-xl border border-gold-200 bg-cream py-3 pl-12 pr-4 outline-none transition-all duration-300 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
       />
 
     </div>
@@ -293,14 +293,14 @@ export default function Signup() {
 
 <div className="relative">
 
-<FaPhone className="absolute left-4 top-4 text-gray-400" />
+<FaPhone className="absolute left-4 top-4 text-gray-600" />
 
 <input
   type="tel"
   id="phone"
   placeholder="Contact Number"
   onChange={handleChange}
-  className="w-full rounded-xl border border-slate-700 bg-slate-900/80 py-3 pl-12 pr-4 outline-none transition-all duration-300 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
+  className="w-full rounded-xl border border-gold-200 bg-cream py-3 pl-12 pr-4 outline-none transition-all duration-300 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
 />
 
 </div>
@@ -309,20 +309,20 @@ export default function Signup() {
 
     <div className="relative">
 
-      <FaLock className="absolute left-4 top-4 text-gray-400" />
+      <FaLock className="absolute left-4 top-4 text-gray-600" />
 
       <input
         type={showPassword ? "text" : "password"}
         id="password"
         placeholder="Create Password"
         onChange={handleChange}
-        className="w-full rounded-xl border border-slate-700 bg-slate-900/80 py-3 pl-12 pr-12 outline-none transition-all duration-300 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
+        className="w-full rounded-xl border border-gold-200 bg-cream py-3 pl-12 pr-12 outline-none transition-all duration-300 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20"
       />
 
       <button
         type="button"
         onClick={() => setShowPassword(!showPassword)}
-        className="absolute right-4 top-4 text-gray-400 hover:text-white"
+        className="absolute right-4 top-4 text-gray-600 hover:text-charcoal"
       >
         {showPassword ? <FaEyeSlash /> : <FaEye />}
       </button>
@@ -331,7 +331,7 @@ export default function Signup() {
 
     {/* Terms */}
 
-    <label className="flex items-start gap-3 text-sm text-gray-400">
+    <label className="flex items-start gap-3 text-sm text-gray-600">
 
       <input
         type="checkbox"
@@ -380,7 +380,7 @@ export default function Signup() {
 
         <FaPhoneAlt className="text-emerald-400" />
 
-        <p className="text-sm text-gray-300">
+        <p className="text-sm text-gray-600">
 
           Our property advisor will personally
           contact you within <strong>24 hours</strong>
@@ -395,9 +395,9 @@ export default function Signup() {
   </form>
         {/* Trust Section */}
 
-        <div className="mt-8 rounded-2xl border border-white/10 bg-white/5 p-5">
+        <div className="mt-8 rounded-2xl border border-gold-200 bg-white border border-gold-100 p-5">
 
-<h3 className="mb-4 text-lg font-semibold text-white">
+<h3 className="mb-4 text-lg font-semibold text-charcoal">
 
   Why Choose GO REALTORS?
 
@@ -409,7 +409,7 @@ export default function Signup() {
 
     <FaCheckCircle className="text-emerald-400" />
 
-    <span className="text-sm text-gray-300">
+    <span className="text-sm text-gray-600">
       100% Verified Properties
     </span>
 
@@ -419,7 +419,7 @@ export default function Signup() {
 
     <FaCheckCircle className="text-emerald-400" />
 
-    <span className="text-sm text-gray-300">
+    <span className="text-sm text-gray-600">
       Professional Property Advisors
     </span>
 
@@ -429,7 +429,7 @@ export default function Signup() {
 
     <FaCheckCircle className="text-emerald-400" />
 
-    <span className="text-sm text-gray-300">
+    <span className="text-sm text-gray-600">
       Free Site Visits & Consultation
     </span>
 
@@ -439,7 +439,7 @@ export default function Signup() {
 
     <FaCheckCircle className="text-emerald-400" />
 
-    <span className="text-sm text-gray-300">
+    <span className="text-sm text-gray-600">
       Zero Hidden Charges
     </span>
 
@@ -453,7 +453,7 @@ export default function Signup() {
 
 <div className="mt-8 text-center">
 
-<p className="text-gray-400">
+<p className="text-gray-600">
 
   Already registered?
 

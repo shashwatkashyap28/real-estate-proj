@@ -64,7 +64,7 @@ export default function Chatbot() {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="flex items-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-black px-5 py-4 rounded-full shadow-[0_10px_30px_rgba(16,185,129,0.3)] font-bold transition transform hover:scale-105 active:scale-95"
+          className="flex items-center gap-2 bg-gradient-to-r from-gold-500 to-gold-400 hover:from-gold-400 hover:to-gold-300 text-charcoal px-5 py-4 rounded-full shadow-[0_10px_30px_rgba(212,175,55,0.4)] font-bold transition transform hover:scale-105 active:scale-95"
         >
           <FaComments className="text-xl" />
           <span>Ask AI Expert</span>
@@ -73,10 +73,10 @@ export default function Chatbot() {
 
       {/* ================= CHAT WINDOW ================= */}
       {isOpen && (
-        <div className="w-100 md:w-96 h-500px bg-zinc-950 border border-zinc-800 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.8)] flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-300">
+        <div className="w-100 md:w-96 h-500px bg-charcoal border border-gold-800/40 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-300">
           
           {/* Header */}
-          <div className="bg-gradient-to-r from-zinc-900 to-black px-6 py-4 border-b border-zinc-800 flex items-center justify-between">
+          <div className="bg-gradient-to-r from-espresso to-charcoal px-6 py-4 border-b border-gold-800/40 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="bg-emerald-500/10 p-2 rounded-xl border border-emerald-500/30">
                 <FaRobot className="text-emerald-400 text-lg animate-pulse" />
@@ -108,7 +108,7 @@ export default function Chatbot() {
                   className={`max-w-[80%] rounded-2xl p-4 text-sm leading-relaxed ${
                     msg.sender === "user"
                       ? "bg-emerald-500 text-black font-medium rounded-tr-none"
-                      : "bg-zinc-900 text-gray-200 border border-zinc-800 rounded-tl-none"
+                      : "bg-espresso text-gray-200 border border-gold-800/30 rounded-tl-none"
                   }`}
                 >
                   {msg.text}
@@ -119,7 +119,7 @@ export default function Chatbot() {
             {/* AI Typing Indicator */}
             {isTyping && (
               <div className="flex justify-start">
-                <div className="bg-zinc-900 text-gray-400 border border-zinc-800 rounded-2xl rounded-tl-none p-4 text-xs flex items-center gap-1">
+                <div className="bg-espresso text-gray-400 border border-gold-800/30 rounded-2xl rounded-tl-none p-4 text-xs flex items-center gap-1">
                   <span>AI is thinking</span>
                   <span className="animate-bounce">.</span>
                   <span className="animate-bounce delay-100">.</span>
@@ -133,18 +133,18 @@ export default function Chatbot() {
           {/* Input Form */}
           <form
             onSubmit={handleSendMessage}
-            className="p-4 border-t border-zinc-800 bg-zinc-950 flex gap-2"
+            className="p-4 border-t border-gold-800/40 bg-charcoal flex gap-2"
           >
             <input
               type="text"
               placeholder="Ask about prices, locations, amenities..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              className="flex-1 bg-black border border-zinc-800 focus:border-emerald-500 text-white rounded-xl px-4 py-3 text-sm outline-none transition"
+              className="flex-1 bg-espresso border border-gold-800/40 focus:border-gold-500 text-white rounded-xl px-4 py-3 text-sm outline-none transition"
             />
             <button
               type="submit"
-              className="bg-emerald-500 hover:bg-emerald-400 text-black p-3 rounded-xl transition flex items-center justify-center active:scale-95"
+              className="bg-gold-500 hover:bg-gold-400 text-charcoal p-3 rounded-xl transition flex items-center justify-center active:scale-95"
             >
               <FaPaperPlane size={14} />
             </button>

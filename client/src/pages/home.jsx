@@ -164,7 +164,7 @@ export default function Home() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="flex min-h-screen bg-black text-white">
+    <div className="flex min-h-screen bg-cream text-charcoal">
 
       {/* ================= RIGHT SIDEBAR ================= */}
 
@@ -172,7 +172,7 @@ export default function Home() {
   initial={{ x: 400 }}
   animate={{ x: open ? 0 : 400 }}
   transition={{ duration: 0.35 }}
-  className="fixed right-0 top-0 z-50 h-screen w-360px overflow-y-auto bg-[#18111d] shadow-2xl"
+  className="fixed right-0 top-0 z-50 h-screen w-360px overflow-y-auto bg-white text-charcoal shadow-2xl"
 >
   <div className="p-8">
 
@@ -185,14 +185,14 @@ export default function Home() {
 
       <button
         onClick={() => setOpen(false)}
-        className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-black text-2xl"
+        className="flex h-12 w-12 items-center justify-center rounded-full bg-charcoal text-white text-2xl"
       >
         ✕
       </button>
 
     </div>
 
-    <hr className="my-8 border-white/20" />
+    <hr className="my-8 border-charcoal/10" />
 
     {/* Menu */}
 
@@ -271,7 +271,7 @@ export default function Home() {
 
     </div>
 
-    <hr className="my-8 border-white/20" />
+    <hr className="my-8 border-charcoal/10" />
 
     <div className="space-y-6 text-2xl">
 
@@ -284,7 +284,7 @@ export default function Home() {
 
     </div>
 
-    <hr className="my-8 border-white/20" />
+    <hr className="my-8 border-charcoal/10" />
 
     <div className="space-y-6 text-2xl">
 
@@ -299,7 +299,7 @@ export default function Home() {
 
     </div>
 
-    <hr className="my-8 border-white/20" />
+    <hr className="my-8 border-charcoal/10" />
 
     <div>
 
@@ -307,7 +307,7 @@ export default function Home() {
         Need any help?
       </h3>
 
-      <p className="mt-4 text-gray-400">
+      <p className="mt-4 text-gray-600">
         Contact our property experts anytime.
       </p>
 
@@ -349,7 +349,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="relative z-10 flex w-full max-w-3xl flex-col items-center text-center px-6"
+            className="relative z-10 flex w-full max-w-3xl flex-col items-center text-center px-6 text-white"
           >
             <span className="rounded-full bg-green-500/20 px-5 py-2 text-green-300">
               Premium Real Estate Platform
@@ -387,16 +387,16 @@ export default function Home() {
             </form>
           </motion.div>
         </section>
-        <section className="bg-black py-20">
+        <section className="bg-cream py-20">
 
   <div className="mx-auto max-w-7xl px-6">
 
-    <h2 className="text-center text-5xl text-white font-bold">
+    <h2 className="text-center text-5xl text-charcoal font-bold">
       Featured  <span className="text-green-400">Cities</span>
     </h2>
     
 
-    <p className="mt-4 mb-12 text-center text-gray-500 text-xl">
+    <p className="mt-4 mb-12 text-center text-gray-600 text-xl">
       Find your dream home in your favourite city
     </p>
 
@@ -458,13 +458,13 @@ export default function Home() {
 </section>
 
         {/* ================= CURATED COLLECTIONS ================= */}
-        <section className="bg-black px-6 py-24">
+        <section className="bg-ivory px-6 py-24">
 
           <div className="mx-auto mb-12 max-w-7xl text-center">
             <h2 className="text-4xl font-bold">
               Curated <span className="text-green-400">Collections</span>
             </h2>
-            <p className="mt-2 text-gray-400">
+            <p className="mt-2 text-gray-600">
               Explore prime properties based on your preference
             </p>
           </div>
@@ -483,7 +483,7 @@ export default function Home() {
 
                 <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition" />
 
-                <h3 className="absolute inset-0 flex items-center justify-center text-xl font-semibold">
+                <h3 className="absolute inset-0 flex items-center justify-center text-xl font-semibold text-white">
                   {c.title}
                 </h3>
               </div>
@@ -491,7 +491,7 @@ export default function Home() {
 
           </div>
         </section>
-        <section className="bg-black py-24">
+        <section className="bg-cream py-24">
 
   <div className="mx-auto max-w-7xl px-6">
 
@@ -499,7 +499,7 @@ export default function Home() {
       Why Buy With Us?
     </h2>
 
-    <p className="mt-4 text-center text-xl text-gray-500">
+    <p className="mt-4 text-center text-xl text-gray-600">
       Aspects that make GoRealtor India's leading Real Estate Advisory
     </p>
 
@@ -549,11 +549,11 @@ export default function Home() {
         {/* ================= FEATURED ================= */}
         <section className="mx-auto max-w-7xl px-6 py-24">
 
-          <h2 className="text-center text-5xl text-white font-bold">
+          <h2 className="text-center text-5xl text-charcoal font-bold">
             Featured <span className="text-green-400">Properties</span>
           </h2>
 
-          <p className="text-center mt-2 text-gray-400">
+          <p className="text-center mt-2 text-gray-600">
             Hand-picked homes for you
           </p>
 
@@ -566,14 +566,14 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="overflow-hidden rounded-3xl bg-white/5 transition hover:-translate-y-2"
+                className="overflow-hidden rounded-3xl bg-white border border-gold-100 shadow-lg transition hover:-translate-y-2 hover:shadow-2xl"
               >
                 <img src={p.img} className="h-64 w-full object-cover" />
 
                 <div className="p-6 space-y-3">
 
                   <h3 className="text-2xl font-semibold">{p.title}</h3>
-                  <p className="text-gray-400">{p.location}</p>
+                  <p className="text-gray-600">{p.location}</p>
 
                   <div className="flex items-center justify-between">
 

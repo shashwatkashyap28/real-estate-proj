@@ -142,7 +142,7 @@ export default function Signin() {
       </section>
 
       {/* ================= RESIDENTIAL ================= */}
-      <section className="bg-black py-24">
+      <section className="bg-cream py-24">
 
 <div className="mx-auto grid max-w-7xl items-center gap-16 px-6 lg:grid-cols-2">
 
@@ -184,7 +184,7 @@ export default function Signin() {
 
     </span>
 
-    <h2 className="mt-5 text-5xl font-bold text-white">
+    <h2 className="mt-5 text-5xl font-bold text-charcoal">
 
       Find The Perfect
       <span className="text-emerald-500">
@@ -194,7 +194,7 @@ export default function Signin() {
 
     </h2>
 
-    <p className="mt-8 text-lg leading-8 text-white/80">
+    <p className="mt-8 text-lg leading-8 text-gray-600">
 
       Our residential property experts simplify every step
       of your home-buying journey. From apartment selection
@@ -218,7 +218,7 @@ export default function Signin() {
 
           </h3>
 
-          <p className="text-white/80">
+          <p className="text-gray-600">
 
             Every listing is carefully verified before recommendation.
 
@@ -240,7 +240,7 @@ export default function Signin() {
 
           </h3>
 
-          <p className="text-white/80">
+          <p className="text-gray-600">
 
             Compare multiple banks and receive the best interest rates.
 
@@ -262,7 +262,7 @@ export default function Signin() {
 
           </h3>
 
-          <p className="text-white/80">
+          <p className="text-gray-600">
 
             We verify ownership, approvals and documentation before purchase.
 
@@ -284,7 +284,7 @@ export default function Signin() {
 
           </h3>
 
-          <p className="text-white/80">
+          <p className="text-gray-600">
 
             Schedule property visits with our dedicated advisors.
 
@@ -311,7 +311,7 @@ export default function Signin() {
 </section>
 
 {/* ================= COMMERCIAL ================= */}
-<section className="bg-black py-24">
+<section className="bg-cream py-24">
 
   <div className="mx-auto max-w-7xl px-6">
 
@@ -323,7 +323,7 @@ export default function Signin() {
 
       </span>
 
-      <h2 className="mt-8 text-5xl font-bold text-white">
+      <h2 className="mt-8 text-5xl font-bold text-charcoal">
 
         The GO REALTORS
         <span className="text-emerald-400">
@@ -332,7 +332,7 @@ export default function Signin() {
 
       </h2>
 
-      <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-gray-300">
+      <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-gray-600">
 
         We don't just help you buy a property.
         We guide you through every stage of the journey,
@@ -346,7 +346,7 @@ export default function Signin() {
 
     <div className="mt-20 grid gap-8 md:grid-cols-2 xl:grid-cols-4">
 
-      <div className="rounded-3xl bg-white/5 p-8 backdrop-blur-xl transition duration-300 hover:-translate-y-2 hover:bg-white/10">
+      <div className="rounded-3xl bg-white border border-gold-100 shadow-lg p-8 backdrop-blur-xl transition duration-300 hover:-translate-y-2 hover:border-gold-300">
 
         <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-500">
 
@@ -354,13 +354,13 @@ export default function Signin() {
 
         </div>
 
-        <h3 className="mt-6 text-2xl font-bold text-white">
+        <h3 className="mt-6 text-2xl font-bold text-charcoal">
 
           Premium Homes
 
         </h3>
 
-        <p className="mt-4 leading-7 text-gray-300">
+        <p className="mt-4 leading-7 text-gray-600">
 
           Carefully selected apartments,
           villas and luxury residences
@@ -370,7 +370,7 @@ export default function Signin() {
 
       </div>
 
-      <div className="rounded-3xl bg-white/5 p-8 backdrop-blur-xl transition duration-300 hover:-translate-y-2 hover:bg-white/10">
+      <div className="rounded-3xl bg-white border border-gold-100 shadow-lg p-8 backdrop-blur-xl transition duration-300 hover:-translate-y-2 hover:border-gold-300">
 
         <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-500">
 
@@ -378,13 +378,13 @@ export default function Signin() {
 
         </div>
 
-        <h3 className="mt-6 text-2xl font-bold text-white">
+        <h3 className="mt-6 text-2xl font-bold text-charcoal">
 
           Commercial Assets
 
         </h3>
 
-        <p className="mt-4 leading-7 text-gray-300">
+        <p className="mt-4 leading-7 text-gray-600">
 
           Offices, retail spaces,
           warehouses and investment
@@ -394,7 +394,7 @@ export default function Signin() {
 
       </div>
 
-      <div className="rounded-3xl bg-white/5 p-8 backdrop-blur-xl transition duration-300 hover:-translate-y-2 hover:bg-white/10">
+      <div className="rounded-3xl bg-white border border-gold-100 shadow-lg p-8 backdrop-blur-xl transition duration-300 hover:-translate-y-2 hover:border-gold-300">
 
         <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-500">
 
@@ -402,13 +402,13 @@ export default function Signin() {
 
         </div>
 
-        <h3 className="mt-6 text-2xl font-bold text-white">
+        <h3 className="mt-6 text-2xl font-bold text-charcoal">
 
           Prime Locations
 
         </h3>
 
-        <p className="mt-4 leading-7 text-gray-300">
+        <p className="mt-4 leading-7 text-gray-600">
 
           Discover projects in
           rapidly developing areas
@@ -418,7 +418,7 @@ export default function Signin() {
 
       </div>
 
-      <div className="rounded-3xl bg-white/5 p-8 backdrop-blur-xl transition duration-300 hover:-translate-y-2 hover:bg-white/10">
+      <div className="rounded-3xl bg-white border border-gold-100 shadow-lg p-8 backdrop-blur-xl transition duration-300 hover:-translate-y-2 hover:border-gold-300">
 
         <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-500">
 
@@ -426,13 +426,13 @@ export default function Signin() {
 
         </div>
 
-        <h3 className="mt-6 text-2xl font-bold text-white">
+        <h3 className="mt-6 text-2xl font-bold text-charcoal">
 
           Complete Assistance
 
         </h3>
 
-        <p className="mt-4 leading-7 text-gray-300">
+        <p className="mt-4 leading-7 text-gray-600">
 
           Home loans, legal checks,
           registration, negotiations
@@ -446,7 +446,7 @@ export default function Signin() {
 
     {/* Statistics */}
 
-    <div className="mt-24 grid gap-8 rounded-3xl bg-white/5 p-10 md:grid-cols-4">
+    <div className="mt-24 grid gap-8 rounded-3xl bg-white border border-gold-100 shadow-lg p-10 md:grid-cols-4">
 
       <div className="text-center">
 
@@ -456,7 +456,7 @@ export default function Signin() {
 
         </h2>
 
-        <p className="mt-3 text-gray-300">
+        <p className="mt-3 text-gray-600">
 
           Happy Clients
 
@@ -472,7 +472,7 @@ export default function Signin() {
 
         </h2>
 
-        <p className="mt-3 text-gray-300">
+        <p className="mt-3 text-gray-600">
 
           Properties Sold
 
@@ -488,7 +488,7 @@ export default function Signin() {
 
         </h2>
 
-        <p className="mt-3 text-gray-300">
+        <p className="mt-3 text-gray-600">
 
           Cities Covered
 
@@ -504,7 +504,7 @@ export default function Signin() {
 
         </h2>
 
-        <p className="mt-3 text-gray-300">
+        <p className="mt-3 text-gray-600">
 
           Client Satisfaction
 
@@ -520,7 +520,7 @@ export default function Signin() {
 
 {/* ================= CTA ================= */}
 
-<section className="bg-gradient-to-red bg-black py-24">
+<section className="bg-charcoal py-24">
 
   <div className="mx-auto flex max-w-7xl flex-col items-center px-6 text-center">
 
@@ -556,7 +556,7 @@ export default function Signin() {
 </section>
 
 {/* ================= ADVISOR LOGIN ================= */}
-<section className="bg-black py-24">
+<section className="bg-cream py-24">
 
   <div className="mx-auto max-w-7xl px-6">
 
@@ -566,13 +566,13 @@ export default function Signin() {
 
       <div>
 
-        <span className="rounded-full bg-emerald-700 px-5 py-2 text-sm font-semibold uppercase tracking-widest text-white">
+        <span className="rounded-full bg-emerald-700 px-5 py-2 text-sm font-semibold uppercase tracking-widest text-charcoal">
 
           Secure Access
 
         </span>
 
-        <h2 className="mt-8 text-5xl font-bold text-white">
+        <h2 className="mt-8 text-5xl font-bold text-charcoal">
 
           Advisor &
           <span className="text-emerald-500">
@@ -596,7 +596,7 @@ export default function Signin() {
 
             <FaCheckCircle className="text-emerald-500 text-xl" />
 
-            <span className="text-white">
+            <span className="text-charcoal">
 
               Track all your enquiries
 
@@ -608,7 +608,7 @@ export default function Signin() {
 
             <FaCheckCircle className="text-emerald-500 text-xl" />
 
-            <span className="text-white">
+            <span className="text-charcoal">
 
               Book property site visits
 
@@ -620,7 +620,7 @@ export default function Signin() {
 
             <FaCheckCircle className="text-emerald-500 text-xl" />
 
-            <span className="text-white">
+            <span className="text-charcoal">
 
               Save favourite properties
 
@@ -632,7 +632,7 @@ export default function Signin() {
 
             <FaCheckCircle className="text-emerald-500 text-xl" />
 
-            <span className="text-white">
+            <span className="text-charcoal">
 
               Connect directly with advisors
 
@@ -923,7 +923,7 @@ export default function Signin() {
 
 {/* Footer */}
 
-<footer className="bg-black py-10">
+<footer className="bg-charcoal py-10">
 
   <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-6 text-center md:flex-row">
 
