@@ -186,7 +186,7 @@ export default function Properties() {
   });
 
   return (
-    <main className="min-h-screen bg-black text-white">
+    <main className="min-h-screen bg-cream text-charcoal">
       {/* HERO */}
       <section className="relative h-[70vh] overflow-hidden">
         <img
@@ -196,7 +196,7 @@ export default function Properties() {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/80 to-black"></div>
         <div className="relative mx-auto flex h-full max-w-7xl items-center px-6">
-          <div className="max-w-3xl">
+          <div className="max-w-3xl text-white">
             <span className="rounded-full border border-green-500 bg-green-500/10 px-5 py-2 text-green-400">
               Premium Collection
             </span>
@@ -214,7 +214,7 @@ export default function Properties() {
       {/* SEARCH BAR & ADD BUTTON */}
       <section className="-mt-14 relative z-20 px-6">
         <div className="mx-auto max-w-7xl">
-          <div className="rounded-3xl border border-green-500/20 bg-zinc-900/90 backdrop-blur-xl p-6 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+          <div className="rounded-3xl border border-green-500/20 bg-white/95 backdrop-blur-xl p-6 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
             <div className="grid gap-5 lg:grid-cols-6 items-center">
               {/* Search */}
               <div className="relative lg:col-span-2">
@@ -224,7 +224,7 @@ export default function Properties() {
                   placeholder="Search properties..."
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
-                  className="w-full rounded-2xl border border-zinc-700 bg-black py-4 pl-14 pr-4 outline-none transition focus:border-green-500"
+                  className="w-full rounded-2xl border border-gold-200 bg-cream py-4 pl-14 pr-4 outline-none transition focus:border-green-500"
                 />
               </div>
 
@@ -234,14 +234,14 @@ export default function Properties() {
                 placeholder="City"
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
-                className="py-4 rounded-2xl border border-zinc-700 bg-black px-5 outline-none transition focus:border-green-500"
+                className="py-4 rounded-2xl border border-gold-200 bg-cream px-5 outline-none transition focus:border-green-500"
               />
 
               {/* Property Type */}
               <select
                 value={type}
                 onChange={(e) => setType(e.target.value)}
-                className="py-4 rounded-2xl border border-zinc-700 bg-black px-5 outline-none transition focus:border-green-500 text-gray-400"
+                className="py-4 rounded-2xl border border-gold-200 bg-cream px-5 outline-none transition focus:border-green-500 text-gray-600"
               >
                 <option>All</option>
                 <option>Villa</option>
@@ -270,10 +270,10 @@ export default function Properties() {
       {/* ================= ADD PROPERTY MODAL/FORM EXPANSION ================= */}
       {isFormOpen && (
         <section className="mx-auto mt-10 max-w-7xl px-6 transition-all duration-300">
-          <div className="rounded-3xl border border-green-500 bg-zinc-900/80 p-8 relative shadow-[0_0_50px_rgba(34,197,94,0.15)]">
+          <div className="rounded-3xl border border-green-500 bg-white p-8 relative shadow-[0_0_50px_rgba(34,197,94,0.15)]">
             <button 
               onClick={() => setIsFormOpen(false)}
-              className="absolute top-6 right-6 text-gray-400 hover:text-white transition"
+              className="absolute top-6 right-6 text-gray-600 hover:text-charcoal transition"
             >
               <FaTimes size={20} />
             </button>
@@ -288,7 +288,7 @@ export default function Properties() {
                 required
                 value={newProperty.title}
                 onChange={handleInputChange}
-                className="p-4 rounded-xl border border-zinc-700 bg-black outline-none focus:border-green-500"
+                className="p-4 rounded-xl border border-gold-200 bg-cream outline-none focus:border-green-500"
               />
               <input
                 type="text"
@@ -297,7 +297,7 @@ export default function Properties() {
                 required
                 value={newProperty.city}
                 onChange={handleInputChange}
-                className="p-4 rounded-xl border border-zinc-700 bg-black outline-none focus:border-green-500"
+                className="p-4 rounded-xl border border-gold-200 bg-cream outline-none focus:border-green-500"
               />
               <input
                 type="text"
@@ -306,13 +306,13 @@ export default function Properties() {
                 required
                 value={newProperty.location}
                 onChange={handleInputChange}
-                className="p-4 rounded-xl border border-zinc-700 bg-black outline-none focus:border-green-500"
+                className="p-4 rounded-xl border border-gold-200 bg-cream outline-none focus:border-green-500"
               />
               <select
                 name="type"
                 value={newProperty.type}
                 onChange={handleInputChange}
-                className="p-4 rounded-xl border border-zinc-700 bg-black outline-none focus:border-green-500 text-gray-400"
+                className="p-4 rounded-xl border border-gold-200 bg-cream outline-none focus:border-green-500 text-gray-600"
               >
                 <option value="Villa">Villa</option>
                 <option value="Apartment">Apartment</option>
@@ -326,7 +326,7 @@ export default function Properties() {
                 required
                 value={newProperty.price}
                 onChange={handleInputChange}
-                className="p-4 rounded-xl border border-zinc-700 bg-black outline-none focus:border-green-500"
+                className="p-4 rounded-xl border border-gold-200 bg-cream outline-none focus:border-green-500"
               />
               <input
                 type="number"
@@ -335,7 +335,7 @@ export default function Properties() {
                 required
                 value={newProperty.area}
                 onChange={handleInputChange}
-                className="p-4 rounded-xl border border-zinc-700 bg-black outline-none focus:border-green-500"
+                className="p-4 rounded-xl border border-gold-200 bg-cream outline-none focus:border-green-500"
               />
               <input
                 type="number"
@@ -343,7 +343,7 @@ export default function Properties() {
                 placeholder="Bedrooms Count"
                 value={newProperty.beds}
                 onChange={handleInputChange}
-                className="p-4 rounded-xl border border-zinc-700 bg-black outline-none focus:border-green-500"
+                className="p-4 rounded-xl border border-gold-200 bg-cream outline-none focus:border-green-500"
               />
               <input
                 type="number"
@@ -351,7 +351,7 @@ export default function Properties() {
                 placeholder="Bathrooms Count"
                 value={newProperty.baths}
                 onChange={handleInputChange}
-                className="p-4 rounded-xl border border-zinc-700 bg-black outline-none focus:border-green-500"
+                className="p-4 rounded-xl border border-gold-200 bg-cream outline-none focus:border-green-500"
               />
               <input
                 type="number"
@@ -359,7 +359,7 @@ export default function Properties() {
                 placeholder="Parking Spaces"
                 value={newProperty.parking}
                 onChange={handleInputChange}
-                className="p-4 rounded-xl border border-zinc-700 bg-black outline-none focus:border-green-500"
+                className="p-4 rounded-xl border border-gold-200 bg-cream outline-none focus:border-green-500"
               />
               <div className="md:col-span-2 lg:col-span-3">
                 <input
@@ -368,14 +368,14 @@ export default function Properties() {
                   placeholder="Amenities (Separated by commas, e.g. Gym, Lift, Pool, Security)"
                   value={newProperty.amenities}
                   onChange={handleInputChange}
-                  className="w-full p-4 rounded-xl border border-zinc-700 bg-black outline-none focus:border-green-500"
+                  className="w-full p-4 rounded-xl border border-gold-200 bg-cream outline-none focus:border-green-500"
                 />
               </div>
               <div className="lg:col-span-3 flex justify-end gap-4 mt-2">
                 <button
                   type="button"
                   onClick={() => setIsFormOpen(false)}
-                  className="px-6 py-3 rounded-xl bg-zinc-800 text-white font-bold hover:bg-zinc-700 transition"
+                  className="px-6 py-3 rounded-xl bg-champagne text-charcoal font-bold hover:bg-sand transition"
                 >
                   Cancel
                 </button>
@@ -395,7 +395,7 @@ export default function Properties() {
       <section className="mx-auto mt-16 max-w-7xl px-6">
         <div className="grid gap-10 lg:grid-cols-[300px_1fr]">
           {/* SIDEBAR */}
-          <aside className="sticky top-24 h-fit rounded-3xl border border-zinc-800 bg-zinc-900 p-8">
+          <aside className="sticky top-24 h-fit rounded-3xl border border-gold-200 bg-white p-8">
             <div className="flex items-center gap-3">
               <FaFilter className="text-green-500" />
               <h2 className="text-2xl font-bold">Filters</h2>
@@ -409,7 +409,7 @@ export default function Properties() {
                 max="60000000"
                 className="mt-5 w-full accent-green-500"
               />
-              <div className="mt-4 flex justify-between text-sm text-gray-400">
+              <div className="mt-4 flex justify-between text-sm text-gray-600">
                 <span>₹10L</span>
                 <span>₹6Cr+</span>
               </div>
@@ -421,7 +421,7 @@ export default function Properties() {
                 {[1, 2, 3, 4, 5].map((bed) => (
                   <button
                     key={bed}
-                    className="rounded-xl border border-zinc-700 px-5 py-2 transition hover:border-green-500 hover:bg-green-500 hover:text-black"
+                    className="rounded-xl border border-gold-200 px-5 py-2 transition hover:border-green-500 hover:bg-green-500 hover:text-black"
                   >
                     {bed}+
                   </button>
@@ -464,11 +464,11 @@ export default function Properties() {
             <div className="mb-10 flex items-center justify-between">
               <div>
                 <h2 className="text-4xl font-bold">Featured Properties</h2>
-                <p className="mt-2 text-gray-400">
+                <p className="mt-2 text-gray-600">
                   {filteredProperties.length} Premium Listings Available
                 </p>
               </div>
-              <select className="rounded-xl border border-zinc-700 bg-zinc-900 px-5 py-3">
+              <select className="rounded-xl border border-gold-200 bg-white px-5 py-3">
                 <option>Newest</option>
                 <option>Price Low</option>
                 <option>Price High</option>
@@ -481,7 +481,7 @@ export default function Properties() {
               {filteredProperties.map((property) => (
                 <div
                   key={property.id}
-                  className="group overflow-hidden rounded-3xl border border-zinc-800 bg-gradient-to-b from-zinc-900 to-black shadow-xl transition-all duration-500 hover:-translate-y-2 hover:border-green-500 hover:shadow-[0_20px_60px_rgba(34,197,94,0.25)]"
+                  className="group overflow-hidden rounded-3xl border border-gold-200 bg-gradient-to-b from-white to-cream shadow-xl transition-all duration-500 hover:-translate-y-2 hover:border-green-500 hover:shadow-[0_20px_60px_rgba(34,197,94,0.25)]"
                 >
                   {/* IMAGE */}
                   <div className="relative overflow-hidden">
@@ -538,7 +538,7 @@ export default function Properties() {
                         <span className="font-semibold">{property.rating}</span>
                       </div>
                     </div>
-                    <div className="mt-3 flex items-center text-gray-400 text-sm">
+                    <div className="mt-3 flex items-center text-gray-600 text-sm">
                       <FaMapMarkerAlt className="mr-2 text-green-500 flex-shrink-0" />
                       <span className="truncate">{property.location}, {property.city}</span>
                     </div>
@@ -548,7 +548,7 @@ export default function Properties() {
                     <p className="mt-2 text-gray-500">{property.area}</p>
 
                     {/* PROPERTY DETAILS */}
-                    <div className="mt-8 grid grid-cols-3 gap-4 rounded-2xl bg-black p-5">
+                    <div className="mt-8 grid grid-cols-3 gap-4 rounded-2xl bg-cream p-5">
                       <div className="text-center">
                         <FaBed className="mx-auto text-2xl text-green-500" />
                         <p className="mt-2 text-lg">{property.beds}</p>
@@ -595,7 +595,7 @@ export default function Properties() {
                 <button
                   key={page}
                   className={`h-12 w-12 rounded-xl font-bold transition ${
-                    page === 1 ? "bg-green-500 text-black" : "border border-zinc-700 bg-zinc-900 hover:border-green-500"
+                    page === 1 ? "bg-green-500 text-black" : "border border-gold-200 bg-white hover:border-green-500"
                   }`}
                 >
                   {page}
@@ -611,11 +611,11 @@ export default function Properties() {
         <div className="text-center">
           <p className="font-semibold uppercase tracking-[6px] text-green-500">TRUSTED BUILDERS</p>
           <h2 className="mt-4 text-5xl font-bold">India's Leading Developers</h2>
-          <p className="mt-5 text-gray-400">We collaborate with the country's most trusted real estate brands.</p>
+          <p className="mt-5 text-gray-600">We collaborate with the country's most trusted real estate brands.</p>
         </div>
         <div className="mt-14 grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-6">
           {["DLF", "Godrej", "Sobha", "Prestige", "Lodha", "Brigade"].map((company) => (
-            <div key={company} className="rounded-2xl border border-zinc-800 bg-zinc-900 p-8 text-center transition hover:border-green-500 hover:-translate-y-1">
+            <div key={company} className="rounded-2xl border border-gold-200 bg-white p-8 text-center transition hover:border-green-500 hover:-translate-y-1">
               <h3 className="text-xl font-bold">{company}</h3>
             </div>
           ))}
@@ -624,7 +624,7 @@ export default function Properties() {
 
       {/* WHY CHOOSE US */}
       <section className="mx-auto mt-28 max-w-7xl px-6">
-        <div className="rounded-3xl border border-green-500/20 bg-zinc-900 p-12">
+        <div className="rounded-3xl border border-green-500/20 bg-white p-12">
           <div className="text-center">
             <p className="uppercase tracking-[6px] text-green-500">GO REALTORS</p>
             <h2 className="mt-4 text-5xl font-bold">Why Choose Us?</h2>
@@ -636,9 +636,9 @@ export default function Properties() {
               { number: "120+", title: "Cities Covered" },
               { number: "99%", title: "Customer Satisfaction" },
             ].map((item) => (
-              <div key={item.title} className="rounded-2xl border border-zinc-800 bg-black p-8 text-center transition hover:border-green-500">
+              <div key={item.title} className="rounded-2xl border border-gold-200 bg-cream p-8 text-center transition hover:border-green-500">
                 <h2 className="text-5xl font-bold text-green-500">{item.number}</h2>
-                <p className="mt-4 text-gray-400">{item.title}</p>
+                <p className="mt-4 text-gray-600">{item.title}</p>
               </div>
             ))}
           </div>
@@ -654,7 +654,7 @@ export default function Properties() {
             className="absolute inset-0 h-full w-full object-cover opacity-30"
           />
           <div className="absolute inset-0 bg-black/80"></div>
-          <div className="relative px-10 py-24 text-center">
+          <div className="relative px-10 py-24 text-center text-white">
             <h2 className="text-6xl font-bold">Find Your <span className="text-green-500">Dream Property</span></h2>
             <p className="mx-auto mt-8 max-w-3xl text-xl leading-9 text-gray-300">
               Whether you're buying your first home, investing in commercial real estate, or looking for luxury living, GO REALTORS is here to make your journey simple, transparent, and memorable.

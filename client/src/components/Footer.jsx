@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
-    <footer className="bg-black border-t border-zinc-800 text-gray-300">
+    <footer className="bg-charcoal border-t border-gold-800/40 text-gray-300">
 
       {/* Top */}
 
@@ -171,28 +171,28 @@ export default function Footer() {
 
               <a
                 href="#"
-                className="w-10 h-10 rounded-full border border-zinc-700 flex items-center justify-center hover:bg-green-600 hover:border-green-600 transition"
+                className="w-10 h-10 rounded-full border border-gold-700/60 flex items-center justify-center hover:bg-gold-500 hover:border-gold-500 hover:text-charcoal transition"
               >
                 <FaInstagram />
               </a>
 
               <a
                 href="#"
-                className="w-10 h-10 rounded-full border border-zinc-700 flex items-center justify-center hover:bg-green-600 hover:border-green-600 transition"
+                className="w-10 h-10 rounded-full border border-gold-700/60 flex items-center justify-center hover:bg-gold-500 hover:border-gold-500 hover:text-charcoal transition"
               >
                 <FaLinkedinIn />
               </a>
 
               <a
                 href="#"
-                className="w-10 h-10 rounded-full border border-zinc-700 flex items-center justify-center hover:bg-green-600 hover:border-green-600 transition"
+                className="w-10 h-10 rounded-full border border-gold-700/60 flex items-center justify-center hover:bg-gold-500 hover:border-gold-500 hover:text-charcoal transition"
               >
                 <FaFacebookF />
               </a>
 
               <a
                 href="#"
-                className="w-10 h-10 rounded-full border border-zinc-700 flex items-center justify-center hover:bg-green-600 hover:border-green-600 transition"
+                className="w-10 h-10 rounded-full border border-gold-700/60 flex items-center justify-center hover:bg-gold-500 hover:border-gold-500 hover:text-charcoal transition"
               >
                 <FaWhatsapp />
               </a>
@@ -207,7 +207,7 @@ export default function Footer() {
 
       {/* Bottom */}
 
-      <div className="border-t border-zinc-800">
+      <div className="border-t border-gold-800/40">
 
         <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
 

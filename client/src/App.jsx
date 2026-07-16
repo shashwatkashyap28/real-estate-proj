@@ -8,7 +8,7 @@ import Profile from './pages/profile';
 import About from './pages/about';
 import FloatingEnquiry from "./components/FloatingEnquiry";
 import Properties from './pages/properties';
-import Chatbot from './components/chatbot';
+import Chatbot from './components/Chatbot';
 
 
 

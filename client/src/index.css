@@ -1,1 +1,64 @@
 @import "tailwindcss";
+
+/*
+  ================= GO REALTORS — BRIGHT LUXURY THEME =================
+  A warm ivory + metallic gold palette for a bright, premium feel.
+  The existing "green"/"emerald" accent utilities are remapped to a
+  gold ramp so every accent across the app instantly becomes gold,
+  while dedicated cream / charcoal tokens power the bright surfaces.
+*/
+
+@theme {
+  /* Warm neutral surfaces */
+  --color-cream: #fbf8f1;
+  --color-ivory: #f5efe3;
+  --color-champagne: #eee6d6;
+  --color-sand: #e8dcc4;
+  --color-charcoal: #17130f;
+  --color-espresso: #211a12;
+
+  /* Metallic gold ramp (primary accent) */
+  --color-gold-50: #fbf7ec;
+  --color-gold-100: #f6ecd0;
+  --color-gold-200: #ebd9a6;
+  --color-gold-300: #dfc277;
+  --color-gold-400: #d4af37;
+  --color-gold-500: #c29b2e;
+  --color-gold-600: #a67c1e;
+  --color-gold-700: #856118;
+  --color-gold-800: #6b4e16;
+  --color-gold-900: #5a4114;
+  --color-gold-950: #342510;
+
+  /* Remap the legacy green accent scale -> gold */
+  --color-green-50: #fbf7ec;
+  --color-green-100: #f6ecd0;
+  --color-green-200: #ebd9a6;
+  --color-green-300: #dfc277;
+  --color-green-400: #d4af37;
+  --color-green-500: #c29b2e;
+  --color-green-600: #a67c1e;
+  --color-green-700: #856118;
+  --color-green-800: #6b4e16;
+  --color-green-900: #5a4114;
+  --color-green-950: #342510;
+
+  /* Remap the legacy emerald accent scale -> gold */
+  --color-emerald-50: #fbf7ec;
+  --color-emerald-100: #f6ecd0;
+  --color-emerald-200: #ebd9a6;
+  --color-emerald-300: #dfc277;
+  --color-emerald-400: #d4af37;
+  --color-emerald-500: #c29b2e;
+  --color-emerald-600: #a67c1e;
+  --color-emerald-700: #856118;
+  --color-emerald-800: #6b4e16;
+  --color-emerald-900: #5a4114;
+  --color-emerald-950: #342510;
+}
+
+html,
+body {
+  background-color: var(--color-cream);
+  color: var(--color-charcoal);
+}
