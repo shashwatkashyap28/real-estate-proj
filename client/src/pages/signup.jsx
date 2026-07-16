@@ -11,6 +11,7 @@ import {
 } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import OAuth from "../components/OAuth";
 
 export default function Signup() {
   const [formData, setFormData] = useState({});
@@ -369,6 +370,7 @@ export default function Signup() {
     >
       {loading ? "Submitting..." : "Book Free Consultation"}
     </button>
+    <OAuth />
 
     {/* Trust Text */}
 
