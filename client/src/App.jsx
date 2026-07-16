@@ -8,6 +8,8 @@ import Profile from './pages/profile';
 import About from './pages/about';
 import FloatingEnquiry from "./components/FloatingEnquiry";
 import Properties from './pages/properties';
+import Chatbot from './components/chatbot';
+
 
 
 export default function App() { 
@@ -22,8 +24,10 @@ export default function App() {
       <Route path="/signin" element={<Signin />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/properties" element={<Properties />} />
+      
 
     </Routes>  
+    <Chatbot/>
     <Footer/>
 
 
