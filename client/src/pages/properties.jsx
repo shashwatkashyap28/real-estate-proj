@@ -186,7 +186,7 @@ export default function Properties() {
   });
 
   return (
-    <main className="min-h-screen bg-black text-white">
+    <main className="min-h-screen bg-[#0E211B] text-[#EFE9DD]">
       {/* HERO */}
       <section className="relative h-[70vh] overflow-hidden">
         <img
@@ -194,17 +194,17 @@ export default function Properties() {
           className="absolute inset-0 h-full w-full object-cover opacity-30"
           alt=""
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/80 to-black"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0E211B]/60 via-[#0E211B]/80 to-[#0E211B]"></div>
         <div className="relative mx-auto flex h-full max-w-7xl items-center px-6">
           <div className="max-w-3xl">
-            <span className="rounded-full border border-green-500 bg-green-500/10 px-5 py-2 text-green-400">
+            <span className="rounded-full border border-[#B8925A] bg-[#B8925A]/10 px-5 py-2 text-[#D9B383]">
               Premium Collection
             </span>
-            <h1 className="mt-8 text-6xl font-extrabold leading-tight">
+            <h1 className="mt-8 text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight">
               Find Your
-              <span className="text-green-500"> Dream Property</span>
+              <span className="text-[#B8925A]"> Dream Property</span>
             </h1>
-            <p className="mt-8 max-w-2xl text-lg leading-8 text-gray-300">
+            <p className="mt-8 max-w-2xl text-lg leading-8 text-[#EFE9DD]/70">
               Explore luxury villas, premium apartments, commercial offices and investment opportunities across India's most desirable locations.
             </p>
           </div>
@@ -214,17 +214,17 @@ export default function Properties() {
       {/* SEARCH BAR & ADD BUTTON */}
       <section className="-mt-14 relative z-20 px-6">
         <div className="mx-auto max-w-7xl">
-          <div className="rounded-3xl border border-green-500/20 bg-zinc-900/90 backdrop-blur-xl p-6 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
-            <div className="grid gap-5 lg:grid-cols-6 items-center">
+          <div className="rounded-3xl border border-[#B8925A]/20 bg-[#132A22]/90 backdrop-blur-xl p-6 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-6 items-center">
               {/* Search */}
               <div className="relative lg:col-span-2">
-                <FaSearch className="absolute left-5 top-5 text-gray-500" />
+                <FaSearch className="absolute left-5 top-5 text-[#EFE9DD]/40" />
                 <input
                   type="text"
                   placeholder="Search properties..."
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
-                  className="w-full rounded-2xl border border-zinc-700 bg-black py-4 pl-14 pr-4 outline-none transition focus:border-green-500"
+                  className="w-full rounded-2xl border border-[#B8925A]/25 bg-[#0E211B] py-4 pl-14 pr-4 outline-none transition focus:border-[#B8925A]"
                 />
               </div>
 
@@ -234,14 +234,14 @@ export default function Properties() {
                 placeholder="City"
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
-                className="py-4 rounded-2xl border border-zinc-700 bg-black px-5 outline-none transition focus:border-green-500"
+                className="py-4 rounded-2xl border border-[#B8925A]/25 bg-[#0E211B] px-5 outline-none transition focus:border-[#B8925A]"
               />
 
               {/* Property Type */}
               <select
                 value={type}
                 onChange={(e) => setType(e.target.value)}
-                className="py-4 rounded-2xl border border-zinc-700 bg-black px-5 outline-none transition focus:border-green-500 text-gray-400"
+                className="py-4 rounded-2xl border border-[#B8925A]/25 bg-[#0E211B] px-5 outline-none transition focus:border-[#B8925A] text-[#EFE9DD]/50"
               >
                 <option>All</option>
                 <option>Villa</option>
@@ -251,153 +251,26 @@ export default function Properties() {
               </select>
 
               {/* Search Button */}
-              <button className="py-4 rounded-2xl bg-green-500 font-bold text-black transition hover:bg-green-400">
+              <button className="py-4 px-5 rounded-2xl bg-[#B8925A] font-bold text-[#0E211B] transition hover:bg-[#D9B383]">
                 Search
               </button>
 
-              {/* ================= ADD LISTING BUTTON ================= */}
-              <button 
-                onClick={() => setIsFormOpen(!isFormOpen)}
-                className="py-4 rounded-2xl border-2 border-dashed border-green-500 text-green-400 font-bold transition hover:bg-green-500/10 flex items-center justify-center gap-2"
-              >
-                <FaPlus size={14} /> Add Listing
-              </button>
+
+
             </div>
           </div>
         </div>
       </section>
 
-      {/* ================= ADD PROPERTY MODAL/FORM EXPANSION ================= */}
-      {isFormOpen && (
-        <section className="mx-auto mt-10 max-w-7xl px-6 transition-all duration-300">
-          <div className="rounded-3xl border border-green-500 bg-zinc-900/80 p-8 relative shadow-[0_0_50px_rgba(34,197,94,0.15)]">
-            <button 
-              onClick={() => setIsFormOpen(false)}
-              className="absolute top-6 right-6 text-gray-400 hover:text-white transition"
-            >
-              <FaTimes size={20} />
-            </button>
-            
-            <h3 className="text-3xl font-bold mb-6 text-green-500">List Your Property</h3>
-            
-            <form onSubmit={handleSubmitListing} className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              <input
-                type="text"
-                name="title"
-                placeholder="Property Title (e.g. Modern Studio Penthouse)"
-                required
-                value={newProperty.title}
-                onChange={handleInputChange}
-                className="p-4 rounded-xl border border-zinc-700 bg-black outline-none focus:border-green-500"
-              />
-              <input
-                type="text"
-                name="city"
-                placeholder="City (e.g. Mumbai)"
-                required
-                value={newProperty.city}
-                onChange={handleInputChange}
-                className="p-4 rounded-xl border border-zinc-700 bg-black outline-none focus:border-green-500"
-              />
-              <input
-                type="text"
-                name="location"
-                placeholder="Location / Area Locality (e.g. Bandra)"
-                required
-                value={newProperty.location}
-                onChange={handleInputChange}
-                className="p-4 rounded-xl border border-zinc-700 bg-black outline-none focus:border-green-500"
-              />
-              <select
-                name="type"
-                value={newProperty.type}
-                onChange={handleInputChange}
-                className="p-4 rounded-xl border border-zinc-700 bg-black outline-none focus:border-green-500 text-gray-400"
-              >
-                <option value="Villa">Villa</option>
-                <option value="Apartment">Apartment</option>
-                <option value="Luxury">Luxury</option>
-                <option value="Commercial">Commercial</option>
-              </select>
-              <input
-                type="number"
-                name="price"
-                placeholder="Price (in INR, e.g., 25000000)"
-                required
-                value={newProperty.price}
-                onChange={handleInputChange}
-                className="p-4 rounded-xl border border-zinc-700 bg-black outline-none focus:border-green-500"
-              />
-              <input
-                type="number"
-                name="area"
-                placeholder="Area Space (Sq.ft)"
-                required
-                value={newProperty.area}
-                onChange={handleInputChange}
-                className="p-4 rounded-xl border border-zinc-700 bg-black outline-none focus:border-green-500"
-              />
-              <input
-                type="number"
-                name="beds"
-                placeholder="Bedrooms Count"
-                value={newProperty.beds}
-                onChange={handleInputChange}
-                className="p-4 rounded-xl border border-zinc-700 bg-black outline-none focus:border-green-500"
-              />
-              <input
-                type="number"
-                name="baths"
-                placeholder="Bathrooms Count"
-                value={newProperty.baths}
-                onChange={handleInputChange}
-                className="p-4 rounded-xl border border-zinc-700 bg-black outline-none focus:border-green-500"
-              />
-              <input
-                type="number"
-                name="parking"
-                placeholder="Parking Spaces"
-                value={newProperty.parking}
-                onChange={handleInputChange}
-                className="p-4 rounded-xl border border-zinc-700 bg-black outline-none focus:border-green-500"
-              />
-              <div className="md:col-span-2 lg:col-span-3">
-                <input
-                  type="text"
-                  name="amenities"
-                  placeholder="Amenities (Separated by commas, e.g. Gym, Lift, Pool, Security)"
-                  value={newProperty.amenities}
-                  onChange={handleInputChange}
-                  className="w-full p-4 rounded-xl border border-zinc-700 bg-black outline-none focus:border-green-500"
-                />
-              </div>
-              <div className="lg:col-span-3 flex justify-end gap-4 mt-2">
-                <button
-                  type="button"
-                  onClick={() => setIsFormOpen(false)}
-                  className="px-6 py-3 rounded-xl bg-zinc-800 text-white font-bold hover:bg-zinc-700 transition"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="px-8 py-3 rounded-xl bg-green-500 text-black font-bold hover:bg-green-400 transition"
-                >
-                  Publish Listing
-                </button>
-              </div>
-            </form>
-          </div>
-        </section>
-      )}
+    
 
       {/* MAIN CONTENT */}
       <section className="mx-auto mt-16 max-w-7xl px-6">
         <div className="grid gap-10 lg:grid-cols-[300px_1fr]">
           {/* SIDEBAR */}
-          <aside className="sticky top-24 h-fit rounded-3xl border border-zinc-800 bg-zinc-900 p-8">
+          <aside className="sticky top-24 h-fit rounded-3xl border border-[#B8925A]/15 bg-[#132A22] p-8">
             <div className="flex items-center gap-3">
-              <FaFilter className="text-green-500" />
+              <FaFilter className="text-[#B8925A]" />
               <h2 className="text-2xl font-bold">Filters</h2>
             </div>
             {/* Price */}
@@ -409,7 +282,7 @@ export default function Properties() {
                 max="60000000"
                 className="mt-5 w-full accent-green-500"
               />
-              <div className="mt-4 flex justify-between text-sm text-gray-400">
+              <div className="mt-4 flex justify-between text-sm text-[#EFE9DD]/50">
                 <span>₹10L</span>
                 <span>₹6Cr+</span>
               </div>
@@ -421,7 +294,7 @@ export default function Properties() {
                 {[1, 2, 3, 4, 5].map((bed) => (
                   <button
                     key={bed}
-                    className="rounded-xl border border-zinc-700 px-5 py-2 transition hover:border-green-500 hover:bg-green-500 hover:text-black"
+                    className="rounded-xl border border-[#B8925A]/25 px-5 py-2 transition hover:border-[#B8925A] hover:bg-[#B8925A] hover:text-[#0E211B]"
                   >
                     {bed}+
                   </button>
@@ -450,7 +323,7 @@ export default function Properties() {
                 {["Pool", "Gym", "Parking", "Lift", "Garden", "Security"].map((item) => (
                   <span
                     key={item}
-                    className="cursor-pointer rounded-full border border-green-500/30 bg-green-500/10 px-4 py-2 text-sm text-green-400 transition hover:bg-green-500 hover:text-black"
+                    className="cursor-pointer rounded-full border border-[#B8925A]/30 bg-[#B8925A]/10 px-4 py-2 text-sm text-[#D9B383] transition hover:bg-[#B8925A] hover:text-[#0E211B]"
                   >
                     {item}
                   </span>
@@ -464,11 +337,11 @@ export default function Properties() {
             <div className="mb-10 flex items-center justify-between">
               <div>
                 <h2 className="text-4xl font-bold">Featured Properties</h2>
-                <p className="mt-2 text-gray-400">
+                <p className="mt-2 text-[#EFE9DD]/50">
                   {filteredProperties.length} Premium Listings Available
                 </p>
               </div>
-              <select className="rounded-xl border border-zinc-700 bg-zinc-900 px-5 py-3">
+              <select className="rounded-xl border border-[#B8925A]/25 bg-[#132A22] px-5 py-3">
                 <option>Newest</option>
                 <option>Price Low</option>
                 <option>Price High</option>
@@ -481,7 +354,7 @@ export default function Properties() {
               {filteredProperties.map((property) => (
                 <div
                   key={property.id}
-                  className="group overflow-hidden rounded-3xl border border-zinc-800 bg-gradient-to-b from-zinc-900 to-black shadow-xl transition-all duration-500 hover:-translate-y-2 hover:border-green-500 hover:shadow-[0_20px_60px_rgba(34,197,94,0.25)]"
+                  className="group overflow-hidden rounded-3xl border border-[#B8925A]/15 bg-gradient-to-b from-[#132A22] to-[#0E211B] shadow-xl transition-all duration-500 hover:-translate-y-2 hover:border-[#B8925A] hover:shadow-[0_20px_60px_rgba(184,146,90,0.25)]"
                 >
                   {/* IMAGE */}
                   <div className="relative overflow-hidden">
@@ -490,19 +363,19 @@ export default function Properties() {
                       alt={property.title}
                       className="h-72 w-full object-cover transition duration-700 group-hover:scale-110"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0E211B] via-transparent to-transparent"></div>
                     {/* Featured */}
                     {property.featured && (
-                      <span className="absolute left-4 top-4 rounded-full bg-green-500 px-4 py-2 text-xs font-bold text-black">
+                      <span className="absolute left-4 top-4 rounded-full bg-[#B8925A] px-4 py-2 text-xs font-bold text-[#0E211B]">
                         FEATURED
                       </span>
                     )}
                     {/* Wishlist */}
                     <button
                       onClick={() => toggleWishlist(property.id)}
-                      className="absolute right-4 top-4 rounded-full bg-black/70 p-3 backdrop-blur-lg transition hover:scale-110"
+                      className="absolute right-4 top-4 rounded-full bg-[#0E211B]/70 p-3 backdrop-blur-lg transition hover:scale-110"
                     >
-                      <FaHeart className={`${wishlist.includes(property.id) ? "text-red-500" : "text-white"}`} />
+                      <FaHeart className={`${wishlist.includes(property.id) ? "text-red-500" : "text-[#EFE9DD]"}`} />
                     </button>
                     {/* Image Slider Controls */}
                     <button
@@ -512,7 +385,7 @@ export default function Properties() {
                           [property.id]: currentImage[property.id] > 0 ? currentImage[property.id] - 1 : property.images.length - 1,
                         })
                       }
-                      className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-black/60 p-3 opacity-0 transition group-hover:opacity-100"
+                      className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-[#0E211B]/60 p-3 opacity-0 transition group-hover:opacity-100"
                     >
                       <FaChevronLeft />
                     </button>
@@ -523,7 +396,7 @@ export default function Properties() {
                           [property.id]: currentImage[property.id] < property.images.length - 1 ? (currentImage[property.id] || 0) + 1 : 0,
                         })
                       }
-                      className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-black/60 p-3 opacity-0 transition group-hover:opacity-100"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-[#0E211B]/60 p-3 opacity-0 transition group-hover:opacity-100"
                     >
                       <FaChevronRight />
                     </button>
@@ -533,43 +406,43 @@ export default function Properties() {
                   <div className="p-6">
                     <div className="flex items-center justify-between">
                       <h3 className="text-2xl font-bold truncate max-w-[70%]">{property.title}</h3>
-                      <div className="flex items-center gap-1 rounded-full bg-green-500/20 px-3 py-1">
-                        <FaStar className="text-yellow-400" />
+                      <div className="flex items-center gap-1 rounded-full bg-[#B8925A]/20 px-3 py-1">
+                        <FaStar className="text-[#D9B383]" />
                         <span className="font-semibold">{property.rating}</span>
                       </div>
                     </div>
-                    <div className="mt-3 flex items-center text-gray-400 text-sm">
-                      <FaMapMarkerAlt className="mr-2 text-green-500 flex-shrink-0" />
+                    <div className="mt-3 flex items-center text-[#EFE9DD]/50 text-sm">
+                      <FaMapMarkerAlt className="mr-2 text-[#B8925A] flex-shrink-0" />
                       <span className="truncate">{property.location}, {property.city}</span>
                     </div>
-                    <h2 className="mt-5 text-4xl font-bold text-green-500">
+                    <h2 className="mt-5 text-4xl font-bold text-[#B8925A]">
                       ₹ {(property.price / 10000000).toFixed(2)} Cr
                     </h2>
-                    <p className="mt-2 text-gray-500">{property.area}</p>
+                    <p className="mt-2 text-[#EFE9DD]/40">{property.area}</p>
 
                     {/* PROPERTY DETAILS */}
-                    <div className="mt-8 grid grid-cols-3 gap-4 rounded-2xl bg-black p-5">
+                    <div className="mt-8 grid grid-cols-3 gap-4 rounded-2xl bg-[#0E211B] p-5">
                       <div className="text-center">
-                        <FaBed className="mx-auto text-2xl text-green-500" />
+                        <FaBed className="mx-auto text-2xl text-[#B8925A]" />
                         <p className="mt-2 text-lg">{property.beds}</p>
-                        <span className="text-xs text-gray-500">Bedrooms</span>
+                        <span className="text-xs text-[#EFE9DD]/40">Bedrooms</span>
                       </div>
                       <div className="text-center">
-                        <FaBath className="mx-auto text-2xl text-green-500" />
+                        <FaBath className="mx-auto text-2xl text-[#B8925A]" />
                         <p className="mt-2 text-lg">{property.baths}</p>
-                        <span className="text-xs text-gray-500">Bathrooms</span>
+                        <span className="text-xs text-[#EFE9DD]/40">Bathrooms</span>
                       </div>
                       <div className="text-center">
-                        <FaCar className="mx-auto text-2xl text-green-500" />
+                        <FaCar className="mx-auto text-2xl text-[#B8925A]" />
                         <p className="mt-2 text-lg">{property.parking}</p>
-                        <span className="text-xs text-gray-500">Parking</span>
+                        <span className="text-xs text-[#EFE9DD]/40">Parking</span>
                       </div>
                     </div>
 
                     {/* Amenities list */}
                     <div className="mt-7 flex flex-wrap gap-2">
                       {property.amenities.map((item) => (
-                        <span key={item} className="rounded-full border border-green-500/30 bg-green-500/10 px-3 py-1 text-xs text-green-400">
+                        <span key={item} className="rounded-full border border-[#B8925A]/30 bg-[#B8925A]/10 px-3 py-1 text-xs text-[#D9B383]">
                           {item}
                         </span>
                       ))}
@@ -577,10 +450,10 @@ export default function Properties() {
 
                     {/* Buttons */}
                     <div className="mt-8 grid grid-cols-2 gap-3">
-                      <button className="rounded-xl bg-green-500 py-3 font-bold text-black transition hover:bg-green-400">
+                      <button className="rounded-xl bg-[#B8925A] py-3 font-bold text-[#0E211B] transition hover:bg-[#D9B383]">
                         View Details
                       </button>
-                      <button className="rounded-xl border border-green-500 py-3 text-green-400 transition hover:bg-green-500 hover:text-black">
+                      <button className="rounded-xl border border-[#B8925A] py-3 text-[#D9B383] transition hover:bg-[#B8925A] hover:text-[#0E211B]">
                         Contact
                       </button>
                     </div>
@@ -595,7 +468,7 @@ export default function Properties() {
                 <button
                   key={page}
                   className={`h-12 w-12 rounded-xl font-bold transition ${
-                    page === 1 ? "bg-green-500 text-black" : "border border-zinc-700 bg-zinc-900 hover:border-green-500"
+                    page === 1 ? "bg-[#B8925A] text-[#0E211B]" : "border border-[#B8925A]/25 bg-[#132A22] hover:border-[#B8925A]"
                   }`}
                 >
                   {page}
@@ -609,13 +482,13 @@ export default function Properties() {
       {/* LEAD DEVELOPERS */}
       <section className="mx-auto mt-28 max-w-7xl px-6">
         <div className="text-center">
-          <p className="font-semibold uppercase tracking-[6px] text-green-500">TRUSTED BUILDERS</p>
-          <h2 className="mt-4 text-5xl font-bold">India's Leading Developers</h2>
-          <p className="mt-5 text-gray-400">We collaborate with the country's most trusted real estate brands.</p>
+          <p className="font-semibold uppercase tracking-[6px] text-[#B8925A]">TRUSTED BUILDERS</p>
+          <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold">India's Leading Developers</h2>
+          <p className="mt-5 text-[#EFE9DD]/50">We collaborate with the country's most trusted real estate brands.</p>
         </div>
         <div className="mt-14 grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-6">
           {["DLF", "Godrej", "Sobha", "Prestige", "Lodha", "Brigade"].map((company) => (
-            <div key={company} className="rounded-2xl border border-zinc-800 bg-zinc-900 p-8 text-center transition hover:border-green-500 hover:-translate-y-1">
+            <div key={company} className="rounded-2xl border border-[#B8925A]/15 bg-[#132A22] p-8 text-center transition hover:border-[#B8925A] hover:-translate-y-1">
               <h3 className="text-xl font-bold">{company}</h3>
             </div>
           ))}
@@ -624,10 +497,10 @@ export default function Properties() {
 
       {/* WHY CHOOSE US */}
       <section className="mx-auto mt-28 max-w-7xl px-6">
-        <div className="rounded-3xl border border-green-500/20 bg-zinc-900 p-12">
+        <div className="rounded-3xl border border-[#B8925A]/20 bg-[#132A22] p-12">
           <div className="text-center">
-            <p className="uppercase tracking-[6px] text-green-500">GO REALTORS</p>
-            <h2 className="mt-4 text-5xl font-bold">Why Choose Us?</h2>
+            <p className="uppercase tracking-[6px] text-[#B8925A]">GO REALTORS</p>
+            <h2 className="mt-4 text-3xl sm:text-4xl md:text-5xl font-bold">Why Choose Us?</h2>
           </div>
           <div className="mt-14 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             {[
@@ -636,9 +509,9 @@ export default function Properties() {
               { number: "120+", title: "Cities Covered" },
               { number: "99%", title: "Customer Satisfaction" },
             ].map((item) => (
-              <div key={item.title} className="rounded-2xl border border-zinc-800 bg-black p-8 text-center transition hover:border-green-500">
-                <h2 className="text-5xl font-bold text-green-500">{item.number}</h2>
-                <p className="mt-4 text-gray-400">{item.title}</p>
+              <div key={item.title} className="rounded-2xl border border-[#B8925A]/15 bg-[#0E211B] p-8 text-center transition hover:border-[#B8925A]">
+                <h2 className="text-5xl font-bold text-[#B8925A]">{item.number}</h2>
+                <p className="mt-4 text-[#EFE9DD]/50">{item.title}</p>
               </div>
             ))}
           </div>
@@ -653,17 +526,17 @@ export default function Properties() {
             alt=""
             className="absolute inset-0 h-full w-full object-cover opacity-30"
           />
-          <div className="absolute inset-0 bg-black/80"></div>
+          <div className="absolute inset-0 bg-[#0E211B]/80"></div>
           <div className="relative px-10 py-24 text-center">
-            <h2 className="text-6xl font-bold">Find Your <span className="text-green-500">Dream Property</span></h2>
-            <p className="mx-auto mt-8 max-w-3xl text-xl leading-9 text-gray-300">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold">Find Your <span className="text-[#B8925A]">Dream Property</span></h2>
+            <p className="mx-auto mt-8 max-w-3xl text-xl leading-9 text-[#EFE9DD]/70">
               Whether you're buying your first home, investing in commercial real estate, or looking for luxury living, GO REALTORS is here to make your journey simple, transparent, and memorable.
             </p>
             <div className="mt-12 flex flex-wrap justify-center gap-5">
-              <Link to="/signup" className="rounded-xl bg-green-500 px-10 py-4 font-bold text-black transition hover:bg-green-400">
+              <Link to="/signup" className="rounded-xl bg-[#B8925A] px-10 py-4 font-bold text-[#0E211B] transition hover:bg-[#D9B383]">
                 Book Consultation
               </Link>
-              <Link to="/contact" className="rounded-xl border border-green-500 px-10 py-4 font-bold text-green-400 transition hover:bg-green-500 hover:text-black">
+              <Link to="/contact" className="rounded-xl border border-[#B8925A] px-10 py-4 font-bold text-[#D9B383] transition hover:bg-[#B8925A] hover:text-[#0E211B]">
                 Contact Us
               </Link>
             </div>
@@ -672,4 +545,4 @@ export default function Properties() {
       </section>
     </main>
   );
-} 
+}

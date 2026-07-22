@@ -2,26 +2,28 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
-import { Link } from "react-router-dom";
+import { Link , useNavigate } from "react-router-dom";
 
 import "swiper/css";
 import "swiper/css/navigation";
-import {
-  FaSearch,
-  FaMapMarkerAlt,
-  FaHome,
-  FaHeart,
-  FaUser,
-} from "react-icons/fa";
+import { FaSearch, FaMapMarkerAlt } from "react-icons/fa";
 import {
   FaHandshake,
   FaGlobe,
   FaHeadset,
   FaCompass,
   FaGavel,
-  FaChevronDown, 
-  FaChevronUp
+  FaHome,
+  FaChevronDown,
+  FaChevronUp,
 } from "react-icons/fa";
+
+// ---- palette (matches Header.jsx) ----
+// ink        #0E211B   page background
+// ink-panel  #132A22   header / sidebar / dark cards
+// parchment  #EFE9DD   primary text on dark
+// brass      #B8925A   accent, CTAs
+// brass-lt   #D9B383   hover state
 
 const properties = [
   {
@@ -81,20 +83,19 @@ const collections = [
     img: "https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?auto=format&fit=crop&w=800&q=80",
   },
 ];
+
 const cities = [
   {
     id: 1,
     name: "Bangalore",
     properties: "1218",
-    image:
-      "https://images.unsplash.com/photo-1596176530529-78163a4f7af2?w=800",
+    image: "https://images.unsplash.com/photo-1596176530529-78163a4f7af2?w=800",
   },
   {
     id: 2,
     name: "Hyderabad",
     properties: "251",
-    image:
-      "https://images.unsplash.com/photo-1599661046289-e31897846e41?w=800",
+    image: "https://images.unsplash.com/photo-1599661046289-e31897846e41?w=800",
   },
   {
     id: 3,
@@ -107,24 +108,22 @@ const cities = [
     id: 4,
     name: "Kolkata",
     properties: "375",
-    image:
-      "https://images.unsplash.com/photo-1566552881560-0be862a7c445?w=800",
+    image: "https://images.unsplash.com/photo-1566552881560-0be862a7c445?w=800",
   },
   {
     id: 5,
     name: "Delhi",
     properties: "2400",
-    image:
-      "https://images.unsplash.com/photo-1587474260584-136574528ed5?w=800",
+    image: "https://images.unsplash.com/photo-1587474260584-136574528ed5?w=800",
   },
   {
     id: 6,
     name: "Mumbai",
     properties: "3200",
-    image:
-      "https://images.unsplash.com/photo-1562979314-bee7453e911c?w=800",
+    image: "https://images.unsplash.com/photo-1562979314-bee7453e911c?w=800",
   },
 ];
+
 const services = [
   {
     icon: <FaHandshake />,
@@ -158,192 +157,153 @@ const services = [
   },
 ];
 
+// FIX: "Buy Property by State" already used {name, link} objects, but
+// "Buy Property by City" and "Curated Collections" were plain strings.
+// SidebarMenu always reads item.name / item.link, so those two sections
+// rendered blank. Normalized everything to the same {name, link} shape.
+const stateLinks = [
+  "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh",
+  "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka",
+  "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya",
+  "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim",
+  "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand",
+  "West Bengal", "Delhi", "Jammu & Kashmir", "Andaman & Nicobar",
+  "Chandigarh", "Dadra & Nagar Haveli", "Daman & Diu", "Lakshadweep",
+  "Puducherry",
+].map((name) => ({
+  name,
+  link: `/search?searchTerm=${encodeURIComponent(name)}`,
+}));
 
+const cityLinks = [
+  "Mumbai", "Bangalore", "Gurgaon", "Pune", "Noida", "Kolkata", "Goa",
+  "Chennai", "Hyderabad", "Ahmedabad", "Faridabad", "Chandigarh",
+  "Lucknow", "Jaipur",
+].map((name) => ({
+  name,
+  link: `/search?searchTerm=${encodeURIComponent(name)}`,
+}));
+
+const collectionLinks = [
+  "Luxury Villas", "Apartments", "Farm Houses", "Beach Homes",
+].map((name) => ({
+  name,
+  link: `/search?searchTerm=${encodeURIComponent(name)}`,
+}));
 
 export default function Home() {
   const [open, setOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState(""); // Add state for search query
+  const navigate = useNavigate(); // Initialize useNavigate
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (!searchTerm.trim()) return;
+    navigate(`/search?searchTerm=${encodeURIComponent(searchTerm)}`);
+  };
 
   return (
-    <div className="flex min-h-screen bg-black text-white">
-
+    <div className="flex min-h-screen bg-[#0E211B] text-[#EFE9DD]">
       {/* ================= RIGHT SIDEBAR ================= */}
-
-<motion.aside
-  initial={{ x: 400 }}
-  animate={{ x: open ? 0 : 400 }}
-  transition={{ duration: 0.35 }}
-  className="fixed right-0 top-0 z-50 h-screen w-360px overflow-y-auto bg-[#18111d] shadow-2xl"
->
-  <div className="p-8">
-
-    {/* Header */}
-    <div className="flex items-center justify-between">
-
-      <h2 className="text-3xl font-bold">
-        India
-      </h2>
-
-      <button
-        onClick={() => setOpen(false)}
-        className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-black text-2xl"
+      <motion.aside
+        initial={{ x: 400 }}
+        animate={{ x: open ? 0 : 400 }}
+        transition={{ duration: 0.35, ease: "easeInOut" }}
+        // FIX: w-360px is not a valid Tailwind class (needs bracket syntax).
+        // It was silently ignored, so the panel had no defined width.
+        className="fixed right-0 top-0 z-50 h-screen w-[360px] overflow-y-auto bg-[#132A22] shadow-2xl border-l border-[#B8925A]/20"
       >
-        ✕
-      </button>
+        <div className="p-8">
+          {/* Header */}
+          <div className="flex items-center justify-between">
+            <h2 className="text-3xl font-serif font-bold text-[#EFE9DD]">
+              India
+            </h2>
 
-    </div>
+            <button
+              onClick={() => setOpen(false)}
+              aria-label="Close menu"
+              className="flex h-12 w-12 items-center justify-center rounded-full bg-[#B8925A] text-[#0E211B] text-2xl hover:bg-[#D9B383] transition-colors"
+            >
+              ✕
+            </button>
+          </div>
 
-    <hr className="my-8 border-white/20" />
+          <hr className="my-8 border-[#B8925A]/20" />
 
-    {/* Menu */}
+          {/* Menu */}
+          <div className="space-y-7">
+            <SidebarMenu title="Buy Property by State" items={stateLinks} />
+            <SidebarMenu title="Buy Property by City" items={cityLinks} />
+            <SidebarMenu title="Curated Collections" items={collectionLinks} />
+          </div>
 
-    <div className="space-y-7">
+          <hr className="my-8 border-[#B8925A]/20" />
 
-    <SidebarMenu
-  title="Buy Property by State"
-  items={[
-    { name: "Andhra Pradesh", link: "/about" },
-    { name: "Arunachal Pradesh", link: "/" },
-    { name: "Assam", link: "/" },
-    { name: "Bihar", link: "/" },
-    { name: "Chhattisgarh", link: "/" },
-    { name: "Goa", link: "/" },
-    { name: "Gujarat", link: "/" },
-    { name: "Haryana", link: "/" },
-    { name: "Himachal Pradesh", link: "/" },
-    { name: "Jharkhand", link: "/" },
-    { name: "Karnataka", link: "/" },
-    { name: "Kerala", link: "/" },
-    { name: "Madhya Pradesh", link: "/" },
-    { name: "Maharashtra", link: "/" },
-    { name: "Manipur", link: "/" },
-    { name: "Meghalaya", link: "/" },
-    { name: "Mizoram", link: "/" },
-    { name: "Nagaland", link: "/" },
-    { name: "Odisha", link: "/" },
-    { name: "Punjab", link: "/" },
-    { name: "Rajasthan", link: "/" },
-    { name: "Sikkim", link: "/" },
-    { name: "Tamil Nadu", link: "/" },
-    { name: "Telangana", link: "/" },
-    { name: "Tripura", link: "/" },
-    { name: "Uttar Pradesh", link: "/" },
-    { name: "Uttarakhand", link: "/" },
-    { name: "West Bengal", link: "/" },
-    { name: "Delhi", link: "/" },
-    { name: "Jammu & Kashmir", link: "/" },
-    { name: "Andaman & Nicobar", link: "/" },
-    { name: "Chandigarh", link: "/" },
-    { name: "Dadra & Nagar Haveli", link: "/" },
-    { name: "Daman & Diu", link: "/" },
-    { name: "Lakshadweep", link: "/" },
-    { name: "Puducherry", link: "/" }
-  ]}
-/>
+          <div className="space-y-6 text-xl text-[#EFE9DD]/80">
+            <p className="hover:text-[#B8925A] transition-colors cursor-pointer">NRI Services</p>
+            <p className="hover:text-[#B8925A] transition-colors cursor-pointer">News</p>
+            <p className="hover:text-[#B8925A] transition-colors cursor-pointer">Events</p>
+            <p className="hover:text-[#B8925A] transition-colors cursor-pointer">Blogs</p>
+            <p className="hover:text-[#B8925A] transition-colors cursor-pointer">Area Calculator</p>
+            <p className="hover:text-[#B8925A] transition-colors cursor-pointer">Research</p>
+          </div>
 
-<SidebarMenu
-  title="Buy Property by City"
-  items={["Mumbai",
-    "Bangalore",
-    "Gurgaon",
-    "Pune",
-   "Noida",
-    "Kolkata",
-    "Goa",
-    "Chennai",
-    "Hyderabad",
-    "Ahmedabad",
-    "Faridabad",
-    "Chandigarh",
-    "Lucknow",
-    "Jaipur"
-  ]}
-/>
+          <hr className="my-8 border-[#B8925A]/20" />
 
-<SidebarMenu
-  title="Curated Collections"
-  items={[
-    "Luxury Villas",
-    "Apartments",
-    "Farm Houses",
-    "Beach Homes",
-  ]}
-/>
+          <div className="space-y-6 text-xl text-[#EFE9DD]/80">
+            <p className="hover:text-[#B8925A] transition-colors cursor-pointer">About</p>
+            <p className="hover:text-[#B8925A] transition-colors cursor-pointer">Awards</p>
+            <p className="hover:text-[#B8925A] transition-colors cursor-pointer">Careers</p>
+            <p className="hover:text-[#B8925A] transition-colors cursor-pointer">Terms</p>
+            <p className="hover:text-[#B8925A] transition-colors cursor-pointer">Sitemap</p>
+            <p className="hover:text-[#B8925A] transition-colors cursor-pointer">Privacy</p>
+            <p className="hover:text-[#B8925A] transition-colors cursor-pointer">FAQs</p>
+            <p className="hover:text-[#B8925A] transition-colors cursor-pointer">Contact</p>
+          </div>
 
-    </div>
+          <hr className="my-8 border-[#B8925A]/20" />
 
-    <hr className="my-8 border-white/20" />
+          <div>
+            <h3 className="text-2xl font-serif font-semibold text-[#EFE9DD]">
+              Need any help?
+            </h3>
+            <p className="mt-3 text-[#EFE9DD]/60">
+              Contact our property experts anytime.
+            </p>
+          </div>
+        </div>
+      </motion.aside>
 
-    <div className="space-y-6 text-2xl">
+      {open && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={() => setOpen(false)}
+          className="fixed inset-0 z-40 bg-[#0E211B]/70"
+        />
+      )}
 
-      <p>NRI Services</p>
-      <p>News</p>
-      <p>Events</p>
-      <p>Blogs</p>
-      <p>Area Calculator</p>
-      <p>Research</p>
-
-    </div>
-
-    <hr className="my-8 border-white/20" />
-
-    <div className="space-y-6 text-2xl">
-
-      <p>About</p>
-      <p>Awards</p>
-      <p>Careers</p>
-      <p>Terms</p>
-      <p>Sitemap</p>
-      <p>Privacy</p>
-      <p>FAQs</p>
-      <p>Contact</p>
-
-    </div>
-
-    <hr className="my-8 border-white/20" />
-
-    <div>
-
-      <h3 className="text-3xl font-semibold">
-        Need any help?
-      </h3>
-
-      <p className="mt-4 text-gray-400">
-        Contact our property experts anytime.
-      </p>
-
-    </div>
-
-  </div>
-</motion.aside>
-{open && (
-  <motion.div
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    exit={{ opacity: 0 }}
-    onClick={() => setOpen(false)}
-    className="fixed inset-0 z-40 bg-black/50"
-  />
-)}
       {/* ================= MAIN ================= */}
       <main className="flex-1 overflow-y-auto">
-      {!open && (
-  <button
-    onClick={() => setOpen(true)}
-    className="fixed right-8 top-3 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-transparent text-2xl text-white shadow-lg transition hover:scale-105"
-  >
-    ☰
-  </button>
-)}
+        {!open && (
+          <button
+            onClick={() => setOpen(true)}
+            aria-label="Open menu"
+            className="fixed right-8 top-4 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-[#132A22] border border-[#B8925A]/40 text-xl text-[#EFE9DD] shadow-lg transition hover:border-[#B8925A] hover:scale-105"
+          >
+            ☰
+          </button>
+        )}
+
         {/* ================= HERO ================= */}
         <section className="relative flex h-screen items-center justify-center">
-
           <img
             src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2000&q=80"
-            className="absolute inset-0 h-full w-full object-cover opacity-40"
-            alt="house"
+            className="absolute inset-0 h-full w-full object-cover opacity-30"
+            alt="Modern house exterior"
           />
-
-          <div className="absolute inset-0 bg-black/80" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0E211B]/80 via-[#0E211B]/85 to-[#0E211B]" />
 
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -351,214 +311,178 @@ export default function Home() {
             transition={{ duration: 0.6 }}
             className="relative z-10 flex w-full max-w-3xl flex-col items-center text-center px-6"
           >
-            <span className="rounded-full bg-green-500/20 px-5 py-2 text-green-300">
+            <span className="rounded-full bg-[#B8925A]/15 border border-[#B8925A]/40 px-5 py-2 text-[#D9B383] text-sm tracking-wide">
               Premium Real Estate Platform
             </span>
 
-            <h1 className="mt-6 text-5xl font-bold md:text-7xl">
+            <h1 className="mt-6 font-serif text-5xl font-bold md:text-7xl text-[#EFE9DD]">
               Find Your
               <br />
               Perfect Place
-              <span className="text-green-400"> To Live</span>
+              <span className="text-[#B8925A]"> To Live</span>
             </h1>
 
-            <p className="mt-6 text-gray-300">
+            <p className="mt-6 text-[#EFE9DD]/60">
               Modern homes, villas & apartments worldwide.
             </p>
 
-            {/* SEARCH */}
-            <form className="mt-10 w-full max-w-2xl">
-              <div className="flex flex-col gap-4 rounded-2xl bg-white p-4 backdrop-blur-xl md:flex-row">
-
-                <div className="flex flex-1 items-center gap-3 rounded-xl bg-white/10 px-4">
-                  <FaMapMarkerAlt className="text-green-400" />
+            {/* MATCHED HEADER SEARCH BAR */}
+            <form onSubmit={handleSearchSubmit} className="mt-10 w-full max-w-2xl">
+              <div className="flex flex-col gap-4 rounded-2xl bg-[#132A22] border border-[#B8925A]/25 p-3 md:flex-row md:items-center">
+                <div className="flex flex-1 items-center gap-3 rounded-xl bg-[#0E211B] px-4 py-3.5 border border-[#B8925A]/15">
+                  <FaMapMarkerAlt className="text-[#B8925A]" />
                   <input
-                    className="w-full bg-transparent py-4 outline-none placeholder:text-gray-400"
-                    placeholder="Search city..."
+                    type="text"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    placeholder="Search by city, address, or zip..."
+                    className="w-full bg-transparent outline-none text-[#EFE9DD] placeholder:text-[#EFE9DD]/40"
                   />
                 </div>
 
-                <button className="rounded-xl bg-green-500 px-8 py-4 font-semibold text-black hover:bg-green-400">
-                  <FaSearch className="mr-2 inline" />
+                <button
+                  type="submit"
+                  className="rounded-xl bg-[#B8925A] px-8 py-4 font-semibold text-[#0E211B] hover:bg-[#D9B383] transition-colors flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <FaSearch />
                   Search
                 </button>
-
               </div>
             </form>
           </motion.div>
         </section>
-        <section className="bg-black py-20">
 
-  <div className="mx-auto max-w-7xl px-6">
+        {/* ================= FEATURED CITIES ================= */}
+        <section className="bg-[#0E211B] py-20">
+          <div className="mx-auto max-w-7xl px-6">
+            <h2 className="text-center font-serif text-5xl font-bold text-[#EFE9DD]">
+              Featured <span className="text-[#B8925A]">Cities</span>
+            </h2>
 
-    <h2 className="text-center text-5xl text-white font-bold">
-      Featured  <span className="text-green-400">Cities</span>
-    </h2>
-    
+            <p className="mt-4 mb-12 text-center text-[#EFE9DD]/50 text-xl">
+              Find your dream home in your favourite city
+            </p>
 
-    <p className="mt-4 mb-12 text-center text-gray-500 text-xl">
-      Find your dream home in your favourite city
-    </p>
+            <Swiper
+              modules={[Navigation, Autoplay]}
+              navigation
+              autoplay={{ delay: 3000 }}
+              spaceBetween={25}
+              breakpoints={{
+                320: { slidesPerView: 1 },
+                768: { slidesPerView: 2 },
+                1024: { slidesPerView: 4 },
+              }}
+            >
+              {cities.map((city) => (
+                <SwiperSlide key={city.id}>
+                  <div className="overflow-hidden rounded-3xl bg-[#132A22] border border-[#B8925A]/15 shadow-lg">
+                    <div className="relative h-72">
+                      <img
+                        src={city.image}
+                        alt={city.name}
+                        className="h-full w-full object-cover transition duration-500 hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-[#0E211B]/40" />
+                      <h3 className="absolute inset-0 flex items-center justify-center font-serif text-3xl font-bold text-[#EFE9DD]">
+                        {city.name}
+                      </h3>
+                    </div>
 
-    <Swiper
-      modules={[Navigation, Autoplay]}
-      navigation
-      autoplay={{
-        delay: 3000,
-      }}
-      spaceBetween={25}
-      breakpoints={{
-        320: {
-          slidesPerView: 1,
-        },
-        768: {
-          slidesPerView: 2,
-        },
-        1024: {
-          slidesPerView: 4,
-        },
-      }}
-    >
-      {cities.map((city) => (
-        <SwiperSlide key={city.id}>
-
-          <div className="overflow-hidden rounded-3xl bg-white shadow-lg">
-
-            <div className="relative h-72">
-
-              <img
-                src={city.image}
-                className="h-full w-full object-cover transition duration-500 hover:scale-110"
-              />
-
-              <div className="absolute inset-0 bg-black/40" />
-
-              <h3 className="absolute inset-0 flex items-center justify-center text-3xl font-bold text-white">
-                {city.name}
-              </h3>
-
-            </div>
-
-            <div className="py-6 text-center">
-
-              <span className="text-black text-xl font-semibold">
-                {city.properties} Properties
-              </span>
-
-            </div>
-
+                    <div className="py-6 text-center">
+                      <span className="text-[#D9B383] text-xl font-semibold">
+                        {city.properties} Properties
+                      </span>
+                    </div>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
           </div>
-
-        </SwiperSlide>
-      ))}
-    </Swiper>
-
-  </div>
-
-</section>
+        </section>
 
         {/* ================= CURATED COLLECTIONS ================= */}
-        <section className="bg-black px-6 py-24">
-
+        <section className="bg-[#0E211B] px-6 py-24">
           <div className="mx-auto mb-12 max-w-7xl text-center">
-            <h2 className="text-4xl font-bold">
-              Curated <span className="text-green-400">Collections</span>
+            <h2 className="font-serif text-4xl font-bold text-[#EFE9DD]">
+              Curated <span className="text-[#B8925A]">Collections</span>
             </h2>
-            <p className="mt-2 text-gray-400">
+            <p className="mt-2 text-[#EFE9DD]/50">
               Explore prime properties based on your preference
             </p>
           </div>
 
           <div className="mx-auto grid max-w-7xl gap-6 sm:grid-cols-2 lg:grid-cols-4">
-
             {collections.map((c, i) => (
               <div
                 key={i}
-                className="group relative h-64 overflow-hidden rounded-2xl"
+                className="group relative h-64 overflow-hidden rounded-2xl border border-[#B8925A]/15"
               >
                 <img
                   src={c.img}
+                  alt={c.title}
                   className="h-full w-full object-cover transition duration-500 group-hover:scale-110"
                 />
-
-                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition" />
-
-                <h3 className="absolute inset-0 flex items-center justify-center text-xl font-semibold">
+                <div className="absolute inset-0 bg-[#0E211B]/40 group-hover:bg-[#0E211B]/60 transition" />
+                <h3 className="absolute inset-0 flex items-center justify-center text-xl font-semibold text-[#EFE9DD]">
                   {c.title}
                 </h3>
               </div>
             ))}
-
           </div>
         </section>
-        <section className="bg-black py-24">
 
-  <div className="mx-auto max-w-7xl px-6">
+        {/* ================= WHY BUY WITH US ================= */}
+        <section className="bg-[#0E211B] py-24">
+          <div className="mx-auto max-w-7xl px-6">
+            <h2 className="text-center font-serif text-5xl font-bold text-[#EFE9DD]">
+              Why Buy With Us?
+            </h2>
 
-    <h2 className="text-center text-5xl font-bold ">
-      Why Buy With Us?
-    </h2>
+            <p className="mt-4 text-center text-xl text-[#EFE9DD]/50">
+              Aspects that make GoRealtor India's leading Real Estate Advisory
+            </p>
 
-    <p className="mt-4 text-center text-xl text-gray-500">
-      Aspects that make GoRealtor India's leading Real Estate Advisory
-    </p>
+            <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {services.map((service, index) => (
+                <div
+                  key={index}
+                  className="rounded-3xl bg-[#EFE9DD] p-10 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+                >
+                  <div className="flex justify-center">
+                    <div className="text-6xl text-[#132A22]">{service.icon}</div>
+                  </div>
 
-    <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                  <h3 className="mt-8 text-center font-serif text-3xl font-bold text-[#132A22]">
+                    {service.title}
+                  </h3>
 
-      {services.map((service, index) => (
+                  <p className="mt-6 text-center leading-8 text-[#132A22]/70">
+                    {service.desc}
+                  </p>
 
-        <div
-          key={index}
-          className="rounded-3xl bg-white p-10 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
-        >
-
-          <div className="flex justify-center">
-
-            <div className="text-6xl text-black">
-              {service.icon}
+                  <div className="mt-6 text-center">
+                    <button className="font-semibold text-[#B8925A] hover:text-[#132A22] transition-colors">
+                      Read More →
+                    </button>
+                  </div>
+                </div>
+              ))}
             </div>
-
           </div>
+        </section>
 
-          <h3 className="mt-8 text-center text-3xl font-bold">
-            {service.title}
-          </h3>
-
-          <p className="mt-6 text-center leading-8 text-gray-600">
-            {service.desc}
-          </p>
-
-          <div className="mt-6 text-center">
-
-            <button className="font-semibold text-green-500 hover:text-black">
-              Read More →
-            </button>
-
-          </div>
-
-        </div>
-
-      ))}
-
-    </div>
-
-  </div>
-
-</section>
-        
-        {/* ================= FEATURED ================= */}
+        {/* ================= FEATURED PROPERTIES ================= */}
         <section className="mx-auto max-w-7xl px-6 py-24">
-
-          <h2 className="text-center text-5xl text-white font-bold">
-            Featured <span className="text-green-400">Properties</span>
+          <h2 className="text-center font-serif text-5xl font-bold text-[#EFE9DD]">
+            Featured <span className="text-[#B8925A]">Properties</span>
           </h2>
 
-          <p className="text-center mt-2 text-gray-400">
+          <p className="text-center mt-2 text-[#EFE9DD]/50">
             Hand-picked homes for you
           </p>
 
           <div className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-
             {properties.map((p, i) => (
               <motion.div
                 key={p.id}
@@ -566,34 +490,26 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="overflow-hidden rounded-3xl bg-white/5 transition hover:-translate-y-2"
+                className="overflow-hidden rounded-3xl bg-[#132A22] border border-[#B8925A]/15 transition hover:-translate-y-2"
               >
-                <img src={p.img} className="h-64 w-full object-cover" />
+                <img src={p.img} alt={p.title} className="h-64 w-full object-cover" />
 
                 <div className="p-6 space-y-3">
-
-                  <h3 className="text-2xl font-semibold">{p.title}</h3>
-                  <p className="text-gray-400">{p.location}</p>
+                  <h3 className="text-2xl font-semibold text-[#EFE9DD]">{p.title}</h3>
+                  <p className="text-[#EFE9DD]/50">{p.location}</p>
 
                   <div className="flex items-center justify-between">
+                    <span className="text-2xl font-bold text-[#B8925A]">{p.price}</span>
 
-                    <span className="text-2xl font-bold text-green-400">
-                      {p.price}
-                    </span>
-
-                    <button className="rounded-lg bg-green-500 px-5 py-2 text-black hover:bg-green-400">
+                    <button className="rounded-lg bg-[#B8925A] px-5 py-2 text-[#0E211B] font-semibold hover:bg-[#D9B383] transition-colors">
                       View
                     </button>
-
                   </div>
-
                 </div>
               </motion.div>
             ))}
-
           </div>
         </section>
-
       </main>
     </div>
   );
@@ -604,33 +520,29 @@ function SidebarMenu({ title, items }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="border-b border-white/10 pb-2">
-
-<button
-  type="button"
-  onClick={() => setOpen(!open)}
-  className="flex w-full items-center justify-between text-xl hover:text-green-400 transition"
->
+    <div className="border-b border-[#B8925A]/15 pb-2">
+      <button
+        type="button"
+        onClick={() => setOpen(!open)}
+        className="flex w-full items-center justify-between text-xl text-[#EFE9DD] hover:text-[#B8925A] transition-colors"
+      >
         <span>{title}</span>
-
         {open ? <FaChevronUp /> : <FaChevronDown />}
       </button>
 
       {open && (
-        <div className="mt-4 ml-4 flex flex-col gap-3 text-lg text-gray-300">
-
-{items.map((item, index) => (
-  <Link
-    key={index}
-    to={item.link}
-    className="cursor-pointer hover:text-green-400 transition"
-  >
-    {item.name}
-  </Link>
-))}
+        <div className="mt-4 ml-4 flex flex-col gap-3 text-lg text-[#EFE9DD]/70 max-h-64 overflow-y-auto pr-2">
+          {items.map((item, index) => (
+            <Link
+              key={index}
+              to={item.link}
+              className="hover:text-[#B8925A] transition-colors"
+            >
+              {item.name}
+            </Link>
+          ))}
         </div>
       )}
-
     </div>
   );
 }
