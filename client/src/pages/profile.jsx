@@ -12,8 +12,9 @@ import {
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+// Stable default avatar matching the header
 const DEFAULT_AVATAR =
-  'https://imgs.search.brave.com/pekBFfEBfmZ5mpETqCk6h5lVaECe_fHVPT_Je3dixgI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/bWFnbmlmaWMuY29t/L3ByZW1pdW0tdmVj/dG9yL2J1c2luZXNz/LW1hbi1hdmF0YXIt/cHJvZmlsZV8xMTMz/MjU3LTI0MzEuanBn/P3NlbXQ9YWlzX2h5/YnJpZCZ3PTc0MCZx/PTgw';
+  'https://res.cloudinary.com/dz9e1lo1v/image/upload/v1690326559/default-avatar_r4jjeq.png';
 
 export default function Profile() {
   const fileRef = useRef(null);
@@ -33,7 +34,6 @@ export default function Profile() {
     }
   }, [file]);
 
-  // Preset name must match CreateListing.jsx / UpdateListing.jsx exactly.
   const CLOUDINARY_UPLOAD_PRESET = 'Real-estate-preset';
   const CLOUDINARY_CLOUD_NAME = 'btrv3nfn';
 
@@ -62,7 +62,7 @@ export default function Profile() {
       setFilePerc(80);
       const fileData = await res.json();
 
-      setFormData({ ...formData, avatar: fileData.secure_url });
+      setFormData((prev) => ({ ...prev, avatar: fileData.secure_url }));
       setFilePerc(100);
     } catch (error) {
       setFileUploadError(true);
@@ -186,7 +186,11 @@ export default function Profile() {
                 onClick={() => fileRef.current.click()}
                 src={formData.avatar || currentUser?.avatar || DEFAULT_AVATAR}
                 alt='profile'
-                className='rounded-full h-24 w-24 object-cover cursor-pointer border-2 border-[#B8925A]/40 hover:border-[#B8925A] transition-colors'
+                className='rounded-full h-24 w-24 object-cover cursor-pointer border-2 border-[#B8925A]/40 hover:border-[#B8925A] transition-colors bg-[#0E211B]'
+                onError={(e) => {
+                  e.currentTarget.onerror = null;
+                  e.currentTarget.src = DEFAULT_AVATAR;
+                }}
               />
               <p className='text-sm mt-3 min-h-[1.25rem]'>
                 {fileUploadError ? (

@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
-import { Link , useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -24,30 +24,6 @@ import {
 // parchment  #EFE9DD   primary text on dark
 // brass      #B8925A   accent, CTAs
 // brass-lt   #D9B383   hover state
-
-const properties = [
-  {
-    id: 1,
-    title: "Luxury Villa",
-    location: "Beverly Hills, California",
-    price: "$2.4M",
-    img: "https://picsum.photos/600/400?random=1",
-  },
-  {
-    id: 2,
-    title: "Modern Apartment",
-    location: "New York City",
-    price: "$1.2M",
-    img: "https://picsum.photos/600/400?random=2",
-  },
-  {
-    id: 3,
-    title: "Eco House",
-    location: "Portland",
-    price: "$980K",
-    img: "https://picsum.photos/600/400?random=3",
-  },
-];
 
 const collections = [
   {
@@ -157,10 +133,6 @@ const services = [
   },
 ];
 
-// FIX: "Buy Property by State" already used {name, link} objects, but
-// "Buy Property by City" and "Curated Collections" were plain strings.
-// SidebarMenu always reads item.name / item.link, so those two sections
-// rendered blank. Normalized everything to the same {name, link} shape.
 const stateLinks = [
   "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh",
   "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka",
@@ -193,8 +165,32 @@ const collectionLinks = [
 
 export default function Home() {
   const [open, setOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState(""); // Add state for search query
-  const navigate = useNavigate(); // Initialize useNavigate
+  const [searchTerm, setSearchTerm] = useState("");
+  const [properties, setProperties] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+
+  // Fetch dynamic listings created from dashboard/profile
+  useEffect(() => {
+    const fetchListings = async () => {
+      try {
+        setLoading(true);
+        // Update this endpoint path to match your backend route (e.g., '/api/listing/get' or similar)
+        const res = await fetch("/api/listing/get?limit=6");
+        const data = await res.json();
+        if (data) {
+          setProperties(data);
+        }
+      } catch (error) {
+        console.error("Failed to fetch dashboard listings:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchListings();
+  }, []);
+
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     if (!searchTerm.trim()) return;
@@ -208,8 +204,6 @@ export default function Home() {
         initial={{ x: 400 }}
         animate={{ x: open ? 0 : 400 }}
         transition={{ duration: 0.35, ease: "easeInOut" }}
-        // FIX: w-360px is not a valid Tailwind class (needs bracket syntax).
-        // It was silently ignored, so the panel had no defined width.
         className="fixed right-0 top-0 z-50 h-screen w-[360px] overflow-y-auto bg-[#132A22] shadow-2xl border-l border-[#B8925A]/20"
       >
         <div className="p-8">
@@ -326,7 +320,6 @@ export default function Home() {
               Modern homes, villas & apartments worldwide.
             </p>
 
-            {/* MATCHED HEADER SEARCH BAR */}
             <form onSubmit={handleSearchSubmit} className="mt-10 w-full max-w-2xl">
               <div className="flex flex-col gap-4 rounded-2xl bg-[#132A22] border border-[#B8925A]/25 p-3 md:flex-row md:items-center">
                 <div className="flex flex-1 items-center gap-3 rounded-xl bg-[#0E211B] px-4 py-3.5 border border-[#B8925A]/15">
@@ -482,33 +475,54 @@ export default function Home() {
             Hand-picked homes for you
           </p>
 
-          <div className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {properties.map((p, i) => (
-              <motion.div
-                key={p.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="overflow-hidden rounded-3xl bg-[#132A22] border border-[#B8925A]/15 transition hover:-translate-y-2"
-              >
-                <img src={p.img} alt={p.title} className="h-64 w-full object-cover" />
+          {loading ? (
+            <div className="text-center mt-12 text-[#EFE9DD]/60 text-xl">
+              Loading properties...
+            </div>
+          ) : properties.length === 0 ? (
+            <div className="text-center mt-12 text-[#EFE9DD]/60 text-xl">
+              No listings found from your dashboard.
+            </div>
+          ) : (
+            <div className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {properties.map((p, i) => (
+                <motion.div
+                  key={p._id || p.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="overflow-hidden rounded-3xl bg-[#132A22] border border-[#B8925A]/15 transition hover:-translate-y-2"
+                >
+                  <img
+                    src={p.imageUrls?.[0] || p.img || "https://picsum.photos/600/400"}
+                    alt={p.name || p.title}
+                    className="h-64 w-full object-cover"
+                  />
 
-                <div className="p-6 space-y-3">
-                  <h3 className="text-2xl font-semibold text-[#EFE9DD]">{p.title}</h3>
-                  <p className="text-[#EFE9DD]/50">{p.location}</p>
+                  <div className="p-6 space-y-3">
+                    <h3 className="text-2xl font-semibold text-[#EFE9DD] truncate">
+                      {p.name || p.title}
+                    </h3>
+                    <p className="text-[#EFE9DD]/50 truncate">{p.address || p.location}</p>
 
-                  <div className="flex items-center justify-between">
-                    <span className="text-2xl font-bold text-[#B8925A]">{p.price}</span>
+                    <div className="flex items-center justify-between">
+                      <span className="text-2xl font-bold text-[#B8925A]">
+                        ${p.regularPrice ? p.regularPrice.toLocaleString() : p.price}
+                      </span>
 
-                    <button className="rounded-lg bg-[#B8925A] px-5 py-2 text-[#0E211B] font-semibold hover:bg-[#D9B383] transition-colors">
-                      View
-                    </button>
+                      <Link
+                        to={`/listing/${p._id || p.id}`}
+                        className="rounded-lg bg-[#B8925A] px-5 py-2 text-[#0E211B] font-semibold hover:bg-[#D9B383] transition-colors"
+                      >
+                        View
+                      </Link>
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                </motion.div>
+              ))}
+            </div>
+          )}
         </section>
       </main>
     </div>

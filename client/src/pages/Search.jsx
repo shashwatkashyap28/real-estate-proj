@@ -1,17 +1,18 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import ListingItem from '../components/ListingItem';
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import ListingItem from "../components/ListingItem";
 
 export default function Search() {
   const navigate = useNavigate();
+
   const [sidebardata, setSidebardata] = useState({
-    searchTerm: '',
-    type: 'all',
+    searchTerm: "",
+    type: "all",
     parking: false,
     furnished: false,
     offer: false,
-    sort: 'created_at',
-    order: 'desc',
+    sort: "createdAt",
+    order: "desc",
   });
 
   const [loading, setLoading] = useState(false);
@@ -19,14 +20,15 @@ export default function Search() {
   const [showMore, setShowMore] = useState(false);
 
   useEffect(() => {
-    const urlParams = new URLSearchParams(location.search);
-    const searchTermFromUrl = urlParams.get('searchTerm');
-    const typeFromUrl = urlParams.get('type');
-    const parkingFromUrl = urlParams.get('parking');
-    const furnishedFromUrl = urlParams.get('furnished');
-    const offerFromUrl = urlParams.get('offer');
-    const sortFromUrl = urlParams.get('sort');
-    const orderFromUrl = urlParams.get('order');
+    const urlParams = new URLSearchParams(window.location.search);
+
+    const searchTermFromUrl = urlParams.get("searchTerm");
+    const typeFromUrl = urlParams.get("type");
+    const parkingFromUrl = urlParams.get("parking");
+    const furnishedFromUrl = urlParams.get("furnished");
+    const offerFromUrl = urlParams.get("offer");
+    const sortFromUrl = urlParams.get("sort");
+    const orderFromUrl = urlParams.get("order");
 
     if (
       searchTermFromUrl ||
@@ -38,247 +40,327 @@ export default function Search() {
       orderFromUrl
     ) {
       setSidebardata({
-        searchTerm: searchTermFromUrl || '',
-        type: typeFromUrl || 'all',
-        parking: parkingFromUrl === 'true' ? true : false,
-        furnished: furnishedFromUrl === 'true' ? true : false,
-        offer: offerFromUrl === 'true' ? true : false,
-        sort: sortFromUrl || 'created_at',
-        order: orderFromUrl || 'desc',
+        searchTerm: searchTermFromUrl || "",
+        type: typeFromUrl || "all",
+        parking: parkingFromUrl === "true",
+        furnished: furnishedFromUrl === "true",
+        offer: offerFromUrl === "true",
+        sort: sortFromUrl || "createdAt",
+        order: orderFromUrl || "desc",
       });
     }
 
     const fetchListings = async () => {
-      setLoading(true);
-      setShowMore(false);
-      const searchQuery = urlParams.toString();
-      const res = await fetch(`/api/listing/get?${searchQuery}`);
-      const data = await res.json();
-      if (data.length > 8) {
-        setShowMore(true);
-      } else {
-        setShowMore(false);
+      try {
+        setLoading(true);
+
+        const searchQuery = urlParams.toString();
+
+        const res = await fetch(`/api/listing/get?${searchQuery}`);
+        const data = await res.json();
+
+        setListings(data);
+
+        if (data.length > 8) {
+          setShowMore(true);
+        } else {
+          setShowMore(false);
+        }
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setLoading(false);
       }
-      setListings(data);
-      setLoading(false);
     };
 
     fetchListings();
-  }, [location.search]);
+  }, [window.location.search]);
 
   const handleChange = (e) => {
     if (
-      e.target.id === 'all' ||
-      e.target.id === 'rent' ||
-      e.target.id === 'sale'
-    ) {
-      setSidebardata({ ...sidebardata, type: e.target.id });
-    }
-
-    if (e.target.id === 'searchTerm') {
-      setSidebardata({ ...sidebardata, searchTerm: e.target.value });
-    }
-
-    if (
-      e.target.id === 'parking' ||
-      e.target.id === 'furnished' ||
-      e.target.id === 'offer'
+      e.target.id === "all" ||
+      e.target.id === "rent" ||
+      e.target.id === "sale"
     ) {
       setSidebardata({
         ...sidebardata,
-        [e.target.id]:
-          e.target.checked || e.target.checked === 'true' ? true : false,
+        type: e.target.id,
       });
     }
 
-    if (e.target.id === 'sort_order') {
-      const sort = e.target.value.split('_')[0] || 'created_at';
-      const order = e.target.value.split('_')[1] || 'desc';
-      setSidebardata({ ...sidebardata, sort, order });
+    if (e.target.id === "searchTerm") {
+      setSidebardata({
+        ...sidebardata,
+        searchTerm: e.target.value,
+      });
+    }
+
+    if (
+      e.target.id === "parking" ||
+      e.target.id === "furnished" ||
+      e.target.id === "offer"
+    ) {
+      setSidebardata({
+        ...sidebardata,
+        [e.target.id]: e.target.checked,
+      });
+    }
+
+    if (e.target.id === "sort_order") {
+      const sort = e.target.value.split("_")[0];
+      const order = e.target.value.split("_")[1];
+
+      setSidebardata({
+        ...sidebardata,
+        sort,
+        order,
+      });
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const urlParams = new URLSearchParams();
-    urlParams.set('searchTerm', sidebardata.searchTerm);
-    urlParams.set('type', sidebardata.type);
-    urlParams.set('parking', sidebardata.parking);
-    urlParams.set('furnished', sidebardata.furnished);
-    urlParams.set('offer', sidebardata.offer);
-    urlParams.set('sort', sidebardata.sort);
-    urlParams.set('order', sidebardata.order);
-    const searchQuery = urlParams.toString();
-    navigate(`/search?${searchQuery}`);
+
+    urlParams.set("searchTerm", sidebardata.searchTerm);
+    urlParams.set("type", sidebardata.type);
+    urlParams.set("parking", sidebardata.parking);
+    urlParams.set("furnished", sidebardata.furnished);
+    urlParams.set("offer", sidebardata.offer);
+    urlParams.set("sort", sidebardata.sort);
+    urlParams.set("order", sidebardata.order);
+
+    navigate(`/search?${urlParams.toString()}`);
   };
 
   const onShowMoreClick = async () => {
-    const numberOfListings = listings.length;
-    const startIndex = numberOfListings;
-    const urlParams = new URLSearchParams(location.search);
-    urlParams.set('startIndex', startIndex);
-    const searchQuery = urlParams.toString();
-    const res = await fetch(`/api/listing/get?${searchQuery}`);
+    const startIndex = listings.length;
+
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.set("startIndex", startIndex);
+
+    const res = await fetch(`/api/listing/get?${urlParams.toString()}`);
     const data = await res.json();
+
     if (data.length < 9) {
       setShowMore(false);
     }
+
     setListings([...listings, ...data]);
   };
 
-  const checkboxCls =
-    'w-4 h-4 accent-[#B8925A] cursor-pointer';
-  const labelCls = 'text-sm text-[#EFE9DD]/80 cursor-pointer';
-
   return (
-    <div className='flex flex-col md:flex-row min-h-screen bg-[#0E211B]'>
-      {/* FILTER SIDEBAR */}
-      <div className='w-full md:w-80 md:shrink-0 p-6 sm:p-7 border-b md:border-b-0 md:border-r border-[#B8925A]/15 bg-[#132A22]/40'>
-        <form onSubmit={handleSubmit} className='flex flex-col gap-6'>
+    <div className="min-h-screen bg-[#0E211B] flex flex-col lg:flex-row">
+
+      {/* SIDEBAR */}
+
+      <aside className="w-full lg:w-80 border-r border-[#B8925A]/20 bg-[#132A22] p-6">
+
+        <h2 className="mb-6 text-2xl font-bold text-[#EFE9DD]">
+          Filters
+        </h2>
+
+        <form onSubmit={handleSubmit} className="space-y-6">
+
           <div>
-            <label className='block text-xs font-semibold uppercase tracking-wide text-[#EFE9DD]/50 mb-1.5'>
-              Search Term
+            <label className="mb-2 block text-sm text-[#EFE9DD]/70">
+              Search
             </label>
+
             <input
-              type='text'
-              id='searchTerm'
-              placeholder='City, address, or zip...'
-              className='w-full bg-[#0E211B] border border-[#B8925A]/25 text-[#EFE9DD] placeholder:text-[#EFE9DD]/30 rounded-lg p-3 outline-none focus:border-[#B8925A] transition-colors'
+              id="searchTerm"
+              type="text"
               value={sidebardata.searchTerm}
               onChange={handleChange}
+              placeholder="Search..."
+              className="w-full rounded-lg border border-[#B8925A]/20 bg-[#0E211B] p-3 text-[#EFE9DD] outline-none focus:border-[#B8925A]"
             />
           </div>
+                    {/* PROPERTY TYPE */}
 
-          <div>
-            <label className='block text-xs font-semibold uppercase tracking-wide text-[#EFE9DD]/50 mb-2'>
-              Type
+                    <div>
+            <label className="mb-3 block text-sm text-[#EFE9DD]/70">
+              Property Type
             </label>
-            <div className='flex flex-wrap gap-x-5 gap-y-2'>
-              <div className='flex items-center gap-2'>
+
+            <div className="space-y-3">
+
+              <label className="flex items-center gap-3 text-[#EFE9DD]">
                 <input
-                  type='checkbox'
-                  id='all'
-                  className={checkboxCls}
+                  type="radio"
+                  id="all"
+                  checked={sidebardata.type === "all"}
                   onChange={handleChange}
-                  checked={sidebardata.type === 'all'}
+                  className="accent-[#B8925A]"
                 />
-                <span className={labelCls}>Rent &amp; Sale</span>
-              </div>
-              <div className='flex items-center gap-2'>
+                All
+              </label>
+
+              <label className="flex items-center gap-3 text-[#EFE9DD]">
                 <input
-                  type='checkbox'
-                  id='rent'
-                  className={checkboxCls}
+                  type="radio"
+                  id="rent"
+                  checked={sidebardata.type === "rent"}
                   onChange={handleChange}
-                  checked={sidebardata.type === 'rent'}
+                  className="accent-[#B8925A]"
                 />
-                <span className={labelCls}>Rent</span>
-              </div>
-              <div className='flex items-center gap-2'>
+                Rent
+              </label>
+
+              <label className="flex items-center gap-3 text-[#EFE9DD]">
                 <input
-                  type='checkbox'
-                  id='sale'
-                  className={checkboxCls}
+                  type="radio"
+                  id="sale"
+                  checked={sidebardata.type === "sale"}
                   onChange={handleChange}
-                  checked={sidebardata.type === 'sale'}
+                  className="accent-[#B8925A]"
                 />
-                <span className={labelCls}>Sale</span>
-              </div>
-              <div className='flex items-center gap-2'>
-                <input
-                  type='checkbox'
-                  id='offer'
-                  className={checkboxCls}
-                  onChange={handleChange}
-                  checked={sidebardata.offer}
-                />
-                <span className={labelCls}>Offer</span>
-              </div>
+                Sale
+              </label>
+
             </div>
           </div>
 
+          {/* FEATURES */}
+
           <div>
-            <label className='block text-xs font-semibold uppercase tracking-wide text-[#EFE9DD]/50 mb-2'>
-              Amenities
+
+            <label className="mb-3 block text-sm text-[#EFE9DD]/70">
+              Features
             </label>
-            <div className='flex flex-wrap gap-x-5 gap-y-2'>
-              <div className='flex items-center gap-2'>
+
+            <div className="space-y-3">
+
+              <label className="flex items-center gap-3 text-[#EFE9DD]">
                 <input
-                  type='checkbox'
-                  id='parking'
-                  className={checkboxCls}
-                  onChange={handleChange}
+                  type="checkbox"
+                  id="parking"
                   checked={sidebardata.parking}
-                />
-                <span className={labelCls}>Parking</span>
-              </div>
-              <div className='flex items-center gap-2'>
-                <input
-                  type='checkbox'
-                  id='furnished'
-                  className={checkboxCls}
                   onChange={handleChange}
-                  checked={sidebardata.furnished}
+                  className="accent-[#B8925A]"
                 />
-                <span className={labelCls}>Furnished</span>
-              </div>
+                Parking
+              </label>
+
+              <label className="flex items-center gap-3 text-[#EFE9DD]">
+                <input
+                  type="checkbox"
+                  id="furnished"
+                  checked={sidebardata.furnished}
+                  onChange={handleChange}
+                  className="accent-[#B8925A]"
+                />
+                Furnished
+              </label>
+
+              <label className="flex items-center gap-3 text-[#EFE9DD]">
+                <input
+                  type="checkbox"
+                  id="offer"
+                  checked={sidebardata.offer}
+                  onChange={handleChange}
+                  className="accent-[#B8925A]"
+                />
+                Offer
+              </label>
+
             </div>
+
           </div>
+
+          {/* SORT */}
 
           <div>
-            <label className='block text-xs font-semibold uppercase tracking-wide text-[#EFE9DD]/50 mb-1.5'>
-              Sort
+
+            <label className="mb-2 block text-sm text-[#EFE9DD]/70">
+              Sort By
             </label>
+
             <select
+              id="sort_order"
+              defaultValue="createdAt_desc"
               onChange={handleChange}
-              defaultValue={'created_at_desc'}
-              id='sort_order'
-              className='w-full bg-[#0E211B] border border-[#B8925A]/25 text-[#EFE9DD] rounded-lg p-3 outline-none focus:border-[#B8925A] transition-colors'
+              className="w-full rounded-lg border border-[#B8925A]/20 bg-[#0E211B] p-3 text-[#EFE9DD] outline-none"
             >
-              <option value='regularPrice_desc'>Price high to low</option>
-              <option value='regularPrice_asc'>Price low to high</option>
-              <option value='createdAt_desc'>Latest</option>
-              <option value='createdAt_asc'>Oldest</option>
+              <option value="createdAt_desc">Newest</option>
+              <option value="createdAt_asc">Oldest</option>
+              <option value="regularPrice_asc">Price Low to High</option>
+              <option value="regularPrice_desc">Price High to Low</option>
             </select>
+
           </div>
 
-          <button className='bg-[#B8925A] text-[#0E211B] font-semibold p-3 rounded-lg uppercase tracking-wide hover:bg-[#D9B383] transition-colors'>
+          <button
+            className="w-full rounded-lg bg-[#B8925A] py-3 font-semibold text-[#0E211B] transition hover:bg-[#D9B383]"
+          >
             Search
           </button>
+
         </form>
-      </div>
+
+      </aside>
 
       {/* RESULTS */}
-      <div className='flex-1 min-w-0'>
-        <h1 className='font-serif text-2xl sm:text-3xl font-semibold border-b border-[#B8925A]/15 p-4 sm:p-5 text-[#EFE9DD]'>
-          Listing results
-        </h1>
-        <div className='p-4 sm:p-7 flex flex-wrap gap-4 sm:gap-6'>
-          {!loading && listings.length === 0 && (
-            <p className='text-lg text-[#EFE9DD]/50'>No listing found!</p>
-          )}
-          {loading && (
-            <p className='text-lg text-[#EFE9DD]/50 text-center w-full py-10'>
-              Loading...
-            </p>
-          )}
 
-          {!loading &&
-            listings &&
-            listings.map((listing) => (
-              <ListingItem key={listing._id} listing={listing} />
+      <main className="flex-1 p-6">
+
+        <div className="mb-8 flex items-center justify-between">
+
+          <h1 className="text-3xl font-bold text-[#EFE9DD]">
+            Property Listings
+          </h1>
+
+          <span className="text-[#EFE9DD]/60">
+            {listings.length} Properties
+          </span>
+
+        </div>
+
+        {loading ? (
+
+          <div className="flex h-64 items-center justify-center text-xl text-[#EFE9DD]/60">
+            Loading...
+          </div>
+
+        ) : listings.length === 0 ? (
+
+          <div className="flex h-64 items-center justify-center text-xl text-[#EFE9DD]/60">
+            No Listings Found
+          </div>
+
+        ) : (
+
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+
+            {listings.map((listing) => (
+              <ListingItem
+                key={listing._id}
+                listing={listing}
+              />
             ))}
 
-          {showMore && (
+          </div>
+
+        )}
+
+        {showMore && (
+
+          <div className="mt-10 flex justify-center">
+
             <button
               onClick={onShowMoreClick}
-              className='text-[#D9B383] hover:text-[#EFE9DD] transition-colors p-6 text-center w-full font-semibold'
+              className="rounded-lg border border-[#B8925A] px-8 py-3 text-[#D9B383] transition hover:bg-[#B8925A] hover:text-[#0E211B]"
             >
-              Show more
+              Show More
             </button>
-          )}
-        </div>
-      </div>
+
+          </div>
+
+        )}
+
+      </main>
+
     </div>
   );
 }

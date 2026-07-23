@@ -19,7 +19,6 @@ export default function Chatbot() {
   }, [messages, isTyping]);
 
   // A simple rule-based local answer engine for instant testing.
-  // In production, replace this with a real fetch request to your server/LLM API.
   const getAIResponse = async (userQuery) => {
     setIsTyping(true);
     
@@ -64,27 +63,27 @@ export default function Chatbot() {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="flex items-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-black px-5 py-4 rounded-full shadow-[0_10px_30px_rgba(16,185,129,0.3)] font-bold transition transform hover:scale-105 active:scale-95"
+          className="flex items-center gap-2 bg-[#0b1a14] hover:bg-[#10241c] text-[#e6c594] border border-[#1b382d] hover:border-[#d4af37] px-5 py-4 rounded-full shadow-[0_10px_30px_rgba(11,26,20,0.5)] font-bold transition transform hover:scale-105 active:scale-95"
         >
-          <FaComments className="text-xl" />
+          <FaComments className="text-xl text-[#d4af37]" />
           <span>Ask AI Expert</span>
         </button>
       )}
 
       {/* ================= CHAT WINDOW ================= */}
       {isOpen && (
-        <div className="w-100 md:w-96 h-500px bg-zinc-950 border border-zinc-800 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.8)] flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-300">
+        <div className="w-[350px] md:w-96 h-[500px] bg-[#0b1a14] border border-[#1b382d] rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.8)] flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-300">
           
           {/* Header */}
-          <div className="bg-gradient-to-r from-zinc-900 to-black px-6 py-4 border-b border-zinc-800 flex items-center justify-between">
+          <div className="bg-[#10241c] px-6 py-4 border-b border-[#1b382d] flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="bg-emerald-500/10 p-2 rounded-xl border border-emerald-500/30">
-                <FaRobot className="text-emerald-400 text-lg animate-pulse" />
+              <div className="bg-[#0b1a14] p-2 rounded-xl border border-[#1b382d]">
+                <FaRobot className="text-[#d4af37] text-lg animate-pulse" />
               </div>
               <div>
-                <h4 className="font-bold text-white text-sm">GO AI Assistant</h4>
-                <p className="text-[10px] text-emerald-400 flex items-center gap-1.5">
-                  <span className="h-2 w-2 rounded-full bg-emerald-400 inline-block animate-ping"></span>
+                <h4 className="font-bold text-[#e6c594] text-sm">GO AI Assistant</h4>
+                <p className="text-[10px] text-[#d4af37] flex items-center gap-1.5">
+                  <span className="h-2 w-2 rounded-full bg-[#d4af37] inline-block animate-ping"></span>
                   Online & ready
                 </p>
               </div>
@@ -98,7 +97,7 @@ export default function Chatbot() {
           </div>
 
           {/* Messages Area */}
-          <div className="flex-1 overflow-y-auto p-6 space-y-4 scrollbar-thin scrollbar-thumb-zinc-800">
+          <div className="flex-1 overflow-y-auto p-6 space-y-4 scrollbar-thin scrollbar-thumb-[#1b382d]">
             {messages.map((msg, index) => (
               <div
                 key={index}
@@ -107,8 +106,8 @@ export default function Chatbot() {
                 <div
                   className={`max-w-[80%] rounded-2xl p-4 text-sm leading-relaxed ${
                     msg.sender === "user"
-                      ? "bg-emerald-500 text-black font-medium rounded-tr-none"
-                      : "bg-zinc-900 text-gray-200 border border-zinc-800 rounded-tl-none"
+                      ? "bg-[#d4af37] text-black font-medium rounded-tr-none shadow-md"
+                      : "bg-[#10241c] text-gray-200 border border-[#1b382d] rounded-tl-none"
                   }`}
                 >
                   {msg.text}
@@ -119,7 +118,7 @@ export default function Chatbot() {
             {/* AI Typing Indicator */}
             {isTyping && (
               <div className="flex justify-start">
-                <div className="bg-zinc-900 text-gray-400 border border-zinc-800 rounded-2xl rounded-tl-none p-4 text-xs flex items-center gap-1">
+                <div className="bg-[#10241c] text-gray-400 border border-[#1b382d] rounded-2xl rounded-tl-none p-4 text-xs flex items-center gap-1">
                   <span>AI is thinking</span>
                   <span className="animate-bounce">.</span>
                   <span className="animate-bounce delay-100">.</span>
@@ -133,18 +132,18 @@ export default function Chatbot() {
           {/* Input Form */}
           <form
             onSubmit={handleSendMessage}
-            className="p-4 border-t border-zinc-800 bg-zinc-950 flex gap-2"
+            className="p-4 border-t border-[#1b382d] bg-[#07130e] flex gap-2"
           >
             <input
               type="text"
               placeholder="Ask about prices, locations, amenities..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              className="flex-1 bg-black border border-zinc-800 focus:border-emerald-500 text-white rounded-xl px-4 py-3 text-sm outline-none transition"
+              className="flex-1 bg-[#10241c] border border-[#1b382d] focus:border-[#d4af37] text-white rounded-xl px-4 py-3 text-sm outline-none transition placeholder:text-gray-500"
             />
             <button
               type="submit"
-              className="bg-emerald-500 hover:bg-emerald-400 text-black p-3 rounded-xl transition flex items-center justify-center active:scale-95"
+              className="bg-[#d4af37] hover:bg-[#e6c594] text-black p-3 rounded-xl transition flex items-center justify-center active:scale-95 shadow-md"
             >
               <FaPaperPlane size={14} />
             </button>
