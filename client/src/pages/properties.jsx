@@ -21,7 +21,7 @@ export default function Properties() {
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const res = await fetch("http://localhost:3000/api/property/get");
+        const res = await fetch("https://real-real-estate-proj-1-cz77.onrender.com/api/property/get");
         const data = await res.json();
   
         setPropertiesList(data);
