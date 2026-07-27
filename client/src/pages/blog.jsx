@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { FaCalendarAlt, FaUser, FaArrowRight, FaSearch } from "react-icons/fa";
+import { FaCalendarAlt, FaArrowRight, FaSearch } from "react-icons/fa";
 
 // ---- palette reference (matches Home.jsx & Header.jsx) ----
 // ink        #0E211B   page background
@@ -10,77 +10,40 @@ import { FaCalendarAlt, FaUser, FaArrowRight, FaSearch } from "react-icons/fa";
 // brass      #B8925A   accent, CTAs, highlights
 // brass-lt   #D9B383   hover state
 
-const blogPosts = [
-  {
-    id: 1,
-    title: "The Ultimate Guide to Investing in Luxury Real Estate in 2026",
-    excerpt: "Discover the top emerging markets, architectural trends, and financial strategies for high-net-worth real estate investments.",
-    category: "Market Trends",
-    author: "Shashwat Kashyap",
-    date: "June 14, 2026",
-    readTime: "5 min read",
-    img: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: 2,
-    title: "How Vastu Principles Can Transform Your Modern Apartment's Energy",
-    excerpt: "Blending ancient architectural wisdom with contemporary design layouts to invite harmony, peace, and abundance into your home.",
-    category: "Vastu & Design",
-    author: "Ananya Sharma",
-    date: "June 08, 2026",
-    readTime: "4 min read",
-    img: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: 3,
-    title: "Navigating NRI Property Investments: Documentation & Legal Safety",
-    excerpt: "A comprehensive roadmap for Non-Resident Indians looking to purchase hassle-free residential or commercial properties in India.",
-    category: "Legal & Advisory",
-    author: "Vikram Malhotra",
-    date: "May 29, 2026",
-    readTime: "7 min read",
-    img: "https://images.unsplash.com/photo-1560184897-ae75f418493e?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: 4,
-    title: "Sustainable Living: Why Eco-Friendly Homes Are the Future",
-    excerpt: "Exploring energy-efficient materials, solar integrations, and green building certifications that reduce carbon footprints and utility bills.",
-    category: "Sustainability",
-    author: "Priya Menon",
-    date: "May 20, 2026",
-    readTime: "6 min read",
-    img: "https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: 5,
-    title: "Top 5 Architectural Styles Dominating Metropolitan Skylines",
-    excerpt: "From minimalist Scandinavian penthouses to neo-classical suburban villas, find out what affluent buyers are demanding right now.",
-    category: "Architecture",
-    author: "Shashwat Kashyap",
-    date: "May 12, 2026",
-    readTime: "5 min read",
-    img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: 6,
-    title: "Home Loan Interest Rates: What Buyers Need to Know Before Applying",
-    excerpt: "An expert analysis of current banking policies, fixed vs. floating rates, and how to secure the best mortgage deal for your dream house.",
-    category: "Finance",
-    author: "Rahul Verma",
-    date: "May 02, 2026",
-    readTime: "4 min read",
-    img: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=800&q=80",
-  },
-];
-
 const categories = ["All", "Market Trends", "Vastu & Design", "Legal & Advisory", "Sustainability", "Architecture", "Finance"];
 
 export default function Blog() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        setLoading(true);
+        setError(false);
+        // status=published so drafts never show up on the public journal.
+        const res = await fetch("/api/blog/get?limit=100&status=published");
+        const data = await res.json();
+        if (data.success === false) {
+          setError(true);
+          setLoading(false);
+          return;
+        }
+        setPosts(Array.isArray(data) ? data : []);
+        setLoading(false);
+      } catch (err) {
+        setError(true);
+        setLoading(false);
+      }
+    };
+    fetchPosts();
+  }, []);
 
   // Filter posts based on category and search query
-  const filteredPosts = blogPosts.filter((post) => {
+  const filteredPosts = posts.filter((post) => {
     const matchesCategory = selectedCategory === "All" || post.category === selectedCategory;
     const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
@@ -148,7 +111,15 @@ export default function Blog() {
 
       {/* ================= BLOG GRID SECTION ================= */}
       <section className="mx-auto max-w-7xl px-6 pb-28 flex-1 w-full">
-        {filteredPosts.length === 0 ? (
+        {loading ? (
+          <p className="text-center text-[#EFE9DD]/40 font-serif text-xl py-20">
+            Loading articles...
+          </p>
+        ) : error ? (
+          <p className="text-center text-red-400 font-serif text-xl py-20">
+            Failed to load articles. Please try again later.
+          </p>
+        ) : filteredPosts.length === 0 ? (
           <div className="text-center py-20">
             <p className="text-2xl text-[#EFE9DD]/40 font-serif">No articles found matching your criteria.</p>
             <button
@@ -162,7 +133,7 @@ export default function Blog() {
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {filteredPosts.map((post, i) => (
               <motion.article
-                key={post.id}
+                key={post._id}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -172,7 +143,7 @@ export default function Blog() {
                 {/* Thumbnail Image */}
                 <div className="relative h-60 overflow-hidden">
                   <img
-                    src={post.img}
+                    src={post.coverImage}
                     alt={post.title}
                     className="h-full w-full object-cover transition duration-500 group-hover:scale-110"
                   />
@@ -190,7 +161,12 @@ export default function Blog() {
                     {/* Meta info */}
                     <div className="flex items-center gap-4 text-xs text-[#EFE9DD]/50 mb-3">
                       <span className="flex items-center gap-1.5">
-                        <FaCalendarAlt className="text-[#B8925A]" /> {post.date}
+                        <FaCalendarAlt className="text-[#B8925A]" />
+                        {new Date(post.createdAt).toLocaleDateString("en-US", {
+                          month: "long",
+                          day: "numeric",
+                          year: "numeric",
+                        })}
                       </span>
                       <span>•</span>
                       <span>{post.readTime}</span>
@@ -214,9 +190,8 @@ export default function Blog() {
                       <span>{post.author}</span>
                     </div>
 
-                    {/* Link placeholder (Change to navigate to individual post route later e.g. /blog/${post.id}) */}
                     <Link
-                      to="#"
+                      to={`/blog/${post._id}`}
                       className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#B8925A] hover:text-[#D9B383] transition-colors"
                     >
                       Read Article <FaArrowRight className="text-xs" />

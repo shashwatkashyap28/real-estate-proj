@@ -16,6 +16,11 @@ import Chatbot from "./components/Chatbot"
 import Footer from './components/Footer';
 import Properties from './pages/properties';
 import Dashboard from './pages/Dashboard';
+import Privacy from './pages/privacy';
+import CreateBlog from './pages/createblog';
+import UpdateBlog from './pages/updateblog';
+import BlogPost from './pages/Blogpost';
+
 
 
 export default function App() {
@@ -23,11 +28,15 @@ export default function App() {
     <BrowserRouter>
       <Header />
       <FloatingEnquiry/>
+      
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/signin' element={<SignIn />} />
         <Route path='/signup' element={<SignUp />} />
+        <Route path='/privacy' element={<Privacy />} />
+
         <Route path='/blog' element = {<Blog/>} />
+        <Route path='/blog/:blogId' element={<BlogPost />} />
         <Route path='/about' element={<About />} />
         <Route path='/search' element={<Search />} />
         <Route path='/properties' element={<Properties/>}/>
@@ -42,6 +51,8 @@ export default function App() {
             path='/update-listing/:listingId'
             element={<UpdateListing />}
           />
+          <Route path='/create-blog' element={<CreateBlog />} />
+          <Route path='/update-blog/:blogId' element={<UpdateBlog />} />
         </Route>
         
       </Routes>

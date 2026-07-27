@@ -58,7 +58,7 @@ export default function Chatbot() {
   };
 
   return (
-    <div className="fixed bottom-6 left-6 z-[9999] font-sans">
+    <div className="fixed bottom-6 left-6  font-sans">
       {/* ================= CHAT TRIGGER BUTTON ================= */}
       {!isOpen && (
         <button
@@ -72,7 +72,7 @@ export default function Chatbot() {
 
       {/* ================= CHAT WINDOW ================= */}
       {isOpen && (
-        <div className="w-[350px] md:w-96 h-[500px] bg-[#0b1a14] border border-[#1b382d] rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.8)] flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-300">
+        <div className="w-350px md:w-96 h-500px bg-[#0b1a14] border border-[#1b382d] rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.8)] flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-5 duration-300">
           
           {/* Header */}
           <div className="bg-[#10241c] px-6 py-4 border-b border-[#1b382d] flex items-center justify-between">

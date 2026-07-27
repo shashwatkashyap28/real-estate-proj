@@ -234,26 +234,54 @@ export default function Home() {
           <hr className="my-8 border-[#B8925A]/20" />
 
           <div className="space-y-6 text-xl text-[#EFE9DD]/80">
-            <p className="hover:text-[#B8925A] transition-colors cursor-pointer">NRI Services</p>
-            <p className="hover:text-[#B8925A] transition-colors cursor-pointer">News</p>
-            <p className="hover:text-[#B8925A] transition-colors cursor-pointer">Events</p>
-            <p className="hover:text-[#B8925A] transition-colors cursor-pointer">Blogs</p>
-            <p className="hover:text-[#B8925A] transition-colors cursor-pointer">Area Calculator</p>
-            <p className="hover:text-[#B8925A] transition-colors cursor-pointer">Research</p>
-          </div>
+  <Link to="/nri-services" className="block hover:text-[#B8925A] transition-colors cursor-pointer">
+    NRI Services
+  </Link>
+  <Link to="/news" className="block hover:text-[#B8925A] transition-colors cursor-pointer">
+    News
+  </Link>
+  <Link to="/events" className="block hover:text-[#B8925A] transition-colors cursor-pointer">
+    Events
+  </Link>
+  <Link to="/blogs" className="block hover:text-[#B8925A] transition-colors cursor-pointer">
+    Blogs
+  </Link>
+  <Link to="/area-calculator" className="block hover:text-[#B8925A] transition-colors cursor-pointer">
+    Area Calculator
+  </Link>
+  <Link to="/research" className="block hover:text-[#B8925A] transition-colors cursor-pointer">
+    Research
+  </Link>
+</div>
 
-          <hr className="my-8 border-[#B8925A]/20" />
+<hr className="my-8 border-[#B8925A]/20" />
 
-          <div className="space-y-6 text-xl text-[#EFE9DD]/80">
-            <p className="hover:text-[#B8925A] transition-colors cursor-pointer">About</p>
-            <p className="hover:text-[#B8925A] transition-colors cursor-pointer">Awards</p>
-            <p className="hover:text-[#B8925A] transition-colors cursor-pointer">Careers</p>
-            <p className="hover:text-[#B8925A] transition-colors cursor-pointer">Terms</p>
-            <p className="hover:text-[#B8925A] transition-colors cursor-pointer">Sitemap</p>
-            <p className="hover:text-[#B8925A] transition-colors cursor-pointer">Privacy</p>
-            <p className="hover:text-[#B8925A] transition-colors cursor-pointer">FAQs</p>
-            <p className="hover:text-[#B8925A] transition-colors cursor-pointer">Contact</p>
-          </div>
+<div className="space-y-6 text-xl text-[#EFE9DD]/80">
+  <Link to="/about" className="block hover:text-[#B8925A] transition-colors cursor-pointer">
+    About
+  </Link>
+  <Link to="/awards" className="block hover:text-[#B8925A] transition-colors cursor-pointer">
+    Awards
+  </Link>
+  <Link to="/careers" className="block hover:text-[#B8925A] transition-colors cursor-pointer">
+    Careers
+  </Link>
+  <Link to="/terms" className="block hover:text-[#B8925A] transition-colors cursor-pointer">
+    Terms and Conditions
+  </Link>
+  <Link to="/sitemap" className="block hover:text-[#B8925A] transition-colors cursor-pointer">
+    Sitemap
+  </Link>
+  <Link to="/privacy" className="block hover:text-[#B8925A] transition-colors cursor-pointer">
+    Privacy
+  </Link>
+  <Link to="/blog" className="block hover:text-[#B8925A] transition-colors cursor-pointer">
+    Blogs
+  </Link>
+  <Link to="/signup" className="block hover:text-[#B8925A] transition-colors cursor-pointer">
+    Contact
+  </Link>
+</div>
 
           <hr className="my-8 border-[#B8925A]/20" />
 
@@ -311,7 +339,7 @@ export default function Home() {
 
             <h1 className="mt-6 font-serif text-5xl font-bold md:text-7xl text-[#EFE9DD]">
               Find Your
-              <br />
+              
               Perfect Place
               <span className="text-[#B8925A]"> To Live</span>
             </h1>

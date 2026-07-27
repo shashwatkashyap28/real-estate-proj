@@ -114,10 +114,10 @@ export default function SignIn() {
         </div>
 
         <div className='flex justify-center gap-2 mt-6 text-sm'>
-          <p className='text-[#EFE9DD]/50'>Don't have an account?</p>
+          <p className='text-[#EFE9DD]/50'>Tell Us Your Query </p>
           <Link to={'/signup'}>
             <span className='text-[#B8925A] hover:text-[#D9B383] font-semibold transition-colors'>
-              Sign up
+              ENQUIRY
             </span>
           </Link>
         </div>

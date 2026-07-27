@@ -1,17 +1,19 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
-import { FaUsers, FaHome, FaPlus, FaTrash, FaEnvelope } from 'react-icons/fa';
+import { FaUsers, FaHome, FaPlus, FaTrash, FaEnvelope, FaNewspaper } from 'react-icons/fa';
 
 export default function Dashboard() {
   const { currentUser } = useSelector((state) => state.user);
   const navigate = useNavigate();
 
-  const [tab, setTab] = useState('enquiries'); // 'enquiries' | 'listings'
+  const [tab, setTab] = useState('enquiries'); // 'enquiries' | 'listings' | 'blogs'
   const [enquiries, setEnquiries] = useState([]);
   const [listings, setListings] = useState([]);
+  const [blogs, setBlogs] = useState([]);
   const [loadingEnquiries, setLoadingEnquiries] = useState(true);
   const [loadingListings, setLoadingListings] = useState(true);
+  const [loadingBlogs, setLoadingBlogs] = useState(true);
   const [error, setError] = useState('');
   const [checkingAccess, setCheckingAccess] = useState(true);
 
@@ -75,10 +77,34 @@ export default function Dashboard() {
     }
   };
 
+  // ---- Fetch All Blogs ----
+  const fetchBlogs = async () => {
+    try {
+      setLoadingBlogs(true);
+      const res = await fetch('/api/blog/get?limit=100&status=all', {
+        credentials: 'include',
+      });
+      const data = await res.json();
+
+      if (data.success === false) {
+        setError(data.message || 'Failed to load blog posts');
+        setLoadingBlogs(false);
+        return;
+      }
+
+      setBlogs(Array.isArray(data) ? data : []);
+      setLoadingBlogs(false);
+    } catch (err) {
+      setError('Failed to load blog posts');
+      setLoadingBlogs(false);
+    }
+  };
+
   useEffect(() => {
     if (checkingAccess) return;
     fetchEnquiries();
     fetchListings();
+    fetchBlogs();
   }, [checkingAccess]);
 
   // ---- Delete Enquiry Handler ----
@@ -125,6 +151,28 @@ export default function Dashboard() {
     }
   };
 
+  // ---- Delete Blog Handler ----
+  const handleDeleteBlog = async (id, label) => {
+    if (!window.confirm(`Delete blog post "${label}"? This action cannot be undone.`)) {
+      return;
+    }
+    try {
+      const res = await fetch(`/api/blog/delete/${id}`, {
+        method: 'DELETE',
+        credentials: 'include',
+      });
+      const data = await res.json();
+
+      if (data.success === false) {
+        setError(data.message);
+        return;
+      }
+      setBlogs((prev) => prev.filter((b) => b._id !== id));
+    } catch (err) {
+      setError('Failed to delete blog post');
+    }
+  };
+
   if (checkingAccess) {
     return (
       <div className='min-h-screen bg-[#0E211B] flex items-center justify-center'>
@@ -153,16 +201,24 @@ export default function Dashboard() {
               Signed in as <span className='text-[#B8925A] font-medium'>{currentUser?.username}</span>
             </p>
           </div>
-          <Link
-            to='/create-listing'
-            className='inline-flex items-center justify-center gap-2 bg-[#B8925A] text-[#0E211B] font-semibold px-5 py-3 rounded-lg hover:bg-[#D9B383] transition-colors shrink-0'
-          >
-            <FaPlus /> Add Listing
-          </Link>
+          <div className='flex flex-wrap gap-3'>
+            <Link
+              to='/create-listing'
+              className='inline-flex items-center justify-center gap-2 bg-[#B8925A] text-[#0E211B] font-semibold px-5 py-3 rounded-lg hover:bg-[#D9B383] transition-colors shrink-0'
+            >
+              <FaPlus /> Add Listing
+            </Link>
+            <Link
+              to='/create-blog'
+              className='inline-flex items-center justify-center gap-2 bg-[#132A22] border border-[#B8925A]/40 text-[#D9B383] font-semibold px-5 py-3 rounded-lg hover:bg-[#B8925A]/10 transition-colors shrink-0'
+            >
+              <FaPlus /> Add Blog
+            </Link>
+          </div>
         </div>
 
         {/* Stat Cards */}
-        <div className='grid grid-cols-2 gap-4 mb-8'>
+        <div className='grid grid-cols-3 gap-4 mb-8'>
           <div className='bg-[#132A22] border border-[#B8925A]/20 rounded-2xl p-5 flex items-center gap-4'>
             <div className='h-11 w-11 rounded-full bg-[#B8925A]/15 flex items-center justify-center shrink-0'>
               <FaEnvelope className='text-[#B8925A]' />
@@ -189,6 +245,19 @@ export default function Dashboard() {
               </p>
             </div>
           </div>
+          <div className='bg-[#132A22] border border-[#B8925A]/20 rounded-2xl p-5 flex items-center gap-4'>
+            <div className='h-11 w-11 rounded-full bg-[#B8925A]/15 flex items-center justify-center shrink-0'>
+              <FaNewspaper className='text-[#B8925A]' />
+            </div>
+            <div>
+              <p className='text-2xl font-bold text-[#EFE9DD]'>
+                {loadingBlogs ? '—' : blogs.length}
+              </p>
+              <p className='text-xs text-[#EFE9DD]/50 uppercase tracking-wide'>
+                Blog Posts
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Error Notification */}
@@ -199,12 +268,15 @@ export default function Dashboard() {
         )}
 
         {/* Tabs */}
-        <div className='flex gap-2 mb-6 border-b border-[#B8925A]/15 pb-2'>
+        <div className='flex gap-2 mb-6 border-b border-[#B8925A]/15 pb-2 flex-wrap'>
           <button onClick={() => setTab('enquiries')} className={tabBtnCls('enquiries')}>
             <FaUsers /> Enquiries ({enquiries.length})
           </button>
           <button onClick={() => setTab('listings')} className={tabBtnCls('listings')}>
             <FaHome /> Listings ({listings.length})
+          </button>
+          <button onClick={() => setTab('blogs')} className={tabBtnCls('blogs')}>
+            <FaNewspaper /> Blog Posts ({blogs.length})
           </button>
         </div>
 
@@ -346,6 +418,85 @@ export default function Dashboard() {
                           onClick={() =>
                             handleDeleteListing(listing._id, listing.name)
                           }
+                          className='flex-1 text-xs font-semibold uppercase text-red-400 border border-red-400/30 rounded-lg py-2 hover:bg-red-400/10 transition-colors'
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* BLOGS TAB */}
+        {tab === 'blogs' && (
+          <div>
+            {loadingBlogs ? (
+              <p className='text-center text-[#EFE9DD]/50 py-12'>Loading blog posts...</p>
+            ) : blogs.length === 0 ? (
+              <div className='text-center py-12'>
+                <p className='text-[#EFE9DD]/50 mb-4'>No blog posts yet.</p>
+                <Link
+                  to='/create-blog'
+                  className='inline-flex items-center gap-2 bg-[#B8925A] text-[#0E211B] font-semibold px-5 py-3 rounded-lg hover:bg-[#D9B383] transition-colors'
+                >
+                  <FaPlus /> Write your first post
+                </Link>
+              </div>
+            ) : (
+              <div className='grid gap-4 sm:grid-cols-2 lg:grid-cols-3'>
+                {blogs.map((post) => (
+                  <div
+                    key={post._id}
+                    className='bg-[#132A22] border border-[#B8925A]/20 rounded-2xl overflow-hidden'
+                  >
+                    <Link to={`/blog/${post._id}`}>
+                      <img
+                        src={post.coverImage}
+                        alt={post.title}
+                        className='h-40 w-full object-cover'
+                      />
+                    </Link>
+                    <div className='p-4'>
+                      <div className='flex items-center gap-2 mb-2'>
+                        <span className='px-2.5 py-1 rounded-full text-xs bg-[#B8925A]/20 text-[#B8925A] font-semibold'>
+                          {post.category}
+                        </span>
+                        {post.status === 'draft' && (
+                          <span className='px-2.5 py-1 rounded-full text-xs bg-yellow-400/15 border border-yellow-400/30 text-yellow-300 font-semibold'>
+                            Draft
+                          </span>
+                        )}
+                      </div>
+                      <Link
+                        to={`/blog/${post._id}`}
+                        className='block text-[#EFE9DD] font-semibold hover:text-[#D9B383] transition-colors line-clamp-2'
+                      >
+                        {post.title}
+                      </Link>
+                      <p className='text-[#EFE9DD]/50 text-xs mt-2'>
+                        {post.createdAt
+                          ? new Date(post.createdAt).toLocaleDateString('en-US', {
+                              month: 'short',
+                              day: 'numeric',
+                              year: 'numeric',
+                            })
+                          : '—'}
+                        {' · '}{post.readTime}
+                      </p>
+
+                      <div className='flex gap-2 mt-4'>
+                        <Link
+                          to={`/update-blog/${post._id}`}
+                          className='flex-1 text-center text-xs font-semibold uppercase text-[#D9B383] border border-[#B8925A]/40 rounded-lg py-2 hover:bg-[#B8925A]/10 transition-colors'
+                        >
+                          Edit
+                        </Link>
+                        <button
+                          onClick={() => handleDeleteBlog(post._id, post.title)}
                           className='flex-1 text-xs font-semibold uppercase text-red-400 border border-red-400/30 rounded-lg py-2 hover:bg-red-400/10 transition-colors'
                         >
                           Delete

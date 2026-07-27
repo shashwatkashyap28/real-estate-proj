@@ -70,19 +70,28 @@ export default function Footer() {
           {/* Services */}
           <div>
             <Link
-              to="/properties"
+              to="/search"
               className="text-2xl font-bold text-[#B8925A]  mb-6 block hover:text-[#B8925A]  transition"
             >
               Properties
             </Link>
-            <div className="flex flex-col gap-4 text-gray-400">
-              <p className="hover:text-[#d4af37] cursor-pointer transition">Residential Properties</p>
-              <p className="hover:text-[#d4af37] cursor-pointer transition">Commercial Properties</p>
-              <p className="hover:text-[#d4af37] cursor-pointer transition">Luxury Villas</p>
-              <p className="hover:text-[#d4af37] cursor-pointer transition">Rental Properties</p>
-              <p className="hover:text-[#d4af37] cursor-pointer transition">NRI Property Services</p>
-              <p className="hover:text-[#d4af37] cursor-pointer transition">Investment Consulting</p>
-            </div>
+           <div className="flex flex-col gap-4 text-gray-400">
+  <Link to="/search?type=residential" className="hover:text-[#d4af37] cursor-pointer transition">
+    Residential Properties
+  </Link>
+  <Link to="/search?type=commercial" className="hover:text-[#d4af37] cursor-pointer transition">
+    Commercial Properties
+  </Link>
+  <Link to="/search?type=villa" className="hover:text-[#d4af37] cursor-pointer transition">
+    Luxury Villas
+  </Link>
+  <Link to="/search?type=rent" className="hover:text-[#d4af37] cursor-pointer transition">
+    Rental Properties
+  </Link>
+  <Link to="/signup" className="hover:text-[#d4af37] cursor-pointer transition">
+    Investment Consulting
+  </Link>
+</div>
           </div>
 
           {/* Contact */}
@@ -92,7 +101,7 @@ export default function Footer() {
             </h3>
             <div className="space-y-5">
               <div className="flex gap-3">
-                <FaMapMarkerAlt className="text-[#B8925A]  mt-1 flex-shrink-0" />
+                <FaMapMarkerAlt className="text-[#B8925A]  mt-1 shrink-0" />
                 <p className="text-gray-400">
                   Sector 67,
                   <br />
@@ -102,11 +111,11 @@ export default function Footer() {
                 </p>
               </div>
               <div className="flex gap-3 items-center">
-                <FaEnvelope className="text-[#B8925A] flex-shrink-0" />
+                <FaEnvelope className="text-[#B8925A] shrink-0" />
                 <p className="text-gray-400">info@gorealtors.com</p>
               </div>
               <div className="flex gap-3 items-center">
-                <FaPhoneAlt className="text-[#B8925A]  flex-shrink-0" />
+                <FaPhoneAlt className="text-[#B8925A]  shrink-0" />
                 <p className="text-gray-400">+91 98765 43210</p>
               </div>
             </div>

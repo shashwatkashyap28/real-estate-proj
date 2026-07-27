@@ -5,6 +5,7 @@ import userRouter from './routes/user.route.js';
 import authRouter from './routes/auth.route.js';
 import listingRouter from './routes/listing.route.js';
 import enquiryRouter from './routes/Enquiry.route.js';
+import blogRouter from './routes/blog.route.js';
 import cookieParser from 'cookie-parser';
 import path from 'path';
 
@@ -31,6 +32,7 @@ app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/listing', listingRouter);
 app.use('/api/enquiry', enquiryRouter); // 👈 Correctly mounts /api/enquiry/create, /api/enquiry/all, etc.
+app.use('/api/blog', blogRouter); // 👈 Mounts /api/blog/create, /api/blog/get, etc.
 
 // --- STATIC FILES & CLIENT ROUTING ---
 app.use(express.static(path.join(__dirname, '/client/dist')));

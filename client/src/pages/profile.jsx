@@ -10,7 +10,7 @@ import {
   signOutUserStart,
 } from '../redux/user/userSlice';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 // Stable default avatar matching the header
 const DEFAULT_AVATAR =
@@ -26,7 +26,9 @@ export default function Profile() {
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const [showListingsError, setShowListingsError] = useState(false);
   const [userListings, setUserListings] = useState([]);
+  const [adminError, setAdminError] = useState(false); // New state for admin check error
   const dispatch = useDispatch();
+  const navigate = useNavigate(); // Hook for programmatic navigation
 
   useEffect(() => {
     if (file) {
@@ -165,6 +167,17 @@ export default function Profile() {
     }
   };
 
+  // Handler for dashboard navigation with admin check
+  const handleDashboardClick = () => {
+    setAdminError(false);
+    // Assuming your user object has an `isAdmin` boolean field (adjust if it's named differently like `role === 'admin'`)
+    if (currentUser && currentUser.isAdmin) {
+      navigate('/dashboard');
+    } else {
+      setAdminError(true);
+    }
+  };
+
   return (
     <div className='min-h-screen bg-[#0E211B] py-10 px-4'>
       <div className='max-w-lg mx-auto'>
@@ -263,6 +276,21 @@ export default function Profile() {
             >
               {loading ? 'Loading...' : 'Update'}
             </button>
+
+            {/* Dashboard Button with Admin Validation */}
+            <button
+              type='button'
+              onClick={handleDashboardClick}
+              className='bg-transparent border border-[#B8925A]/50 text-[#D9B383] p-3 rounded-lg uppercase tracking-wide text-center hover:bg-[#B8925A]/10 transition-colors'
+            >
+              Dashboard
+            </button>
+            
+            {adminError && (
+              <p className='text-red-400 text-sm text-center -mt-2'>
+                Access denied: You must be an admin to view the dashboard.
+              </p>
+            )}
 
             <Link
               className='bg-transparent border border-[#B8925A]/50 text-[#D9B383] p-3 rounded-lg uppercase tracking-wide text-center hover:bg-[#B8925A]/10 transition-colors'
