@@ -21,8 +21,6 @@ import CreateBlog from './pages/createblog';
 import UpdateBlog from './pages/updateblog';
 import BlogPost from './pages/Blogpost';
 
-
-
 export default function App() {
   return (
     <BrowserRouter>
@@ -58,7 +56,6 @@ export default function App() {
       </Routes>
       <Chatbot/>
       <Footer/>
-
 
     </BrowserRouter>
   );
