@@ -10,73 +10,101 @@ export const test = (req, res) => {
 };
 
 export const updateUser = async (req, res, next) => {
-  if (req.user.id !== req.params.id)
-    return next(errorHandler(401, 'You can only update your own account!'));
+  if (req.user.id !== req.params.id) {
+    return next(errorHandler(403, 'You can only update your own account!'));
+  }
+
   try {
-    if (req.body.password) {
-      req.body.password = argon2.hash(req.body.password, 10);
+    const updateFields = {};
+
+    if (req.body.username && req.body.username.trim()) {
+      updateFields.username = req.body.username.trim();
+    }
+
+    if (req.body.email && req.body.email.trim()) {
+      updateFields.email = req.body.email.trim().toLowerCase();
+    }
+
+    if (req.body.password && req.body.password.trim()) {
+      if (req.body.password.length < 6) {
+        return next(errorHandler(400, 'Password must be at least 6 characters long!'));
+      }
+      updateFields.password = await argon2.hash(req.body.password);
+    }
+
+    const avatarUrl = req.body.avatar || req.body.photo;
+    if (avatarUrl) {
+      updateFields.avatar = avatarUrl;
     }
 
     const updatedUser = await User.findByIdAndUpdate(
       req.params.id,
-      {
-        $set: {
-          username: req.body.username,
-          email: req.body.email,
-          password: req.body.password,
-          avatar: req.body.photo,
-        },
-      },
+      { $set: updateFields },
       { new: true }
     );
 
-    const { password, ...rest } = updatedUser._doc;
+    if (!updatedUser) {
+      return next(errorHandler(404, 'User not found!'));
+    }
 
-    res.status(200).json(rest);
+    const { password, ...rest } = updatedUser._doc;
+    return res.status(200).json(rest);
   } catch (error) {
     next(error);
   }
 };
 
 export const deleteUser = async (req, res, next) => {
-  if (req.user.id !== req.params.id) {
-    const requester = await User.findById(req.user.id);
-    if (!requester || !requester.isAdmin) {
-      return next(errorHandler(401, 'You can only delete your own account!'));
-    }
-  }
   try {
-    await User.findByIdAndDelete(req.params.id);
-    res.clearCookie('access_token');
-    res.status(200).json('User has been deleted!');
+    if (req.user.id !== req.params.id) {
+      const requester = await User.findById(req.user.id);
+      if (!requester || !requester.isAdmin) {
+        return next(errorHandler(403, 'You can only delete your own account!'));
+      }
+    }
+
+    const deletedUser = await User.findByIdAndDelete(req.params.id);
+    if (!deletedUser) {
+      return next(errorHandler(404, 'User not found!'));
+    }
+
+    if (req.user.id === req.params.id) {
+      res.clearCookie('access_token', {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: 'User has been deleted successfully!',
+    });
   } catch (error) {
     next(error);
   }
 };
 
 export const getUserListings = async (req, res, next) => {
-  if (req.user.id === req.params.id) {
-    try {
-      const listings = await Listing.find({ userRef: req.params.id });
-      res.status(200).json(listings);
-    } catch (error) {
-      next(error);
-    }
-  } else {
-    return next(errorHandler(401, 'You can only view your own listings!'));
+  if (req.user.id !== req.params.id) {
+    return next(errorHandler(403, 'You can only view your own listings!'));
+  }
+
+  try {
+    const listings = await Listing.find({ userRef: req.params.id });
+    return res.status(200).json(listings);
+  } catch (error) {
+    next(error);
   }
 };
 
 export const getUser = async (req, res, next) => {
   try {
-    
     const user = await User.findById(req.params.id);
-  
     if (!user) return next(errorHandler(404, 'User not found!'));
-  
+
     const { password: pass, ...rest } = user._doc;
-  
-    res.status(200).json(rest);
+    return res.status(200).json(rest);
   } catch (error) {
     next(error);
   }
@@ -84,9 +112,8 @@ export const getUser = async (req, res, next) => {
 
 export const getUsers = async (req, res, next) => {
   try {
-    // Exclude password from the result
     const users = await User.find().select('-password').sort({ createdAt: -1 });
-    res.status(200).json(users);
+    return res.status(200).json(users);
   } catch (error) {
     next(error);
   }

@@ -20,7 +20,7 @@ export default function FloatingEnquiry() {
 
       {/* Enquiry Button */}
       <Link
-        to="/signup"
+        to="/enquiry"
         className="group flex items-center rounded-full bg-[#0b1a14] border border-[#1b382d] px-6 py-3 shadow-2xl transition-all duration-300 hover:scale-105 hover:border-[#d4af37]"
       >
         <div className="mr-3 flex h-10 w-10 items-center justify-center rounded-full bg-[#10241c] border border-[#1b382d]">

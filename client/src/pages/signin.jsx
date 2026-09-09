@@ -7,6 +7,7 @@ import {
   signInFailure,
 } from '../redux/user/userSlice';
 import OAuth from '../components/OAuth';
+import { safeFetchJson } from '../utils/api';
 
 export default function SignIn() {
   const [formData, setFormData] = useState({});
@@ -23,26 +24,30 @@ export default function SignIn() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!formData.email || !formData.password) {
+      dispatch(signInFailure('Please enter both email and password'));
+      return;
+    }
+
     try {
       dispatch(signInStart());
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/signin`, {
+      const data = await safeFetchJson('/api/auth/signin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
       });
-      const data = await res.json();
-      if (data.success === false) {
-        dispatch(signInFailure(data.message));
+
+      if (!data || data.success === false) {
+        dispatch(signInFailure(data?.message || 'Invalid email or password'));
         return;
       }
+
       dispatch(signInSuccess(data));
-      // Admins land on the dashboard; Dashboard.jsx itself bounces
-      // non-admin users back to '/' after checking currentUser.isAdmin.
-      navigate('/dashboard');
-    } catch (error) {
-      dispatch(signInFailure(error.message));
+      navigate(data.isAdmin ? '/dashboard' : '/');
+    } catch (err) {
+      dispatch(signInFailure(err.message || 'An error occurred during sign in'));
     }
   };
 
@@ -72,6 +77,7 @@ export default function SignIn() {
                 placeholder='you@example.com'
                 className='w-full bg-[#0E211B] border border-[#B8925A]/25 text-[#EFE9DD] placeholder:text-[#EFE9DD]/30 p-3 rounded-lg outline-none focus:border-[#B8925A] transition-colors'
                 id='email'
+                required
                 onChange={handleChange}
               />
             </div>
@@ -88,6 +94,7 @@ export default function SignIn() {
                 placeholder='••••••••'
                 className='w-full bg-[#0E211B] border border-[#B8925A]/25 text-[#EFE9DD] placeholder:text-[#EFE9DD]/30 p-3 rounded-lg outline-none focus:border-[#B8925A] transition-colors'
                 id='password'
+                required
                 onChange={handleChange}
               />
             </div>
@@ -113,13 +120,23 @@ export default function SignIn() {
           )}
         </div>
 
-        <div className='flex justify-center gap-2 mt-6 text-sm'>
-          <p className='text-[#EFE9DD]/50'>Tell Us Your Query </p>
-          <Link to={'/signup'}>
-            <span className='text-[#B8925A] hover:text-[#D9B383] font-semibold transition-colors'>
-              ENQUIRY
-            </span>
-          </Link>
+        <div className='flex flex-col gap-2 mt-6 text-center text-sm'>
+          <p className='text-[#EFE9DD]/50'>
+            Don't have an account?{' '}
+            <Link to='/signup'>
+              <span className='text-[#B8925A] hover:text-[#D9B383] font-semibold transition-colors'>
+                Sign Up
+              </span>
+            </Link>
+          </p>
+          <p className='text-[#EFE9DD]/40 text-xs'>
+            Have a property query?{' '}
+            <Link to='/enquiry'>
+              <span className='text-[#B8925A]/80 hover:text-[#D9B383] font-medium underline transition-colors'>
+                Talk to an advisor
+              </span>
+            </Link>
+          </p>
         </div>
       </div>
     </div>

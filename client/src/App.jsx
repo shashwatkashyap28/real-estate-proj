@@ -1,8 +1,9 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/home';
-import Blog from "./pages/blog"
+import Blog from './pages/blog';
 import SignIn from './pages/signin';
 import SignUp from './pages/signup';
+import Enquiry from './pages/Enquiry';
 import About from './pages/about';
 import Profile from './pages/profile';
 import Header from './components/Header';
@@ -11,8 +12,8 @@ import CreateListing from './pages/CreateListing';
 import UpdateListing from './pages/UpdateListing';
 import Listing from './pages/Listing';
 import Search from './pages/Search';
-import FloatingEnquiry from './components/FloatingEnquiry'
-import Chatbot from "./components/Chatbot"
+import FloatingEnquiry from './components/FloatingEnquiry';
+import Chatbot from './components/Chatbot';
 import Footer from './components/Footer';
 import Properties from './pages/properties';
 import Dashboard from './pages/Dashboard';
@@ -25,22 +26,22 @@ export default function App() {
   return (
     <BrowserRouter>
       <Header />
-      <FloatingEnquiry/>
-      
+      <FloatingEnquiry />
+
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/signin' element={<SignIn />} />
         <Route path='/signup' element={<SignUp />} />
+        <Route path='/enquiry' element={<Enquiry />} />
         <Route path='/privacy' element={<Privacy />} />
 
-        <Route path='/blog' element = {<Blog/>} />
+        <Route path='/blog' element={<Blog />} />
         <Route path='/blog/:blogId' element={<BlogPost />} />
         <Route path='/about' element={<About />} />
         <Route path='/search' element={<Search />} />
-        <Route path='/properties' element={<Properties/>}/>
+        <Route path='/properties' element={<Properties />} />
         <Route path='/listing/:listingId' element={<Listing />} />
-        <Route path='/dashboard' element={<Dashboard/>} />
-        
+        <Route path='/dashboard' element={<Dashboard />} />
 
         <Route element={<PrivateRoute />}>
           <Route path='/profile' element={<Profile />} />
@@ -52,11 +53,10 @@ export default function App() {
           <Route path='/create-blog' element={<CreateBlog />} />
           <Route path='/update-blog/:blogId' element={<UpdateBlog />} />
         </Route>
-        
       </Routes>
-      <Chatbot/>
-      <Footer/>
 
+      <Chatbot />
+      <Footer />
     </BrowserRouter>
   );
 }

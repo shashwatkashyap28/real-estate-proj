@@ -10,12 +10,11 @@ const slugify = (str) =>
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/(^-|-$)+/g, '');
 
-// Only admins can publish blog posts (matches the Dashboard's admin-only gate).
 export const createBlog = async (req, res, next) => {
   try {
     const requester = await User.findById(req.user.id);
     if (!requester || !requester.isAdmin) {
-      return next(errorHandler(401, 'Only admins can publish blog posts!'));
+      return next(errorHandler(403, 'Only admins can publish blog posts!'));
     }
 
     const slug = (req.body.slug && req.body.slug.trim()) || slugify(req.body.title);
@@ -32,38 +31,41 @@ export const createBlog = async (req, res, next) => {
 };
 
 export const deleteBlog = async (req, res, next) => {
-  const blog = await Blog.findById(req.params.id);
-  if (!blog) return next(errorHandler(404, 'Blog post not found!'));
-
-  if (req.user.id !== blog.userRef) {
-    const requester = await User.findById(req.user.id);
-    if (!requester || !requester.isAdmin) {
-      return next(errorHandler(401, 'You can only delete your own blog posts!'));
-    }
-  }
-
   try {
+    const blog = await Blog.findById(req.params.id);
+    if (!blog) return next(errorHandler(404, 'Blog post not found!'));
+
+    if (req.user.id !== blog.userRef) {
+      const requester = await User.findById(req.user.id);
+      if (!requester || !requester.isAdmin) {
+        return next(errorHandler(403, 'You can only delete your own blog posts!'));
+      }
+    }
+
     await Blog.findByIdAndDelete(req.params.id);
-    res.status(200).json('Blog post has been deleted!');
+    return res.status(200).json({
+      success: true,
+      message: 'Blog post has been deleted successfully!',
+    });
   } catch (error) {
     next(error);
   }
 };
 
 export const updateBlog = async (req, res, next) => {
-  const blog = await Blog.findById(req.params.id);
-  if (!blog) {
-    return next(errorHandler(404, 'Blog post not found!'));
-  }
-
-  if (req.user.id !== blog.userRef) {
-    const requester = await User.findById(req.user.id);
-    if (!requester || !requester.isAdmin) {
-      return next(errorHandler(401, 'You can only update your own blog posts!'));
-    }
-  }
-
   try {
+    const blog = await Blog.findById(req.params.id);
+    if (!blog) {
+      return next(errorHandler(404, 'Blog post not found!'));
+    }
+
+    if (req.user.id !== blog.userRef) {
+      const requester = await User.findById(req.user.id);
+      if (!requester || !requester.isAdmin) {
+        return next(errorHandler(403, 'You can only update your own blog posts!'));
+      }
+    }
+
     const slug =
       (req.body.slug && req.body.slug.trim()) || slugify(req.body.title || blog.title);
 
@@ -72,7 +74,7 @@ export const updateBlog = async (req, res, next) => {
       { ...req.body, slug },
       { new: true }
     );
-    res.status(200).json(updatedBlog);
+    return res.status(200).json(updatedBlog);
   } catch (error) {
     next(error);
   }
@@ -84,7 +86,7 @@ export const getBlog = async (req, res, next) => {
     if (!blog) {
       return next(errorHandler(404, 'Blog post not found!'));
     }
-    res.status(200).json(blog);
+    return res.status(200).json(blog);
   } catch (error) {
     next(error);
   }
@@ -100,8 +102,6 @@ export const getBlogs = async (req, res, next) => {
       category = { $regex: '', $options: 'i' };
     }
 
-    // Public callers (the blog listing page) should only ever see published
-    // posts. Pass ?status=all from the admin dashboard to include drafts.
     let status = req.query.status;
     let statusFilter;
     if (status === 'all') {
@@ -114,7 +114,7 @@ export const getBlogs = async (req, res, next) => {
 
     const searchTerm = req.query.searchTerm || '';
     const sort = req.query.sort || 'createdAt';
-    const order = req.query.order || 'desc';
+    const order = req.query.order === 'asc' ? 1 : -1;
 
     const blogs = await Blog.find({
       title: { $regex: searchTerm, $options: 'i' },
